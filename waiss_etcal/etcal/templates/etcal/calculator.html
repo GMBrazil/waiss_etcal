@@ -1,0 +1,41 @@
+{% extends 'etcal/base.html' %}
+{% load static %}
+
+{% block head_block %}
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row d-flex align-items-center flex-wrap">
+            <div class="col-md-7">
+                <h1 class="h2">WAISS ETCal</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb d-flex justify-content-end">
+                    <li class="breadcrumb-item">
+                        <a href={% url 'etcal:index' %}>Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Calculator</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block main_block %}
+<section class="bar bg-gray no-mb padding-big text-center-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-uppercase">ET-based Irrigation Scheduler and Calculator</h2>
+                <p class="mb-small">A web version of the spreadsheet-based evapotranspiration irrigation scheduler and calculator which aims to provide crop monitoring support to farmers. The calculator analyzes evapotranspiration rates and translates it into manageable and simple advisories for management of crops. By using this web app, users will be asked to provide data specific in their farms to be able to capture a near-real scenario of a farm's crop properties, soil and field condition, weather status, and other external factors affecting the soil-water-climate interaction.</p>
+                <br>
+                <p class="mb-small">Let's get you started. Click the button below!</p>
+                <p><a href={% url 'etcal:get_started' %} class="btn btn-template-outlined">Click Me!</a></p>
+            </div>
+            <div class="col-md-6 text-center">
+                <img src={% static "all/imgs/WAISS%20field%20setup.png" %} alt="" class="side-pic">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

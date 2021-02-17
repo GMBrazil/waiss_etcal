@@ -1,0 +1,135 @@
+{% if stations %}
+{% for item in stations %}                                    
+<div class="row">
+    <div class="col-4"> <label>Type of Data Source:</label> </div>
+    <div class="col-8">
+        <select class="list-dt others" id="sta-type" name="sta-type">
+            <optgroup label="Station Types">
+                {% if item.station_type == "Atmometer" %}
+                <option value="">Choose</option>
+                <option value="Atmometer" selected>Atmometer</option>
+                <option value="Weather Station">Weather Station</option>
+                <option value="AWS">Automatic Weather Station</option>
+                <option value="Other">Other</option>
+                {% elif item.station_type == "Weather Station" %}
+                <option value="">Choose</option>
+                <option value="Atmometer">Atmometer</option>
+                <option value="Weather Station" selected>Weather Station</option>
+                <option value="AWS">Automatic Weather Station</option>
+                <option value="Other">Other</option>
+                {% elif item.station_type == "AWS" %}
+                <option value="">Choose</option>
+                <option value="Atmometer">Atmometer</option>
+                <option value="Weather Station">Weather Station</option>
+                <option value="AWS" selected>Automatic Weather Station</option>
+                <option value="Other">Other</option>
+                {% else %}
+                <option value="" selected>Choose</option>
+                <option value="Atmometer">Atmometer</option>
+                <option value="Weather Station">Weather Station</option>
+                <option value="AWS" selected>Automatic Weather Station</option>
+                <option value="Other">Other</option>
+                {% endif %}
+            </optgroup>
+        </select>
+        <input class="others" id="sta-type-other" type="text" name="sta-type-other" placeholder="Other types" hidden/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"> <label>Station Name:</label> </div>
+    <div class="col-8">
+        <input id="sta-name" class="others" type="text" name="sta-name" value="{{ item.station_name }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"> <label>Station Elevation (m):</label> </div>
+    <div class="col-8">
+        <input id="sta-elev" class="others" type="number" min="0" name="sta-elev" value="{{ item.station_elev }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
+</div>
+<div class="row">
+    <div class="col-4"> 
+        <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude" value="{{ item.station_lat }}"/>
+    </div>
+    <div class="col-4"> 
+        <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude" value="{{ item.station_long }}"/>
+    </div>
+    <div class="col-4"> 
+        <input id="sta-my-loc" type="button" name="get-sta-coordinates" class="input-loc btn-template-outlined" value="Get my location">
+    </div>
+</div>
+<div class="row">
+    <div class="col-12"> <label>Location:</label> </div>
+</div>
+<div class="row">
+    <div class="col-4"> 
+        <input id="sta-brgy" type="text" class="input-loc" name="sta-brgy" placeholder="Barangay" value="{{ item.station_brgy }}"/>
+    </div>
+    <div class="col-4"> 
+        <input id="sta-muni" type="text" class="input-loc" name="sta-muni" placeholder="Municipality" value="{{ item.station_muni }}"/>
+    </div>
+    <div class="col-4"> 
+        <input id="sta-prov" type="text" class="input-loc" name="sta-prov" placeholder="Province"  value="{{ item.station_prov }}"/>
+    </div>
+</div>
+{% endfor %}
+{% else %}                                    
+<div class="row">
+    <div class="col-4"> <label>Type of Data Source:</label> </div>
+    <div class="col-8">
+        <select class="list-dt others" id="sta-type" name="sta-type">
+            <optgroup label="Station Types">
+                <option value="" selected>Choose</option>
+                <option value="Atmometer">Atmometer</option>
+                <option value="Weather Station">Weather Station</option>
+                <option value="AWS">Automatic Weather Station</option>
+                <option value="Other">Other</option>
+            </optgroup>
+        </select>
+        <input class="others" id="sta-type-other" type="text" name="sta-type-other" placeholder="Other types" hidden/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"> <label>Station Name:</label> </div>
+    <div class="col-8">
+        <input id="sta-name" class="others" type="text" name="sta-name" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"> <label>Station Elevation (m):</label> </div>
+    <div class="col-8">
+        <input id="sta-elev" class="others" type="number" min="0" name="sta-elev" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
+</div>
+<div class="row">
+    <div class="col-4"> 
+        <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude" />
+    </div>
+    <div class="col-4"> 
+        <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude" />
+    </div>
+    <div class="col-4"> 
+        <input id="sta-my-loc" type="button" name="get-sta-coordinates" class="input-loc btn-template-outlined" value="Get my location" >
+    </div>
+</div>
+<div class="row">
+    <div class="col-12"> <label>Location:</label> </div>
+</div>
+<div class="row">
+    <div class="col-4"> 
+        <input id="sta-brgy" type="text" class="input-loc" name="sta-brgy" placeholder="Barangay" />
+    </div>
+    <div class="col-4"> 
+        <input id="sta-muni" type="text" class="input-loc" name="sta-muni" placeholder="Municipality" />
+    </div>
+    <div class="col-4"> 
+        <input id="sta-prov" type="text" class="input-loc" name="sta-prov" placeholder="Province" />
+    </div>
+</div>
+{% endif %}

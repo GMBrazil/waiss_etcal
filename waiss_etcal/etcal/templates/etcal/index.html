@@ -1,0 +1,413 @@
+{% extends 'etcal/base.html' %}
+{% load static %}
+
+{% block main_block %}
+            <section style="background: url({% static 'base/imgs/corn-field-2.jpg' %}) center center repeat; background-size: cover;" class="bar background-white relative-positioned">
+                <div class="container">
+                    <!-- Carousel Start-->
+                    <div class="home-carousel">
+                        <div class="dark-mask mask-primary"></div>
+                        <div class="container">
+                            <div class="homepage owl-carousel">
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-5 text-right">
+                                            <p><img src={% static "all/logo/WAISS-logo-no-label.png" %} alt="" class="ml-auto"></p>
+                                            <h1>Water Advisory For Irrigation Scheduling System</h1>
+                                            <p>Smart. Accurate. Innovation.<br>Easy. User-friendly. Accessible.</p>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <img src={% static "base/img/template-homepage.png" %} alt="" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-7 text-center">
+                                            <img src={% static "base/img/template-mac.png" %} alt="" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h2>ET-based Irrigation Scheduler and Calculator</h2>
+                                            <ul class="list-unstyled">
+                                                <li>Analyze evapotranspiration rates</li>
+                                                <li>Translate manageable crop, soil, and water information</li>
+                                                <li>Provide irrigation advisories</li>
+                                                <li>and many more features</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-5 text-right">
+                                            <h1>Features</h1>
+                                            <ul class="list-unstyled">
+                                                <li>Continuous farm and crop monitoring with wide range of accessibility</li>
+                                                <li>Free access to calculator and temporary data-saving feature for farm monitoring</li>                                            </ul>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <img src={% static "base/img/template-easy-customize.png" %} alt="" class="img-fluid">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <img src={% static "base/img/template-easy-code.png" %} alt="" class="img-fluid">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h1>WAISS ETCal</h1>
+                                            <ul class="list-unstyled">
+                                                <li>Works everywhere</li>
+                                                <li>Always available</li>
+                                                <li>Accurate advisories</li>
+                                                <li>Forecasting features</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carousel End-->
+                </div>
+            </section>
+            <section class="bar background-white no-mb">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="heading text-center">
+                            <h2>WAISS ETCal</h2>
+                        </div>
+                        <p class="lead">WAISS ETCal is an ET-based Irrigation Scheduler and Calculator which analyzes evapotranspiration rates and translates it into manageable and simple advisories for management of crops. Evapotranspiration rates can be determined directly through specialized evapotranspiration instruments or can be computed from agrometeorological data such as temperature, humidity, sunshine duration, etc. through empirical formulas.
+                            <br><br>This uses data from the following sources:
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="home-blog-post">
+                                    <div class="image">
+                                        <img src={% static "base/imgs/atmometer_sq.jpg" %} alt="..." class="img-fluid">
+                                        <div class="overlay d-flex align-items-center justify-content-center">
+                                            <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <h4><a href="#">Atmometer </a></h4>
+                                        <p class="intro">An instrument which measures reference evapotranspiration.</p>
+                                        <a href="#" class="btn btn-template-outlined">Continue Reading</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="home-blog-post">
+                                    <div class="image">
+                                        <img src={% static "base/imgs/aws_sq.jpg" %} alt="..." class="img-fluid">
+                                        <div class="overlay d-flex align-items-center justify-content-center">
+                                            <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <h4><a href="#">Automatic Weather Station</a></h4>
+                                        <p class="intro">A stand-alone station that generates meteorological data.</p>
+                                        <a href="#" class="btn btn-template-outlined">Continue Reading</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="home-blog-post">
+                                    <div class="image">
+                                        <img src={% static "base/imgs/agromet_sq.jpg" %} alt="..." class="img-fluid">
+                                        <div class="overlay d-flex align-items-center justify-content-center">
+                                            <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                        </div>
+                                    </div>
+                                    <div class="text">
+                                        <h4><a href="#">Agrometeorological Station </a></h4>
+                                        <p class="intro">A weather station that collects agrometeorological data for agriculture.</p>
+                                        <a href="#" class="btn btn-template-outlined">Continue Reading</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bar background-pentagon no-mb text-md-center">
+                <div class="container">
+                    <div class="heading text-center">
+                        <h2>Features</h2>
+                    </div>
+                    <p class="lead">This web app allows users to enter daily data for continuous farm monitoring and also allows free use for starters and demonstrations purposes.</p>
+                    <div class="row" data-pg-collapsed>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fa fa-user-circle icon fa-3x" style="color: rgb(82,210,171);"></i>
+                                    <br><br>
+                                    <h5 class="card-title">Subscribe</h5>
+                                    <p class="card-text">Enables daily input of parameters for continual farm monitoring which can be accessed in multiple and different computers and browsers</p>
+                                    <a href={% url 'etcal:signup' %} class="btn btn-template-main">Sign Up Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <i class="fa fa-user-circle-o icon fa-3x" style="color: rgb(101,205,205);"></i>
+                                    <br><br>
+                                    <h5 class="card-title">Free Use</h5>
+                                    <p class="card-text">Free access to calculator with temporary data-saving feature for daily farm monitoring which can only be accessed in a single computer and browser</p>
+                                    <a href={% url 'etcal:signup' %} class="btn btn-template-outlined">Sign Up Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bar no-mb">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="heading text-center">
+                            <h2>Who can use it?</h2>
+                            <br>
+                            <p class="lead">This web application is for everyone's use!</p>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <div data-animate="fadeInUp" class="team-member">
+                                    <div class="image">
+                                        <a><img src={% static "base/imgs/farmer.png" %} alt="" class="img-fluid rounded-circle stakeholder-icon"></a>
+                                    </div>
+                                    <h3>Farm People</h3>
+                                    <div class="text">
+                                        <p>including farmers, farm managers, operators, owners, extension workers and anyone who works in a farm</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.team-member-->
+                            <div data-animate="fadeInUp" data-pg-collapsed class="col-md-4">
+                                <div class="team-member">
+                                    <div class="image">
+                                        <a><img src={% static "base/imgs/engineer.png" %} alt="" class="img-fluid rounded-circle stakeholder-icon"></a>
+                                    </div>
+                                    <h3>Technical Persons</h3>
+                                    <div class="text">
+                                        <p>including engineers, technicians,  data processing workers, researchers, teachers, students, etc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.team-member-->
+                            <div data-animate="fadeInUp" data-pg-collapsed class="col-md-4">
+                                <div class="team-member">
+                                    <div class="image">
+                                        <a><img src={% static "base/imgs/technician.png" %} alt="" class="img-fluid rounded-circle stakeholder-icon"></a>
+                                    </div>
+                                    <h3>Others</h3>
+                                    <div class="text">
+                                        <p>all interested users with or without on-site data sources such as atmometers, AWS, ET controllers, etc.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.team-member-->
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bar no-mb color-white padding-big text-md-center bg-primary">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="text-uppercase">How can it help you?</h2>
+                            <br><br>
+                            <p class="lead mb-small">This web application uses evapotranspiration or agrometeorological data to generate an irrigation schedule and irrigation advisories for farms. </p>
+                            <p class="mb-small">This enables accurate crop water and irrigation water management especially for farmers and farm workers, continuous and distanced monitoring for agricultural extension workers and managers, and a handy irrigation scheduler and calculator for students, teachers, researchers, etc.</p>
+                            <p><a href="#" class="btn btn-template-outlined-white">Read more</a></p>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <img src={% static "all/imgs/WAISS%20field%20setup.png" %} alt="" class="side-pic">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="bar background-white">
+                <div class="container text-center">
+                    <div class="heading text-center">
+                        <h2>Why use WAISS ETCal?</h2>
+                        <br><br>
+                        <p class="lead">The calculator has many features and considerations which allows accurate calculation of irrigation schedule and generate forecasted irrigation advisories.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="box-simple">
+                                <div class="icon-outlined">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <h3 class="h4">Works everywhere</h3>
+                                <p>Can be accessed anywhere withour needing to install any hardware or components</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="box-simple">
+                                <div class="icon-outlined">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                                <h3 class="h4">Always available</h3>
+                                <p>Always accessible with very high run-time</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="box-simple">
+                                <div class="icon-outlined">
+                                    <i class="fa fa-list-alt"></i>
+                                </div>
+                                <h3 class="h4">Customizable</h3>
+                                <p>Allows addition of multiple farms and weather stations to suit the need of the user</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="box-simple">
+                                <div class="icon-outlined">
+                                    <i class="fa fa-leaf"></i>
+                                </div>
+                                <h3 class="h4">Accurate advisories</h3>
+                                <p>Incorporates many relevant factors such as location, crop and soil specific considerations in generating advisories</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="box-simple">
+                                <div class="icon-outlined">
+                                    <i class="fa fa-retweet"></i>
+                                </div>
+                                <h3 class="h4">Iterated forecasts</h3>
+                                <p>Forecasted advisories are iterated daily and during critical change points for better accuracy</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="box-simple">
+                                <div class="icon-outlined">
+                                    <i class="fa fa-user-circle-o"></i>
+                                </div>
+                                <h3 class="h4">User-friendly</h3>
+                                <p>Features simple and user-friendly interface which can also be accessed through mobile browsers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section style="background: url({% static 'base/imgs/corn-field.jpg' %}) center top no-repeat; background-size: cover;" class="bar no-mb color-white text-center bg-fixed relative-positioned">
+                <div class="dark-mask"></div>
+                <div class="container">
+                    <div class="icon icon-outlined icon-lg">
+                        <i class="fa fa-question"></i>
+                    </div>
+                    <h3 class="text-uppercase">What you need to know</h3>
+                    <p class="lead">Some important concepts use in this calculator are further discussed below. Be sure to read it!</p>
+                    <p class="lead mb-small">Click a button below to view.</p>
+                    <br>
+                    <ul class="list-unstyled owl-carousel customers no-mb">
+                        <li class="item">
+                            <a role="button" data-toggle="tooltip" data-bs-tooltip="" href="#" title="Evapotranspiration">
+                            <img src={% static "base/imgs/icons/et_icon.png" %} alt="" class="img-fluid"></a>
+                        </li>
+                        <li class="item">
+                            <a role="button" data-toggle="tooltip" data-bs-tooltip="" href="#" title="Crop Water Requirement">
+                                <img src={% static "base/imgs/icons/cwr_icon.png" %} alt="" class="img-fluid"></a>
+                        </li>
+                        <li class="item">
+                            <a role="button" data-toggle="tooltip" data-bs-tooltip="" href="#" title="Available Water">
+                                <img src={% static "base/imgs/icons/aw_icon.png" %} alt="" class="img-fluid"></a>
+                        </li>
+                        <li class="item">
+                            <a role="button" data-toggle="tooltip" data-bs-tooltip="" href="#" title="Water Stress">
+                                <img src={% static "base/imgs/icons/ws_icon.png" %} alt="" class="img-fluid"></a>
+                        </li>
+                        <li class="item">
+                            <a role="button" data-toggle="tooltip" data-bs-tooltip="" href="#" title="Effective Rainfall">
+                                <img src={% static "base/imgs/icons/efr_icon.png" %} alt="" class="img-fluid"></a>
+                        </li>
+                        <li class="item">
+                            <a role="button" data-toggle="tooltip" data-bs-tooltip="" href="#" title="Percolation">
+                                <img src={% static "base/imgs/icons/dp_icon.png" %} alt="" class="img-fluid"></a>
+                        </li>
+                    </ul>
+                    <br>
+                    <p class="text-center"><a href="#" class="btn btn-template-outlined-white btn-lg">Read More</a></p>
+                </div>
+            </section>
+            <section class="bg-white bar">
+                <div class="container">
+                    <div class="heading text-center">
+                        <h2>From the books</h2>
+                    </div>
+                    <p class="lead">A better understanding of underlying factors in the soil-plant-atmosphere continuum is a great start to the development of helpful innovations. <a href="#">Here are some resources!</a></p>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="home-blog-post">
+                                <div class="image">
+                                    <img src={% static "base/imgs/evapotranspiration-2.png" %} alt="..." class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h4><a href="#">Evapotranspiration </a></h4>
+                                    <p class="author-category">By <a href="http://www.fao.org/3/x0490e/x0490e04.htm" target="_blank">FAO</a></p>
+                                    <p class="intro">This chapter explains the concepts of and the differences between reference crop evapotranspiration (ETo) and crop evapotranspiration under standard conditions (ETc) and various management and environmental conditions (ETc adj). </p>
+                                    <a href="http://www.fao.org/3/x0490e/x0490e04.htm" target="_blank" class="btn btn-template-outlined">Continue Reading</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="home-blog-post">
+                                <div class="image">
+                                    <img src={% static "base/imgs/FAO%20PM.gif" %} alt="..." class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h4><a href="#">FAO Penman-Monteith</a></h4>
+                                    <p class="author-category">By <a href="http://www.fao.org/3/x0490e/x0490e06.htm" target="_blank">FAO</a></p>
+                                    <p class="intro">This chapter introduces the user to the need to standardize one method to compute reference evapotranspiration (ETo) from meteorological data. The FAO Penman-Monteith method is recommended as the sole ETo method for determining reference evapotranspiration.</p>
+                                    <a href="http://www.fao.org/3/x0490e/x0490e06.htm" target="_blank" class="btn btn-template-outlined">Continue Reading</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="home-blog-post">
+                                <div class="image">
+                                    <img src={% static "base/imgs/atmometer.jpg" %} alt="..." class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h4><a href="#">Atmometer</a></h4>
+                                    <p class="author-category">By <a href="https://extensionpublications.unl.edu/assets/html/g1579/build/g1579.htm" target="_blank">S. Irmak, J.O. Payero, and D.L. Martin</a></p>
+                                    <p class="intro">This NebGuide describes the atmometer (evapotranspiration gage) and explains how it can be used for irrigation scheduling. Examples are provided to show how information collected with an atmometer can be used to estimate crop water use for corn and soybean.</p>
+                                    <a href="https://extensionpublications.unl.edu/assets/html/g1579/build/g1579.htm" target="_blank" class="btn btn-template-outlined">Continue Reading</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="home-blog-post">
+                                <div class="image">
+                                    <img src={% static "base/imgs/soil-water-components.png" %} alt="..." class="img-fluid">
+                                    <div class="overlay d-flex align-items-center justify-content-center">
+                                        <a href="#" class="btn btn-template-outlined-white"><i class="fa fa-chain"> </i> Read More</a>
+                                    </div>
+                                </div>
+                                <div class="text">
+                                    <h4><a href="#">Soil-Plant-Atmosphere Continuum </a></h4>
+                                    <p class="author-category">By <a href="http://ecosensing.org/wp-content/uploads/2012/03/Soil-Plant-Atmoshere-Continuum.pdf" target="_blank">J.M. Norman and M.C. Anderson</a> in <a href="http://ecosensing.org/wp-content/uploads/2012/03/Soil-Plant-Atmoshere-Continuum.pdf" target="_blank">University of Wisconsin</a></p>
+                                    <p class="intro">The dominant distinguishing feature of the Earth, in comparison with all other celestial bodies we observe, is the presence of life. 
+                                        Humans, as a part of life onEarth, attempt to understand all of the life system, albeit from an anthropocentric perspective. </p>
+                                    <a href="http://ecosensing.org/wp-content/uploads/2012/03/Soil-Plant-Atmoshere-Continuum.pdf" target="_blank" class="btn btn-template-outlined">Continue Reading</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+{% endblock %}

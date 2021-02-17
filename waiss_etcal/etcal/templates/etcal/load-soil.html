@@ -1,0 +1,65 @@
+{% if soils %}
+{% for item in soils %}
+<div class="row">
+    <div class="col-5"> <label>Field Capacity (mm/mm):</label> </div>
+    <div class="col-7">
+        <input class="others" id="soil-fc" type="number" min="0" step="0.01" name="soil-fc" placeholder="" value="{{ item.soil_fc }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Permanent Wilting Point (mm/mm)</label> </div>
+    <div class="col-7">
+        <input class="others" id="soil-pwp" type="number" min="0" step="0.01" name="soil-pwp" placeholder="" value="{{ item.soil_pwp }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Percolation (mm/day)</label> </div>
+    <div class="col-7">
+        <input class="others" id="soil-perc" type="number" min="0" step="0.01" name="soil-perc" placeholder="" value="{{ item.percolation }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Initial Depletion (mm)</label> </div>
+    <div class="col-7">
+        <input class="others" id="init-depl" type="number" min="0" step="0.01" name="init-depl" placeholder="" value="{{ item.init_depl }}"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Management Allowable Depletion (mm/mm)</label> </div>
+    <div class="col-7">
+        <input class="others" id="mad" type="number" min="0" step="0.01" name="mad" placeholder="" value="{{ item.mad }}"/>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="row">
+    <div class="col-5"> <label>Field Capacity (mm/mm):</label> </div>
+    <div class="col-7">
+        <input class="others" id="soil-fc" type="number" min="0" step="0.01" name="soil-fc" placeholder="" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Permanent Wilting Point (mm/mm)</label> </div>
+    <div class="col-7">
+        <input class="others" id="soil-pwp" type="number" min="0" step="0.01" name="soil-pwp" placeholder="" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Percolation (mm/day)</label> </div>
+    <div class="col-7">
+        <input class="others" id="soil-perc" type="number" min="0" step="0.01" name="soil-perc" placeholder="" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Initial Depletion (mm)</label> </div>
+    <div class="col-7">
+        <input class="others" id="init-depl" type="number" min="0" step="0.01" name="init-depl" placeholder="" value="0.00"/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5"> <label>Management Allowable Depletion (mm/mm)</label> </div>
+    <div class="col-7">
+        <input class="others" id="mad" type="number" min="0" step="0.01" name="mad" placeholder="" value="0.50"/>
+    </div>
+</div>
+{% endif %}

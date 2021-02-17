@@ -1,0 +1,22 @@
+/* your styles go here */
+#main-logo {
+    width: 220px;
+}
+#small-logo {
+    width: 180px;
+}
+.stakeholder-icon{
+    width: 150px;
+}
+
+.side-pic{
+    height: 400px;
+}
+
+.credits{
+    font-size: 7px !important;
+}
+
+.notes{
+    font-size: 10px;
+}

@@ -1,0 +1,215 @@
+{% if crops %}
+{% for item in crops %}
+<div class="row">
+    <div class="col-4"> <label>Depth of Root Zone (mm):</label> </div>
+    <div class="col-8">
+        <input class="others" id="crop-drz" type="number" min="0" step="0.01" name="crop-drz" placeholder="" value="{{ item.crop_drz }}" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"> <label>Days to Maturity:</label> </div>
+    <div class="col-8">
+        <input class="others" id="crop-dtm" type="number" min="0" step="0.01" name="crop-dtm" placeholder="" value="{{ item.crop_dtm }}"/>
+    </div>
+</div>
+<!--<div class="row" data-pg-collapsed>
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-borderless table-sm">
+                <thead>
+                    <tr>
+                        <th><label>Crop Stages</label></th>
+                        <th><label>Initial</label></th>
+                        <th><label>Developmental</label></th>
+                        <th><label>Mid-Season</label></th>
+                        <th><label>Late Season</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>Stage Length (days)</label></td>
+                        <td>
+                            <input id="stage-init" name="stage-init" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_init }}">
+                        </td>
+                        <td>
+                            <input id="stage-dev" name="stage-dev" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_dev }}">
+                        </td>
+                        <td>
+                            <input id="stage-mid" name="stage-mid" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_mid }}">
+                        </td>
+                        <td>
+                            <input id="stage-late" name="stage-late" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_late }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Cumulative Stage Length (days)</label></td>
+                        <td>
+                            <input id="cs-init" name="cs-init" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                        <td>
+                            <input id="cs-dev" name="cs-dev" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                        <td>
+                            <input id="cs-mid" name="cs-mid" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                        <td>
+                            <input id="cs-late" name="cs-late" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Crop Coefficient (kc)</label> </td>
+                        <td>
+                            <input id="kc-init" name="kc-init" class="form-control form-control-sm" type="number" min="0" step="0.01" value="{{ item.kc_init }}">
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input id="kc-mid" name="kc-mid" class="form-control form-control-sm" type="number" min="0" step="0.01" value="{{ item.kc_mid }}">
+                        </td>
+                        <td>
+                            <input id="kc-late" name="kc-late" class="form-control form-control-sm" type="number" min="0" step="0.01" value="{{ item.kc_late }}">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+<section id="crop-grid" class="align-items-center">
+    <div class="row" class="text-center">
+        <div class="col-3"><strong><label>Crop Stages</label></strong></div>
+        <div class="col-2"><strong><label>Initial</label></strong></div>
+        <div class="col-3"><strong><label>Developmental</label></strong></div>
+        <div class="col-2"><strong><label>Mid-Season</label></strong></div>                                            
+        <div class="col-2"><strong><label>Late Season</label></strong></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><label>Stage Length (days)</label></div>
+        <div class="col-2"><input id="stage-init" name="stage-init" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_init }}"></div>
+        <div class="col-3"><input id="stage-dev" name="stage-dev" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_dev }}"></div>
+        <div class="col-2"><input id="stage-mid" name="stage-mid" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_mid }}"></div>                                            
+        <div class="col-2"><input id="stage-late" name="stage-late" class="form-control form-control-sm" type="number" min="0" value="{{ item.stage_late }}"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><label>Cumulative Stage Length (days)</label></div>
+        <div class="col-2"><input id="cs-init" name="cs-init" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+        <div class="col-3"><input id="cs-dev" name="cs-dev" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+        <div class="col-2"><input id="cs-mid" name="cs-mid" class="form-control form-control-sm" type="number" min="0" readonly=""></div>                                            
+        <div class="col-2"><input id="cs-late" name="cs-late" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><label>Crop Coefficient (kc)</label></div>
+        <div class="col-2"><input id="kc-init" name="kc-init" class="form-control form-control-sm" type="number" min="0" step="0.01" value="{{ item.kc_init }}"></div>
+        <div class="col-3"> </div>
+        <div class="col-2"><input id="kc-mid" name="kc-mid" class="form-control form-control-sm" type="number" min="0" step="0.01" value="{{ item.kc_mid }}"></div>                                            
+        <div class="col-2"><input id="kc-late" name="kc-late" class="form-control form-control-sm" type="number" min="0" step="0.01"  value="{{ item.kc_late }}"></div>
+    </div>
+</section>
+{% endfor %}
+{% else %}
+<div class="row">
+    <div class="col-4"> <label>Depth of Root Zone (mm):</label> </div>
+    <div class="col-8">
+        <input class="others" id="crop-drz" type="number" min="0" step="0.01" name="crop-drz" placeholder="" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-4"> <label>Days to Maturity:</label> </div>
+    <div class="col-8">
+        <input class="others" id="crop-dtm" type="number" min="0" step="0.01" name="crop-dtm" placeholder="" />
+    </div>
+</div>
+<!--<div class="row" data-pg-collapsed>
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table table-borderless table-sm">
+                <thead>
+                    <tr>
+                        <th><label>Crop Stages</label></th>
+                        <th><label>Initial</label></th>
+                        <th><label>Developmental</label></th>
+                        <th><label>Mid-Season</label></th>
+                        <th><label>Late-Season</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label>Stage Length (days)</label></td>
+                        <td>
+                            <input id="stage-init" name="stage-init" class="form-control form-control-sm" type="number" min="0" >
+                        </td>
+                        <td>
+                            <input id="stage-dev" name="stage-dev" class="form-control form-control-sm" type="number" min="0">
+                        </td>
+                        <td>
+                            <input id="stage-mid" name="stage-mid" class="form-control form-control-sm" type="number" min="0">
+                        </td>
+                        <td>
+                            <input id="stage-late" name="stage-late" class="form-control form-control-sm" type="number" min="0">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Cumulative Stage Length (days)</label></td>
+                        <td>
+                            <input id="cs-init" name="cs-init" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                        <td>
+                            <input id="cs-dev" name="cs-dev" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                        <td>
+                            <input id="cs-mid" name="cs-mid" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                        <td>
+                            <input id="cs-late" name="cs-late" class="form-control form-control-sm" type="number" min="0" readonly="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label>Crop Coefficient (kc)</label> </td>
+                        <td>
+                            <input id="kc-init" name="kc-init" class="form-control form-control-sm" type="number" min="0" step="0.01">
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <input id="kc-mid" name="kc-mid" class="form-control form-control-sm" type="number" min="0" step="0.01">
+                        </td>
+                        <td>
+                            <input id="kc-late" name="kc-late" class="form-control form-control-sm" type="number" min="0" step="0.01">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>-->
+<section id="crop-grid" class="align-items-center">
+    <div class="row" class="text-center">
+        <div class="col-3"><strong><label>Crop Stages</label></strong></div>
+        <div class="col-2"><strong><label>Initial</label></strong></div>
+        <div class="col-3"><strong><label>Developmental</label></strong></div>
+        <div class="col-2"><strong><label>Mid-Season</label></strong></div>                                            
+        <div class="col-2"><strong><label>Late Season</label></strong></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><label>Stage Length (days)</label></div>
+        <div class="col-2"><input id="stage-init" name="stage-init" class="form-control form-control-sm" type="number" min="0" ></div>
+        <div class="col-3"><input id="stage-dev" name="stage-dev" class="form-control form-control-sm" type="number" min="0"></div>
+        <div class="col-2"><input id="stage-mid" name="stage-mid" class="form-control form-control-sm" type="number" min="0" ></div>                                            
+        <div class="col-2"><input id="stage-late" name="stage-late" class="form-control form-control-sm" type="number" min="0" ></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><label>Cumulative Stage Length (days)</label></div>
+        <div class="col-2"><input id="cs-init" name="cs-init" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+        <div class="col-3"><input id="cs-dev" name="cs-dev" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+        <div class="col-2"><input id="cs-mid" name="cs-mid" class="form-control form-control-sm" type="number" min="0" readonly=""></div>                                            
+        <div class="col-2"><input id="cs-late" name="cs-late" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+    </div>
+    <div class="row">
+        <div class="col-3"><label>Crop Coefficient (kc)</label></div>
+        <div class="col-2"><input id="kc-init" name="kc-init" class="form-control form-control-sm" type="number" min="0" step="0.01"></div>
+        <div class="col-3"> </div>
+        <div class="col-2"><input id="kc-mid" name="kc-mid" class="form-control form-control-sm" type="number" min="0" step="0.01"></div>                                            
+        <div class="col-2"><input id="kc-late" name="kc-late" class="form-control form-control-sm" type="number" min="0" step="0.01"></div>
+    </div>
+</section>
+{% endif %}

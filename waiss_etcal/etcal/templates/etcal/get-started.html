@@ -1,0 +1,466 @@
+{% extends 'etcal/calculator.html' %}
+{% load static %}
+
+{% block addtl_top_script_block %}
+<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<link rel="stylesheet" href={% static "get-started/get-started.css" %}>
+{% endblock %}
+
+{% block main_block %}
+<!-- MultiStep Form -->
+<div class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>Let's get you started</strong></h2>
+                <p>Fill all form field to go to next step</p>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                        <form id="msform" name="get-started-form" action="{% url 'etcal:get_started' %}" method="post" data-crop-url="{% url 'etcal:load_crop' %}" data-soil-url="{% url 'etcal:load_soil' %}" data-station-url="{% url 'etcal:load_station' %}">
+                            {% csrf_token %}
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="farm"><strong>Farm</strong></li>
+                                <li id="crop"><strong>Crop</strong></li>
+                                <li id="soil"><strong>Soil</strong></li>
+                                <li id="station"><strong>Station</strong></li>
+                                <li id="data"><strong>Data</strong></li>
+                                <li id="confirm"><strong>Finish</strong></li>
+                            </ul> <!-- fieldsets -->
+                            <fieldset data-step="1">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Farm Information</h2>                                    
+                                    <div class="row">
+                                        <div class="col-4"> <label>Farm Name:</label> </div>
+                                        <div class="col-8">
+                                            <input id="farm-name" type="text" name="farm-name" data-toggle="popover" data-trigger="hover" data-placement="right" title="Farm Name" data-content="A unique name will make your farm more recognizable."/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <label>Location:</label> </div>
+                                    </div>
+                                    <div class="row" data-toggle="popover" data-trigger="hover" title="Farm Location" data-content="The local address of your farm is required for site-specific references.">
+                                        <div class="col-4"> 
+                                            <input id="farm-brgy" type="text" class="input-loc" name="farm-brgy" placeholder="Barangay" />
+                                        </div>
+                                        <div class="col-4"> 
+                                            <input id="farm-muni" type="text" class="input-loc" name="farm-muni" placeholder="Municipality" />
+                                        </div>
+                                        <div class="col-4"> 
+                                            <input id="farm-prov" type="text" class="input-loc" name="farm-prov" placeholder="Province" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
+                                    </div>
+                                    <div class="row" data-toggle="popover" data-trigger="hover" data-placement="right" title="Farm Coordinates" data-content="The coordinates of your farm may not be filled out if the local address is already provided. Further, if you are near your farm, you can get your current location by clicking the button.">
+                                        <div class="col-4"> 
+                                            <input id="farm-lat" type="number" class="input-loc" name="farm-latitude" min="0" placeholder="Latitude" />
+                                        </div>
+                                        <div class="col-4"> 
+                                            <input id="farm-long" type="number" class="input-loc" name="farm-longitude" min="0" placeholder="Longitude" />
+                                        </div>
+                                        <div class="col-4"> 
+                                            <input id="get-my-loc" type="button" name="get-farm-coordinates" class="input-loc btn-template-outlined" value="Get my location" onclick="getLocationforFarm();" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="By clicking this button, you may need to allow this site to access your current location.">
+                                        </div>
+                                    </div>
+                                    <i id="fh" class="notes"></i>
+                                </div>
+                                <input type="button" name="next" class="next action-button" value="Next Step"/>
+                            </fieldset>
+                            <fieldset data-step="2">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Crop Parameters</h2>
+                                    <div class="row">
+                                        <div class="col-4"> <label>Choose a crop:</label> </div>
+                                        <div class="col-8">
+                                            <select class="list-dt others" id="crops" name="crops">
+                                                <optgroup label="Crops">
+                                                    <option value="" selected="">Choose</option>
+                                                    {% for item in crop_info %}
+                                                    <option value="{{ item.crop_type }}">{{ item.crop_type }}</option>
+                                                    {% endfor %}
+                                                    <option value="Other">Other</option>
+                                                </optgroup>
+                                            </select>
+                                            <input class="others" id="crop-other" type="text" name="crop-other" placeholder="Other crops" hidden/>
+                                        </div>
+                                    </div>
+                                    <section id="crop-form">
+                                        <div class="row">
+                                            <div class="col-4"> <label>Depth of Root Zone (mm):</label> </div>
+                                            <div class="col-8">
+                                                <input class="others" id="crop-drz" type="number" min="0" step="0.01" name="crop-drz" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> <label>Days to Maturity:</label> </div>
+                                            <div class="col-8">
+                                                <input class="others" id="crop-dtm" type="number" min="0" step="0.01" name="crop-dtm" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <!--<div class="row" data-pg-collapsed>
+                                            <div class="col">
+                                                <div class="table-responsive">
+                                                    <table class="table table-borderless table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><label>Crop Stages</label></th>
+                                                                <th><label>Initial</label></th>
+                                                                <th><label>Developmental</label></th>
+                                                                <th><label>Mid-Season</label></th>
+                                                                <th><label>Late Season</label></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><label>Stage Length (days)</label></td>
+                                                                <td>
+                                                                    <input id="stage-init" name="stage-init" class="form-control form-control-sm" type="number" min="0" >
+                                                                </td>
+                                                                <td>
+                                                                    <input id="stage-dev" name="stage-dev" class="form-control form-control-sm" type="number" min="0">
+                                                                </td>
+                                                                <td>
+                                                                    <input id="stage-mid" name="stage-mid" class="form-control form-control-sm" type="number" min="0">
+                                                                </td>
+                                                                <td>
+                                                                    <input id="stage-late" name="stage-late" class="form-control form-control-sm" type="number" min="0">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>Cumulative Stage Length (days)</label></td>
+                                                                <td>
+                                                                    <input id="cs-init" name="cs-init" class="form-control form-control-sm" type="number" min="0" readonly="">
+                                                                </td>
+                                                                <td>
+                                                                    <input id="cs-dev" name="cs-dev" class="form-control form-control-sm" type="number" min="0" readonly="">
+                                                                </td>
+                                                                <td>
+                                                                    <input id="cs-mid" name="cs-mid" class="form-control form-control-sm" type="number" min="0" readonly="">
+                                                                </td>
+                                                                <td>
+                                                                    <input id="cs-late" name="cs-late" class="form-control form-control-sm" type="number" min="0" readonly="">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>Crop Coefficient (kc)</label> </td>
+                                                                <td>
+                                                                    <input id="kc-init" name="kc-init" class="form-control form-control-sm" type="number" min="0" step="0.01">
+                                                                </td>
+                                                                <td>
+                                                                </td>
+                                                                <td>
+                                                                    <input id="kc-mid" name="kc-mid" class="form-control form-control-sm" type="number" min="0" step="0.01">
+                                                                </td>
+                                                                <td>
+                                                                    <input id="kc-late" name="kc-late" class="form-control form-control-sm" type="number" min="0" step="0.01">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <section id="crop-grid" class="align-items-center">
+                                            <div class="row" class="text-center">
+                                                <div class="col-3"><strong><label>Crop Stages</label></strong></div>
+                                                <div class="col-2"><strong><label>Initial</label></strong></div>
+                                                <div class="col-3"><strong><label>Developmental</label></strong></div>
+                                                <div class="col-2"><strong><label>Mid-Season</label></strong></div>                                            
+                                                <div class="col-2"><strong><label>Late Season</label></strong></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3"><label>Stage Length (days)</label></div>
+                                                <div class="col-2"><input id="stage-init" name="stage-init" class="form-control form-control-sm" type="number" min="0" ></div>
+                                                <div class="col-3"><input id="stage-dev" name="stage-dev" class="form-control form-control-sm" type="number" min="0"></div>
+                                                <div class="col-2"><input id="stage-mid" name="stage-mid" class="form-control form-control-sm" type="number" min="0" ></div>                                            
+                                                <div class="col-2"><input id="stage-late" name="stage-late" class="form-control form-control-sm" type="number" min="0" ></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3"><label>Cumulative Stage Length (days)</label></div>
+                                                <div class="col-2"><input id="cs-init" name="cs-init" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+                                                <div class="col-3"><input id="cs-dev" name="cs-dev" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+                                                <div class="col-2"><input id="cs-mid" name="cs-mid" class="form-control form-control-sm" type="number" min="0" readonly=""></div>                                            
+                                                <div class="col-2"><input id="cs-late" name="cs-late" class="form-control form-control-sm" type="number" min="0" readonly=""></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-3"><label>Crop Coefficient (kc)</label></div>
+                                                <div class="col-2"><input id="kc-init" name="kc-init" class="form-control form-control-sm" type="number" min="0" step="0.01"></div>
+                                                <div class="col-3"> </div>
+                                                <div class="col-2"><input id="kc-mid" name="kc-mid" class="form-control form-control-sm" type="number" min="0" step="0.01"></div>                                            
+                                                <div class="col-2"><input id="kc-late" name="kc-late" class="form-control form-control-sm" type="number" min="0" step="0.01"></div>
+                                            </div>
+                                        </section>
+                                    </section>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset data-step="3">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Soil Parameters</h2>
+                                    <div class="row">
+                                        <div class="col-5"> <label>Choose a soil:</label> </div>
+                                        <div class="col-7">
+                                            <select class="list-dt others" id="soils" name="soils">
+                                                <optgroup label="Soil Type">
+                                                    <option value="" selected="">Choose</option>
+                                                    {% for item in soil_info %}
+                                                    <option value="{{ item.soil_type }}" >{{ item.soil_type }}</option>
+                                                    {% endfor %}
+                                                    <option value="Other">Other</option>
+                                                </optgroup>
+                                            </select>
+                                            <input class="others" id="soil-other" type="text" name="soil-other" placeholder="Other soils" hidden/>
+                                        </div>
+                                    </div>
+                                    <section id="soil-form">
+                                        <div class="row">
+                                            <div class="col-5"> <label>Field Capacity (mm/mm):</label> </div>
+                                            <div class="col-7">
+                                                <input class="others" id="soil-fc" type="number" min="0" step="0.01" name="soil-fc" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-5"> <label>Permanent Wilting Point (mm/mm)</label> </div>
+                                            <div class="col-7">
+                                                <input class="others" id="soil-pwp" type="number" min="0" step="0.01" name="soil-pwp" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-5"> <label>Percolation (mm/day)</label> </div>
+                                            <div class="col-7">
+                                                <input class="others" id="soil-perc" type="number" min="0" step="0.01" name="soil-perc" placeholder="" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-5"> <label>Initial Depletion (mm)</label> </div>
+                                            <div class="col-7">
+                                                <input class="others" id="init-depl" type="number" min="0" step="0.01" name="init-depl" placeholder="" value="0.00"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-5"> <label>Management Allowable Depletion (mm/mm)</label> </div>
+                                            <div class="col-7">
+                                                <input class="others" id="mad" type="number" min="0" step="0.01" name="mad" placeholder="" value="0.50"/>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset data-step="4">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Station or Data Source</h2>
+                                    <div class="row">
+                                        <div class="col-4"> <label>Choose a station:</label> </div>
+                                        <div class="col-8">
+                                            <select class="list-dt others" id="stations" name="stations">
+                                                <optgroup label="Stations">
+                                                    <option value="" selected="">Choose</option>
+                                                    {% for item in station_info %}
+                                                    <option value="{{ item.station_name }}" >{{ item.station_name }}</option>
+                                                    {% endfor %}
+                                                    <option value="Other">Other</option>
+                                                </optgroup>
+                                            </select>
+                                            <!--<input class="others" id="station-other" type="text" name="station-other" placeholder="Other stations" hidden/>-->
+                                        </div>
+                                    </div>
+                                    <section id="station-form">                                    
+                                        <div class="row">
+                                            <div class="col-4"> <label>Type of Data Source:</label> </div>
+                                            <div class="col-8">
+                                                <select class="list-dt others" id="sta-type" name="sta-type">
+                                                    <optgroup label="Station Types">
+                                                        <option value="" selected>Choose</option>
+                                                        <option value="Atmometer">Atmometer</option>
+                                                        <option value="Weather Station">Weather Station</option>
+                                                        <option value="AWS">Automatic Weather Station</option>
+                                                        <option value="Other">Other</option>
+                                                    </optgroup>
+                                                </select>
+                                                <input class="others" id="sta-type-other" type="text" name="sta-type-other" placeholder="Other types" hidden/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> <label>Station Name:</label> </div>
+                                            <div class="col-8">
+                                                <input id="sta-name" class="others" type="text" name="sta-name" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> <label>Station Elevation (m):</label> </div>
+                                            <div class="col-8">
+                                                <input id="sta-elev" class="others" type="number" min="0" name="sta-elev" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> 
+                                                <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude" />
+                                            </div>
+                                            <div class="col-4"> 
+                                                <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude" />
+                                            </div>
+                                            <div class="col-4"> 
+                                                <input id="sta-my-loc" type="button" name="get-sta-coordinates" class="input-loc btn-template-outlined" value="Get my location" onclick="getLocationforStation();">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12"> <label>Location:</label> </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> 
+                                                <input id="sta-brgy" type="text" class="input-loc" name="sta-brgy" placeholder="Barangay" />
+                                            </div>
+                                            <div class="col-4"> 
+                                                <input id="sta-muni" type="text" class="input-loc" name="sta-muni" placeholder="Municipality" />
+                                            </div>
+                                            <div class="col-4"> 
+                                                <input id="sta-prov" type="text" class="input-loc" name="sta-prov" placeholder="Province" />
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <i id="sh" class="notes"></i>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset data-step="5">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Data</h2>
+                                    <section id="add-now-form" class="text-center">
+                                        <p class="lead text-center">Do you want to add your first data now?</p>
+                                        <div class="btn-group" role="group" aria-label="Basic example"> 
+                                            <button id='add-now' type='button' class='btn btn-template-main'>YES</button>
+                                            <button id='not-now' type='button' class='btn btn-template-outlined'>MAYBE LATER</button>                           
+                                        </div>
+                                    </section>
+                                    <section id="data-form" hidden>
+                                        <div class="row">
+                                            <div class="col-4"> <label>Date of Planting/Sowing:</label> </div>
+                                            <div class="col-8">
+                                                <input id="dap" class="others" type="date" name="dap" />
+                                            </div>
+                                        </div>                                   
+                                        <div class="row">
+                                            <div class="col-4"> <label>Type of Data Input:</label> </div>
+                                            <div class="col-8">
+                                                <select class="list-dt others" id="data-type" name="data-type">
+                                                    <option selected>Reference Evapotranspiration (ETo)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> <label>Correction Factor:</label> </div>
+                                            <div class="col-8">
+                                                <input id="corr-factor" class="others" type="number" name="corr-factor"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4"> <label>How do you want to add data?</label> </div>
+                                            <div class="col-8">
+                                                <select class="list-dt others" id="input-type" name="input-type">
+                                                    <option selected>Single Data Input</option>
+                                                    <option>Upload Formatted Excel File</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row" data-pg-collapsed>
+                                            <div class="col">
+                                                <div class="table-responsive">                                                
+                                                    <table class="table-borderless table table-sm data-table input-data">
+                                                        <thead>
+                                                            <tr>
+                                                                <th><i class="fas fa-folder-minus"></i></th>
+                                                                <th><label>Date</label></th>
+                                                                <th><label>ETo(mm/day)</label></th>
+                                                                <th><label>Rainfall(mm)</label></th>
+                                                                <th><label>Irrigation(mm)</label></th>
+                                                                <th><i class="fas fa-folder-plus"></i></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>
+                                                                <td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>
+                                                                <td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>
+                                                                <td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>
+                                                                <td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>
+                                                                <td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>
+                                                            </tr>
+                                                        </tbody>                                                    
+                                                    </table>
+                                                    <script type="text/javascript">
+                                                        $(document).on('click', '.add-row', function () {
+                                                            //adding rows to data table
+                                                            var counter = $('table.input-data tbody tr').length + 1;
+                                                            var newRow = $("<tr>");
+                                                            var cols = "";
+                                                            cols += "<td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>";
+                                                            cols += "<td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>";
+                                                            cols += "<td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>";
+                                                            cols += "<td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>";
+                                                            cols += "<td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>";
+                                                            cols += "<td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>";
+                                                            newRow.append(cols);
+                                                            newRow.insertAfter($(this).closest("tr"));
+                                                        });
+                                                        $("table.input-data").on('click', '.delete-row', function (event) {
+                                                            //deleting selected row in data table
+                                                            $("table.input-data tbody").find('button[name="data"]').each(function () {
+                                                                if ($(this).is(":focus")) {
+                                                                    $(this).parents("tr").remove();
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section id="not-now-form" class="text-center" hidden>
+                                        <p class="lead text-center">You can now submit this form.</p>
+                                    </section>    
+                                    <section class="text-center"><button id='back-data-opt' type='button' class='btn btn-template-outlined' hidden>CHANGED MY MIND</button></section> 
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title text-center">Success !</h2> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                                    </div> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5>You Have Successfully Signed Up</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block addtl_bottom_script_block %}
+<!--<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>     
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>       
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
+<script src={% static "get-started/get-started.js" %}></script>
+<script src={% static "all/js/validate.js" %}></script>
+{% endblock %}
