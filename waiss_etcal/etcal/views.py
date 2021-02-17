@@ -97,6 +97,9 @@ def get_started(request):
             farm_lat = None
             farm_long = None
         
+        if (dap == "") or (corr_factor == ""):
+            dap = None
+            corr_factor = None
 
         # save to databases
         crop_data, created = Crop.objects.get_or_create(crop_type=crop_type, crop_drz=crop_drz, crop_dtm=crop_dtm, stage_init=stage_init,
