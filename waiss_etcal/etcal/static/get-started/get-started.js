@@ -54,7 +54,7 @@ $(document).ready(function () {
             'sta-lat': { required: true },
             'sta-long': { required: true },
             'dap': { required: '#data-form:visible' },
-            'data-type': { required: '#data-form:!visible'  },
+            'data-type': { required: '#data-form:visible'  },
             'corr-factor': { required: '#data-form:visible' },
             'date_measured[]': { required: '#data-form:visible'  },
             'eto_data[]': { required: '#data-form:visible'  },
@@ -428,7 +428,7 @@ $(document).ready(function () {
         $("#add-now-form").attr('hidden', '');
         $("#not-now-form").attr('hidden', '');
         $("#data-form").removeAttr('hidden');
-        $("#back-data-opt").removeAttr('hidden');
+        //$("#back-data-opt").removeAttr('hidden');
         $("#data-form").find('input').each(function(){
             $(this).removeAttr('hidden');
         });
@@ -440,7 +440,7 @@ $(document).ready(function () {
         $("#add-now-form").attr('hidden', '');
         $("#data-form").attr('hidden', '');
         $("#not-now-form").removeAttr('hidden');
-        $("#back-data-opt").removeAttr('hidden');
+        //$("#back-data-opt").removeAttr('hidden');
         $("#data-form").find('input').each(function(){
             $(this).attr('hidden', '');
         });
@@ -448,7 +448,7 @@ $(document).ready(function () {
             $(this).attr('hidden', '');
         });
     });
-    $("#back-data-opt").click(function () {//user clicks 'CHANGED MY MIND'
+    /*$("#back-data-opt").click(function () {//user clicks 'CHANGED MY MIND'
         $("#add-now-form").removeAttr('hidden');
         $("#data-form").attr('hidden', '');
         $("#not-now-form").attr('hidden', '');
@@ -462,7 +462,7 @@ $(document).ready(function () {
         $("#data-form").find('select').each(function(){
             $(this).attr('hidden', '');
         });
-    });
+    });*/
 });
 
 
