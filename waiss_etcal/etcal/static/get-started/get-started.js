@@ -194,6 +194,9 @@ $(document).ready(function () {
                 validationPassed = true;
             }
         }
+        else if (current_fs.data('step') == 6) {
+            $("#msform").submit();
+        }
 
         for (i = 0; i < validationArray.length; i++) {
             //alert("8");
