@@ -101,6 +101,12 @@ def get_started(request):
             dap = None
             corr_factor = None
 
+        if (date_measured == "") or (eto_data == ""):
+            date_measured = None
+            eto_data = None
+            rain_data = None
+            irrig_data = None
+
         # save to databases
         crop_data, created = Crop.objects.get_or_create(crop_type=crop_type, crop_drz=crop_drz, crop_dtm=crop_dtm, stage_init=stage_init,
                                                          stage_dev=stage_dev, stage_mid=stage_mid, stage_late=stage_late, kc_init=kc_init, kc_mid=kc_mid, kc_late=kc_late)
