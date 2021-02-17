@@ -90,7 +90,7 @@ def get_started(request):
             station_name = station_other
 
         # save to databases
-        crop_data, created = Crops.objects.get_or_create(crop_type=crop_type, crop_drz=crop_drz, crop_dtm=crop_dtm, stage_init=stage_init,
+        crop_data, created = Crop.objects.get_or_create(crop_type=crop_type, crop_drz=crop_drz, crop_dtm=crop_dtm, stage_init=stage_init,
                                                          stage_dev=stage_dev, stage_mid=stage_mid, stage_late=stage_late, kc_init=kc_init, kc_mid=kc_mid, kc_late=kc_late)
         crop_data.save()
         crop = Crop.objects.get(id=crop_data.id)
