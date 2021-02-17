@@ -226,6 +226,10 @@ $(document).ready(function () {
                 duration: 600
             });
         }
+
+        $("#submit-form").click(function(){
+            $("#msform").submit();
+        });
     });
 
     $(".previous").click(function () {
