@@ -44,7 +44,7 @@ class Farm(models.Model):
     farm_brgy = models.CharField(max_length=30, default=None, verbose_name="Barangay")
     farm_lat = models.DecimalField(max_digits=10, decimal_places=7, verbose_name="Latitude (°)", null=True, blank=True)
     farm_long = models.DecimalField(max_digits=10, decimal_places=7, verbose_name="Longitude (°)", null=True, blank=True)
-    date_planted = models.DateField(verbose_name='Planting Date', default=None)
+    date_planted = models.DateField(verbose_name='Planting Date', default=None, null=True)
     crop = models.ForeignKey(Crop, on_delete=models.CASCADE, default=None, null=True)
     soil = models.ForeignKey(Soil, on_delete=models.CASCADE, default=None, null=True)    
     corr_factor = models.DecimalField(max_digits=6, decimal_places=4, verbose_name="Correction Factor", null=True)
