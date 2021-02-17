@@ -183,7 +183,6 @@ $(document).ready(function () {
                         });
                     }
                 });
-
             }
             else {
                 $("#data-form").find('input').each(function(){
@@ -227,9 +226,6 @@ $(document).ready(function () {
             });
         }
 
-        $("#submit-form").click(function(){
-            $("#msform").submit();
-        });
     });
 
     $(".previous").click(function () {
