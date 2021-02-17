@@ -89,6 +89,15 @@ def get_started(request):
         elif (station_other != "") and (station_def == "Other"):
             station_name = station_other
 
+        if (station_lat == "") or (station_long == ""):
+            station_lat = None
+            station_long = None
+
+        if (farm_lat == "") or (farm_long == ""):
+            farm_lat = None
+            farm_long = None
+        
+
         # save to databases
         crop_data, created = Crop.objects.get_or_create(crop_type=crop_type, crop_drz=crop_drz, crop_dtm=crop_dtm, stage_init=stage_init,
                                                          stage_dev=stage_dev, stage_mid=stage_mid, stage_late=stage_late, kc_init=kc_init, kc_mid=kc_mid, kc_late=kc_late)
