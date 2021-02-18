@@ -16,7 +16,7 @@ def index(request):
 def sign_up(request):
     user_form = UserCreationForm(request.POST or None)
     if request.method == "POST":
-        if form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
             login(request, user)
             return render(request, 'etcal/index.html')
