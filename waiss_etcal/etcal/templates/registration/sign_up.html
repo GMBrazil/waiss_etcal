@@ -8,6 +8,34 @@
 {% endblock %}
 
 {% block main_block %}
+<div class="page login-page">
+    <div class="container">
+        <div class="form-outer text-center d-flex align-items-center">
+            <div class="form-inner">
+                <div class="logo text-uppercase">
+                    <span>WAISS</span>
+                    <strong class="text-primary">ETCAL</strong>
+                </div>
+                <p>Welcome! Log in now to update your farm, crop, and other data for more accurate advisories. We hope this will also be another amazing experience for you.</p>
+                <form method="post" class="text-left form-validate">
+                    {% csrf_token %}
+                    {{ user_form.as_p }}
+                    <div class="form-group text-center">
+                        <input type="submit" id="login" value="Login" class="btn btn-primary">Login</a>
+                        <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                    </div>
+                </form>
+                <a href="#" class="forgot-pass">Forgot Password?</a>
+                <small>Do not have an account? </small>
+                <a href="register.html" class="signup">Signup</a>
+            </div>
+            <div class="copyrights text-center">
+                <p>Design by <a href="https://bootstrapious.com/p/bootstrap-4-dashboard" class="external">Bootstrapious</a></p>
+                <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions. Thank you for understanding :)-->
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block footer_block %}
