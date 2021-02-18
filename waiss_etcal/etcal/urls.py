@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.urls import path, include
 from . import views
 
@@ -6,7 +7,7 @@ app_name = 'etcal'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('signup/', views.signup, name='signup'),
+    path('etcal/signup/', views.sign_up, name='sign_up'),
     path('database/', views.database, name='database'),
     path('calculator/', views.calculator, name='calculator'),
     path('getstarted/', views.get_started, name='get_started'),

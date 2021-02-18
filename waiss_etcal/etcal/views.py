@@ -1,17 +1,29 @@
 from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect, JsonResponse
 from .models import Crop, Soil, Farm, Station, Data
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required
 def index(request):
     return render(request, 'etcal/index.html')
 
 
-def signup(request):
-    return render(request, 'etcal/signup.html')
+def sign_up(request):
+    user_form = UserCreationForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            user = user_form.save()
+            login(request, user)
+            return render(request, 'etcal/index.html')
+    context = {
+        "user_form" : user_form
+    }
+    return render(request, 'etcal/sign_up.html', context)
 
 
 def database(request):
