@@ -23,7 +23,7 @@ def sign_up(request):
     context = {
         "user_form" : user_form
     }
-    return render(request, 'etcal/sign_up.html', context)
+    return render(request, 'registration/sign_up.html', context)
 
 
 def database(request):
