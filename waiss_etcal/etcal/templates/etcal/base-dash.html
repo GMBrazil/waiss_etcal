@@ -613,7 +613,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src="img/avatar-5.jpg" alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-5.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Aria Smith</strong>
                                                     <small>Posted a new blog </small>
@@ -631,7 +631,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src="img/avatar-2.jpg" alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-2.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Frank Williams</strong>
                                                     <small>Posted a new blog </small>
@@ -653,7 +653,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src="img/avatar-3.jpg" alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-3.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Ashley Wood</strong>
                                                     <small>Posted a new blog </small>
@@ -671,7 +671,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src="img/avatar-1.jpg" alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-1.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Jason Doe</strong>
                                                     <small>Posted a new blog </small>
@@ -695,7 +695,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src="img/avatar-6.jpg" alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-6.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Sam Martinez</strong>
                                                     <small>Posted a new blog </small>
@@ -812,10 +812,10 @@
                     <p>SARAI 2.3 &copy; 2020</p>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <img src="img/logos/project-sarai-logo.png" class="logo-icon"/>
-                    <img src="img/logos/uplb-logo.png" class="logo-icon"/>
-                    <img src="img/logos/dost-pcaarrd-logo.png" class="logo-icon"/>
-                    <img src="img/logos/dost-logo.png" class="logo-icon"/>
+                    <img src={% static "all/logo/sarai-logo.png" %} class="logo-icon"/>
+                    <img src={% static "all/logo/up-logo.png" %} class="logo-icon"/>
+                    <img src={% static "all/logo/dost-pcaarrd-logo.png" %} class="logo-icon"/>
+                    <img src={% static "all/logo/dost-logo.png" %} class="logo-icon"/>
                     <!-- Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions and it helps me to run Bootstrapious. Thank you for understanding :)-->
                 </div>
             </div>
@@ -834,14 +834,14 @@
 
 {% block bottom_script_block %}
 <!-- JavaScript files-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
-<script src="vendor/jquery.cookie/jquery.cookie.js"> </script>
-<script src="vendor/chart.js/Chart.min.js"></script>
-<script src="vendor/jquery-validation/jquery.validate.min.js"></script>
-<script src="vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/charts-home.js"></script>
+<script src={% static "dash/vendor/jquery/jquery.min.js" %}></script>
+<script src={% static "dash/vendor/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+<script src={% static "dash/js/grasp_mobile_progress_circle-1.0.0.min.js" %}></script>
+<script src={% static "dash/vendor/jquery.cookie/jquery.cookie.js" %}> </script>
+<script src={% static "dash/vendor/chart.js/Chart.min.js" %}></script>
+<script src={% static "dash/vendor/jquery-validation/jquery.validate.min.js" %}></script>
+<script src={% static "dash/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" %}></script>
+<script src={% static "dash/js/charts-home.js" %}></script>
 <!-- Main File-->
-<script src="js/front.js"></script>
+<script src={% static "dash/js/front.js" %}></script>
 {% endblock %}
