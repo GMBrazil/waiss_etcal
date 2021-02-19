@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .forms import NewUserForm
 
 # Create your views here.
 
@@ -14,7 +15,7 @@ def index(request):
 
 
 def sign_up(request):
-    user_form = UserCreationForm(request.POST or None)
+    user_form = NewUserForm(request.POST or None)
     if request.method == "POST":
         if user_form.is_valid():
             user = user_form.save()
