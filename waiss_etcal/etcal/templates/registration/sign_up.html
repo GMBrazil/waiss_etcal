@@ -19,7 +19,7 @@
                 <p>Welcome! Log in now to update your farm, crop, and other data for more accurate advisories. We hope this will also be another amazing experience for you.</p>
                 <form method="post" class="text-left form-validate">
                     {% csrf_token %}
-                    {{ user_form.as_p }}
+                    {{ user_form.as_table }}
                     <div class="form-group text-center">
                         <input type="submit" id="login" value="Login" class="btn btn-primary">
                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
