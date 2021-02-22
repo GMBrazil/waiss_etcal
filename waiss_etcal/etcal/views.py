@@ -9,7 +9,6 @@ from .forms import NewUserForm
 
 # Create your views here.
 
-@login_required
 def index(request):
     return render(request, 'etcal/index.html')
 
@@ -34,6 +33,7 @@ def calculator(request):
     return render(request, 'etcal/calculator.html')
 
 
+@login_required
 def get_started(request):
     crop_info = Crop.objects.all()
     soil_info = Soil.objects.all()
@@ -154,6 +154,7 @@ def get_started(request):
     return render(request, 'etcal/get-started.html', context)
 
 
+@login_required
 def dashboard(request):
     return render(request, 'etcal/dashboard.html')
 
