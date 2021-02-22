@@ -13,7 +13,6 @@ from .forms import NewUserForm
 def index(request):
     return render(request, 'etcal/index.html')
 
-
 def sign_up(request):
     user_form = NewUserForm(request.POST or None)
     if request.method == "POST":
