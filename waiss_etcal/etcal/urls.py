@@ -15,5 +15,5 @@ urlpatterns = [
     path('load/crop/', views.load_crop, name='load_crop'),
     path('load/soil/', views.load_soil, name='load_soil'),
     path('load/station/', views.load_station, name='load_station'),
-    path('farm/dashboard/', views.dashboard, name='dashboard')
+    path('dashboard/', views.dashboard, name='dashboard')
 ]
