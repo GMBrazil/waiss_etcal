@@ -11,8 +11,8 @@ class NewUserForm(UserCreationForm):
         fields = ("first_name", "last_name", "username", "email", "password1", "password2",)
         help_texts = {
             "username" : None,
-            "password1" : None,
-            "password2" : None
+            "password1" : "",
+            "password2" : "",
         }
     
     def save(self, commit=True):
