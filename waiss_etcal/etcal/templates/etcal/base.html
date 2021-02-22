@@ -79,7 +79,7 @@
                                 </ul>
                                 <div class="login">
                                     {% if user.is_authenticated %}
-                                    <span>Hi {{ user.username }} !</span>
+                                    <p>Hi {{ user.username }} !</p>
                                     <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
                                     {% else %}
                                     <a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log In</span></a>
