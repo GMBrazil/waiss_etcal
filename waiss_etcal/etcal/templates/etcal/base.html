@@ -78,6 +78,7 @@
                                     </li>
                                 </ul>
                                 <div class="login">
+                                    {% block user_block %}
                                     {% if user.is_authenticated %}
                                     <p>Hi {{ user.username }} !</p>
                                     <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
@@ -86,6 +87,7 @@
                                     <!--<a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log In</span></a>-->
                                     <a href={% url 'etcal:sign_up' %} class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a>
                                     {% endif %}
+                                    {% endblock %}
                                 </div>
                                 <ul class="social-custom list-inline">
                                     <li class="list-inline-item">
