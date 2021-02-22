@@ -9,7 +9,7 @@ class NewUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("first_name", "last_name", "username", "email", "password1", "password2",)
-        help_text = {
+        help_texts = {
             "username" : None,
             "password1" : None,
             "password2" : None
