@@ -1,10 +1,10 @@
 {% extends 'etcal/base-dash.html' %}
 {% load static %}
 
-{% block head_navbar_block %}
+{% block navbar_block %}
 {% endblock %}
 
-{% block navbar_block %}
+{% block head_block %}
 {% endblock %}
 
 {% block main_block %}
@@ -21,7 +21,7 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     <div class="form-group text-center">
-                        <input type="submit" id="login" value="Login" class="btn btn-primary">Login</a>
+                        <input type="submit" id="login" value="Login" class="btn btn-primary">
                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                     </div>
                 </form>
@@ -39,7 +39,4 @@
 {% endblock %}
 
 {% block footer_block %}
-{% endblock %}
-
-{% block bottom_navbar_block %}
 {% endblock %}
