@@ -27,7 +27,7 @@
                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
                     </div>
                 </form>
-                <a href="#" class="forgot-pass">Forgot Password?</a>
+                <a href={% url 'password_reset' %} class="forgot-pass">Forgot Password?</a>
                 <small>Already have an account? </small>
                 <a href={% url 'login' %} class="signup">Log In</a>
             </div>
