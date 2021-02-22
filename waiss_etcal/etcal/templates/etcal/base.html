@@ -80,7 +80,7 @@
                                 <div class="login">
                                     {% block user_block %}
                                     {% if user.is_authenticated %}
-                                    <p>Hi {{ user.username }} !</p>
+                                    <span>Hi {{ user.username }} !</span>
                                     <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
                                     {% else %}
                                     <a href={% url 'login' %} class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log In</span></a>
