@@ -21,7 +21,7 @@
                 <form method="post" class="text-left form-validate">
                     {% csrf_token %}
                     <table>
-                        {{ user_form|crispy }}
+                        {{ user_form }}
                     </table>
                     <div class="form-group text-center">
                         <input type="submit" id="signup" value="Sign Up" class="btn btn-primary">
