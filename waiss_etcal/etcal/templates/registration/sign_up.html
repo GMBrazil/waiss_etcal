@@ -1,5 +1,6 @@
 {% extends 'etcal/base-dash.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block navbar_block %}
 {% endblock %}
@@ -20,7 +21,7 @@
                 <form method="post" class="text-left form-validate">
                     {% csrf_token %}
                     <table>
-                        {{ user_form.as_table }}
+                        {{ user_form|crispy }}
                     </table>
                     <div class="form-group text-center">
                         <input type="submit" id="signup" value="Sign Up" class="btn btn-primary">
