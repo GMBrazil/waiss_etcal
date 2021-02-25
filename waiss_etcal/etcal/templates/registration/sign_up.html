@@ -20,6 +20,18 @@
                 <p>Welcome! Register now to start monitoring your farm and crop with our accurate water advisory system. We hope this will also be another amazing experience for you.</p>
                 <form method="post" class="text-left form-validate">
                     {% csrf_token %}
+                    <div class="row">
+                        <div class="col-6">{{ user_form.first_name | as_crispy_field }}</div>
+                        <div class="col-6">{{ user_form.last_name | as_crispy_field }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">{{ user_form.username | as_crispy_field }}</div>
+                        <div class="col-12">{{ user_form.email | as_crispy_field }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">{{ user_form.password1 | as_crispy_field }}</div>
+                        <div class="col-12">{{ user_form.password2 | as_crispy_field }}</div>
+                    </div>
                     <table>
                         {{ user_form | crispy }}
                     </table>
