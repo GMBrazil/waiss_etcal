@@ -143,8 +143,6 @@ def get_started(request):
                         farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
                     data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
-        else:            
-            return HttpResponseRedirect(reverse('etcal:dashboard'))
 
     context = {
         "crop_info": crop_info,
