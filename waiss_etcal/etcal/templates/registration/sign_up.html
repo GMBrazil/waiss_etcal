@@ -32,9 +32,6 @@
                         <div class="col-12">{{ user_form.password1 | as_crispy_field }}</div>
                         <div class="col-12">{{ user_form.password2 | as_crispy_field }}</div>
                     </div>
-                    <table>
-                        {{ user_form | crispy }}
-                    </table>
                     <div class="form-group text-center">
                         <input type="submit" id="signup" value="Sign Up" class="btn btn-primary">
                         <!-- This should be submit button but I replaced it with <a> for demo purposes-->
