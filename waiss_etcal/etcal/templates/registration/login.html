@@ -19,7 +19,8 @@
                 </div>
                 <p>Welcome! Log in now to update your farm, crop, and other data for more accurate advisories. We hope this will also be another amazing experience for you.</p>
                 <form method="post" class="text-left form-validate">
-                    {% csrf_token %}                    
+                    {% csrf_token %}
+                    {{ form | crispy }}                  
                     <div class="row">
                         <div class="col-12">{{ form.username | as_crispy_field }}</div>
                         <div class="col-12">{{ form.password | as_crispy_field }}</div>
