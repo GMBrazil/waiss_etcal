@@ -234,18 +234,17 @@
     <div role="document" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 id="login-modalLabel" class="modal-title">Log Out</h4>
+                <h4 id="login-modalLabel" class="modal-title">User Log Out</h4>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="text-center text-muted">Hope you are having a good time using WAISS ETCal.</p>
-                <p class="text-center text-muted">Are you sure you want to log out?</p>
+                <p class="text-center text-muted">Hope you are having a good time using WAISS ETCal. Are you sure you want to log out?</p>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" type="submit" href={% url 'logout' %}>Log Out</button>
+                <button><a href={% url 'logout' %} class="signup">Log Out</a></button>
             </div>
         </div>
     </div>
