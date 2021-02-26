@@ -42,6 +42,8 @@ function calcData() {
     date_harvest = new Date(DAP_js_converted);
     date_harvest.setDate(date_harvest.getDate() + crop_dtm);
     DOH_today = (date_harvest.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
+    date = date_harvest;
+    date_harvest = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear();
     if (DOH_today > 0) {
         DOH_today = Math.floor(DOH_today);
     }
@@ -281,9 +283,10 @@ function iterateData() {
 }
 
 function displayResults() {
-    document.getElementById("valDAP").textContent = DAP_today + " DAP";
-    document.getElementById("valDOH").textContent = DOH_today + " Days Before Harvest";
-    lastDataUpdate();
+    document.getElementById("valDAP").textContent = DAP_today;
+    document.getElementById("valDOH").textContent = DOH_today;
+    document.getElementById("dHarvest").textContent = date_harvest;
+    //lastDataUpdate();
     soilWaterStatus();
     dayToIrrigate();
     irrigateWater();
@@ -410,16 +413,16 @@ function irrigateWater() {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
         var percentRAWtoFC = (valdActualRAW[latest_index] / valFC[latest_index]) * 100;
-        document.querySelector("#progressIrrigate").style.width = percentRAWtoFC + "%";
-        $('#progressIrrigate').attr('aria-valuenow', percentRAWtoFC + '%');
+        //document.querySelector("#progressIrrigate").style.width = percentRAWtoFC + "%";
+        //$('#progressIrrigate').attr('aria-valuenow', percentRAWtoFC + '%');
     }
     else {
         valIrrigate = 0;
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "Still Above Field Capacity";
         var percentRAWtoFC = 100;
-        document.querySelector("#progressIrrigate").style.width = percentRAWtoFC + "%";
-        $('#progressIrrigate').attr('aria-valuenow', percentRAWtoFC + '%');
+        //document.querySelector("#progressIrrigate").style.width = percentRAWtoFC + "%";
+        //$('#progressIrrigate').attr('aria-valuenow', percentRAWtoFC + '%');
     }
 
 }
