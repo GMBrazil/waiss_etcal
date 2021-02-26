@@ -234,7 +234,7 @@
     <div role="document" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 id="login-modalLabel" class="modal-title">User Log Out</h4>
+                <h4 id="login-modalLabel" class="modal-title">Log Out</h4>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -244,7 +244,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" value="Close" data-dismiss="modal" class="btn btn-light">
-                <input type="button" href={% url 'logout' %} value="Log Out" class="btn btn-primary">
+                <a href={% url 'logout' %} class="btn btn-primary">Log Out</a>
             </div>
         </div>
     </div>
