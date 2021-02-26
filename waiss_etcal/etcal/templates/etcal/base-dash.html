@@ -243,8 +243,8 @@
                 <p class="text-center text-muted">Hope you are having a good time using WAISS ETCal. Are you sure you want to log out?</p>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
-                <button><a href={% url 'logout' %} class="signup">Log Out</a></button>
+                <input type="button" value="Close" data-dismiss="modal" class="btn btn-light">
+                <input type="button" href={% url 'logout' %} value="Log Out" class="btn btn-primary">
             </div>
         </div>
     </div>
