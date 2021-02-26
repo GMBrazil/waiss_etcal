@@ -129,7 +129,7 @@ Highcharts.ajax({
                     positioner: function () {
                         return {
                             // right aligned
-                            x: this.chart.chartWidth - (2* this.label.width) ,
+                            x: this.chart.chartWidth - this.label.width - 10 ,
                             y: 10 // align to title
                         };
                     },
