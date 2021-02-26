@@ -292,7 +292,7 @@ function displayResults() {
     irrigateWater();
 }
 
-function lastDataUpdate() {
+/*function lastDataUpdate() {
     var last_data = new Date(date_data[latest_index]);
     date_today = new Date();
     data_update_diff = (last_data.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
@@ -313,7 +313,7 @@ function lastDataUpdate() {
         document.getElementById("lastDataAlert_text").textContent = "Your last data input was " + Math.abs(data_update_diff) + " days ago. It is recommended to update your data for more accurate advisories. Thank you!";
         $("#lastDataAlert").show();
     }
-}
+}*/
 
 function soilWaterStatus() {
     var threshold_level = 0.05;
