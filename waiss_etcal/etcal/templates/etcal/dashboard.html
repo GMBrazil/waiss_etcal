@@ -2,8 +2,14 @@
 {%load static %}
 
 {% block addtl_top_script_block %}
+<!-- Highcharts --->
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/timeline.js"></script>
+<script src="https://code.highcharts.com/modules/xrange.js"></script>
 <link rel="stylesheet" href={% static "dash/css/highcharts.css" %}>
 {% endblock %}
 
