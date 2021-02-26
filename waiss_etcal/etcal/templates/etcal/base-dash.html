@@ -190,7 +190,7 @@
                         </li>
                         <!-- Log out-->
                         <li class="nav-item">
-                            <a href={% url 'logout' %} class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a>
+                            <a href="#" data-toggle="modal" data-target="#logout-modal" class="nav-link logout"> <span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -229,6 +229,28 @@
 {% endblock %}
 
 {% block modal_block %}
+<!-- Logout Modal-->
+<div id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logout-modalLabel" aria-hidden="true" class="modal fade">
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="login-modalLabel" class="modal-title">Log Out</h4>
+                <button type="button" data-dismiss="modal" aria-label="Close" class="close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center text-muted">Hope you are having a good time using WAISS ETCal.</p>
+                <p class="text-center text-muted">Are you sure you want to log out?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-light" type="button" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" type="submit" href={% url 'logout' %}>Log Out</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Logout modal end-->
 {% endblock %}
 
 {% block bottom_script_block %}
