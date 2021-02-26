@@ -1,6 +1,12 @@
 {% extends 'etcal/base-dash.html' %}
 {%load static %}
 
+{% block addtl_top_script_block %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<link rel="stylesheet" href={% static "dash/css/highcharts.css" %}>
+{% endblock %}
+
 {% block main_block %}
     <!-- Counts Section -->
     <section class="dashboard-counts section-padding">
@@ -14,8 +20,8 @@
                         </div>
                         <div class="name">
                             <strong class="text-uppercase">DAYS AFTER PLANTING</strong>
-                            <span>Last 7 days</span>
-                            <div class="count-number">25</div>
+                            <span>DAP</span>
+                            <div class="count-number" id="valDAP">25</div>
                         </div>
                     </div>
                 </div>
@@ -27,8 +33,8 @@
                         </div>
                         <div class="name">
                             <strong class="text-uppercase">DAYS BEFORE HARVEST</strong>
-                            <span>Last 5 days</span>
-                            <div class="count-number">400</div>
+                            <span id="dHarvest">Last 5 days</span>
+                            <div class="count-number" id="valDOH">400</div>
                         </div>
                     </div>
                 </div>
@@ -36,12 +42,24 @@
                 <div class="col-xl-2 col-md-4 col-6">
                     <div class="wrapper count-title d-flex">
                         <div class="icon">
+                            <i class="fa fa-cloud"></i>
+                        </div>
+                        <div class="name">
+                            <strong class="text-uppercase">RAINFALL PERCENT CHANCE</strong>
+                            <span>Next 3 days</span>
+                            <div class="count-number">70</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-4 col-6">
+                    <div class="wrapper count-title d-flex">
+                        <div class="icon">
                             <i class="fa fa-sort-amount-desc"></i>
                         </div>
                         <div class="name">
                             <strong class="text-uppercase">SOIL WATER STATUS</strong>
-                            <span>Last 2 months</span>
-                            <div class="count-number">342</div>
+                            <span id="textActualRAW">Last 2 months</span>
+                            <div id="valActualRAW">342</div>
                         </div>
                     </div>
                 </div>
@@ -53,8 +71,9 @@
                         </div>
                         <div class="name">
                             <strong class="text-uppercase">DAY TO IRRIGATE</strong>
-                            <span>Last 2 days</span>
-                            <div class="count-number">123</div>
+                            <span id="textDBI">Last 2 days</span>
+                            <div id="valDBI">123</div>
+                            <span id="textDBINote">Last 3 months</span>
                         </div>
                     </div>
                 </div>
@@ -66,93 +85,37 @@
                         </div>
                         <div class="name">
                             <strong class="text-uppercase">level of irrigation</strong>
-                            <span>Last 3 months</span>
-                            <div class="count-number">92</div>
+                            <span id="textIrrigate">Last 3 months</span>
+                            <div class="count-number" id="valIrrigate">92</div>
                         </div>
                     </div>
                 </div>
                 <!-- Count item widget-->
-                <div class="col-xl-2 col-md-4 col-6">
-                    <div class="wrapper count-title d-flex">
-                        <div class="icon">
-                            <i class="fa fa-cloud"></i>
-                        </div>
-                        <div class="name">
-                            <strong class="text-uppercase">RAINFALL CHANCE</strong>
-                            <span>Last 7 days</span>
-                            <div class="count-number">70</div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
     <!-- Header Section-->
     <section class="dashboard-header section-padding">
         <div class="container-fluid">
-            <div class="row d-flex align-items-md-stretch">
-                <!-- To Do List-->
-                <div class="col-lg-3 col-md-6">
-                    <div class="card to-do">
-                        <h2 class="display h4">To do List</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <ul class="check-lists list-unstyled">
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-1" name="list-1" class="form-control-custom">
-                                <label for="list-1">Similique sunt in culpa qui officia</label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-2" name="list-2" class="form-control-custom">
-                                <label for="list-2">Ed ut perspiciatis unde omnis iste</label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-3" name="list-3" class="form-control-custom">
-                                <label for="list-3">At vero eos et accusamus et iusto </label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-4" name="list-4" class="form-control-custom">
-                                <label for="list-4">Explicabo Nemo ipsam voluptatem</label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-5" name="list-5" class="form-control-custom">
-                                <label for="list-5">Similique sunt in culpa qui officia</label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-6" name="list-6" class="form-control-custom">
-                                <label for="list-6">At vero eos et accusamus et iusto </label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-7" name="list-7" class="form-control-custom">
-                                <label for="list-7">Similique sunt in culpa qui officia</label>
-                            </li>
-                            <li class="d-flex align-items-center"> 
-                                <input type="checkbox" id="list-8" name="list-8" class="form-control-custom">
-                                <label for="list-8">Ed ut perspiciatis unde omnis iste</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Pie Chart-->
-                <div class="col-lg-3 col-md-6">
-                    <div class="card project-progress">
-                        <h2 class="display h4">Project Beta progress</h2>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <div class="pie-chart">
-                            <canvas id="pieChart" width="300" height="300"> </canvas>
-                        </div>
-                    </div>
-                </div>
-                <!-- Line Chart -->
-                <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
-                    <div class="card sales-report">
-                        <h2 class="display h4">Sales marketing report</h2>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor amet officiis</p>
-                        <div class="line-chart">
-                            <canvas id="lineCahrt"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    This demo shows how related charts can be synchronized. Hover
+                    over one chart to see the effect in the other charts as well.
+                    This is a technique that is commonly seen in dashboards, 
+                    where multiple charts are often used to visualize related
+                    information.
+                </p>
+            </figure>
+        </div>
+    </section>
+    <section class="dashboard-header section-padding">
+        <div class="container-fluid">
+            <div class="pg-empty-placeholder" id="weatherForecastChart"></div>
+            <div class="pg-empty-placeholder" id="plantGrowthChart"></div>
+            <div class="pg-empty-placeholder" id="growthStageChart"></div>
+            <div class="pg-empty-placeholder" id="soilConditionChart"></div>
+            <div class="pg-empty-placeholder" id="appliedWaterChart"></div>
         </div>
     </section>
     <section class="dashboard-header section-padding">
@@ -286,8 +249,7 @@
                     <!-- Recent Updates Widget          -->
                     <div id="new-updates" class="card updates recent-updated">
                         <div id="updates-header" class="card-header d-flex justify-content-between align-items-center">
-                            <h2 class="h5 display">
-                            <a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box">News Updates</a></h2>
+                            <h2 class="h5 display"><a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box">News Updates</a></h2>
                             <a data-toggle="collapse" data-parent="#new-updates" href="#updates-box" aria-expanded="true" aria-controls="updates-box"><i class="fa fa-angle-down"></i></a>
                         </div>
                         <div id="updates-box" role="tabpanel" class="collapse show">
@@ -416,7 +378,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-5.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src="img/avatar-5.jpg" alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Aria Smith</strong>
                                                     <small>Posted a new blog </small>
@@ -434,7 +396,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-2.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src="img/avatar-2.jpg" alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Frank Williams</strong>
                                                     <small>Posted a new blog </small>
@@ -456,7 +418,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-3.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src="img/avatar-3.jpg" alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Ashley Wood</strong>
                                                     <small>Posted a new blog </small>
@@ -474,7 +436,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-1.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src="img/avatar-1.jpg" alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Jason Doe</strong>
                                                     <small>Posted a new blog </small>
@@ -498,7 +460,7 @@
                                     <li class="clearfix">
                                         <div class="feed d-flex justify-content-between">
                                             <div class="feed-body d-flex justify-content-between">
-                                                <a href="#" class="feed-profile"><img src={% static "dash/img/avatar-6.jpg" %} alt="person" class="img-fluid rounded-circle"></a>
+                                                <a href="#" class="feed-profile"><img src="img/avatar-6.jpg" alt="person" class="img-fluid rounded-circle"></a>
                                                 <div class="content">
                                                     <strong>Sam Martinez</strong>
                                                     <small>Posted a new blog </small>
@@ -606,4 +568,9 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block addtl_bottom_script_block %}
+<script src={% static "dash/js/main_script.js" %}></script>
+<script src={% static "dash/js/script.js" %}></script>
 {% endblock %}
