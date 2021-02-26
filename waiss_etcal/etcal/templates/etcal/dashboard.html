@@ -3,6 +3,7 @@
 
 {% block addtl_top_script_block %}
 <!-- Highcharts --->
+<link rel="stylesheet" href={% static "dash/css/highcharts.css" %}>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -10,7 +11,6 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/timeline.js"></script>
 <script src="https://code.highcharts.com/modules/xrange.js"></script>
-<link rel="stylesheet" href={% static "dash/css/highcharts.css" %}>
 {% endblock %}
 
 {% block main_block %}
