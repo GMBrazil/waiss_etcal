@@ -142,6 +142,9 @@ def get_started(request):
                 data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
                 data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
+        elif (date_measured == "") or (eto_data == "") or (rain_data == "") or (irrig_data == ""):
+            return HttpResponseRedirect(reverse('etcal:dashboard'))
+
 
     context = {
         "crop_info": crop_info,
