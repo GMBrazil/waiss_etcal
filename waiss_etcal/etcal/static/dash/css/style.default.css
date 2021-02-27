@@ -1672,7 +1672,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 .register-page a.forgot-pass,
 .register-page a.signup {
     font-size: 0.65em;
-    color: #66b0ff;
+    color: #46ac97;
 }
 
 .login-page a.forgot-pass:hover,
@@ -1683,7 +1683,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 .register-page a.forgot-pass:focus,
 .register-page a.signup:hover,
 .register-page a.signup:focus {
-    color: #66b0ff;
+    color: #46ac97;
     text-decoration: none;
 }
 
