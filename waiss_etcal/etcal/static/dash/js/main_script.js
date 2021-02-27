@@ -319,10 +319,9 @@ function soilWaterStatus() {
     var threshold_level = 0.05;
     var critical_level = 0.5; //50% below MAD and above PWP
     var diffActualRAW;
-    var currentMC, currentpercentMC, pathPercent, valMC;
+    var currentpercentMC, pathPercent, valMC;
     valMC = valdActualRAW[latest_index].toFixed(2)
-    currentMC = (valFC[latest_index]-valdActualRAW[latest_index]);
-    currentpercentMC = parseInt((currentMC)/valFC[latest_index]*100);
+    currentpercentMC = (valMC)/valFC[latest_index]*100;
     pathPercent = (360-(360*currentpercentMC));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
