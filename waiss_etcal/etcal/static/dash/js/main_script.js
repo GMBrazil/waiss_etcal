@@ -322,7 +322,7 @@ function soilWaterStatus() {
     var currentpercentMC, pathPercent, valMC;
     valMC = valdActualRAW[latest_index].toFixed(2)
     currentpercentMC = (valMC)/valFC[latest_index]*100;
-    pathPercent = (360-(360*currentpercentMC));
+    pathPercent = (301.635-(301.635*currentpercentMC));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
     //>5% above FC level
@@ -420,6 +420,8 @@ function dayToIrrigate() {
 }
 
 function irrigateWater() {
+    var valMC = valdActualRAW[latest_index].toFixed(2)
+    var currentpercentMC = ((valMC)/valFC[latest_index]*100).toFixed(2);
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
     var valpercentroundIrrigate = valpercentIrrigate.toFixed(2);
@@ -428,13 +430,13 @@ function irrigateWater() {
     if (valIrrigate > 0) {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
-        document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + valpercentroundIrrigate + "%. " + "To reach field capacity, " + valIrrigate + "mm of water is needed.";
+        document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + currentpercentMC + "%. " + "To reach field capacity, " + valIrrigate + "mm of water is needed.";
     }
     else {
         valIrrigate = 0;
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "Still Above Field Capacity";
-        document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + valpercentroundIrrigate + "% and is still above field capacity. No irrigation is needed.";
+        document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + currentpercentMC + "% and is still above field capacity. No irrigation is needed.";
     }
 
 }
