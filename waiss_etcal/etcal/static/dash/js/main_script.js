@@ -323,41 +323,47 @@ function soilWaterStatus() {
     currentMC = (valFC[latest_index]-valdActualRAW[latest_index]);
     currentpercentMC = parseInt((currentMC)/valFC[latest_index]*100);
     pathPercent = (360-(360*currentpercentMC));
-    document.getElementById("valCurrentMC").textContent = currentMC.toFixed(2) + "mm";
+    document.getElementById("valCurrentMC").textContent = valdActualRAW[latest_index].toFixed(2) + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
     //>5% above FC level
     if (valdActualRAW[latest_index] > ((1 + threshold_level) * valFC[latest_index])) {
         document.getElementById("textActualRAW").textContent = "Sufficient";
         diffActualRAW = Math.round(valActualRAW[latest_index] - valFC[latest_index]);
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm Above FC";
+        document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valdActualRAW[latest_index] + "mm" + " which is still at sufficient levels with " + diffActualRAW + "mm of soil moisture above field capacity.";
     }
     //(+/-)5% at FC level
     else if ((valdActualRAW[latest_index] <= ((1 + threshold_level) * valFC[latest_index])) && (valdActualRAW[latest_index] > ((1 - threshold_level) * valFC[latest_index]))) {
         document.getElementById("textActualRAW").textContent = "Sufficient";
         document.getElementById("valActualRAW").textContent = "At Field Capacity";
+        document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valdActualRAW[latest_index] + "mm" + " which is sufficient and is at field capacity level.";
     }
     //<5% below FC level and >5% above MAD level
     else if ((valdActualRAW[latest_index] <= ((1 - threshold_level) * valFC[latest_index])) && (valdActualRAW[latest_index] > ((1 + threshold_level) * valdMAD[latest_index]))) {
         document.getElementById("textActualRAW").textContent = "Sufficient";
         diffActualRAW = Math.round(valFC[latest_index] - valActualRAW[latest_index]);
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm Below FC";
+        document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valdActualRAW[latest_index] + "mm" + " which is still at sufficient levels with " + diffActualRAW + "mm of soil moisture below field capacity.";
     }
     //(+/-)5% at MAD level
     else if ((valdActualRAW[latest_index] <= ((1 + threshold_level) * valdMAD[latest_index])) && (valdActualRAW[latest_index] > ((1 - threshold_level) * valdMAD[latest_index]))) {
         document.getElementById("textActualRAW").textContent = "Threshold Level";
         document.getElementById("valActualRAW").textContent = "Within 5% near MAD";
+        document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valdActualRAW[latest_index] + "mm" + " which is at threshold level or within 5% near management allowable depletion level.";
     }
     //<5% below MAD and >50% above PWP
     else if ((valdActualRAW[latest_index] <= ((1 - threshold_level) * valdMAD[latest_index])) && (valdActualRAW[latest_index] > ((1 + critical_level) * valPWP[latest_index]))) {
         document.getElementById("textActualRAW").textContent = "Water Stress";
         diffActualRAW = Math.round(valRAW[latest_index] - valActualRAW[latest_index]);
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm Below MAD";
+        document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valdActualRAW[latest_index] + "mm" + " which is in water stress condition with " + diffActualRAW + "mm of soil moisture below management allowable depletion.";
     }
     //<50% above PWP and beyond
     else if ((valdActualRAW[latest_index] <= ((1 + critical_level) * valPWP[latest_index]))) {
         document.getElementById("textActualRAW").textContent = "Critical";
         diffActualRAW = Math.round(valActualRAW[latest_index] - valPWP[latest_index]);
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm near PWP";
+        document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valdActualRAW[latest_index] + "mm" + " which is in critical condition with" + diffActualRAW + "mm of soil moisture near permanent wilting point.";
     }
 }
 
@@ -420,13 +426,13 @@ function irrigateWater() {
     if (valIrrigate > 0) {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
-        var percentRAWtoFC = (valdActualRAW[latest_index] / valFC[latest_index]) * 100;
+        document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + valpercentIrrigate + "%. " + "To reach field capacity, " + valIrrigate + "mm of water is needed.";
     }
     else {
         valIrrigate = 0;
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "Still Above Field Capacity";
-        var percentRAWtoFC = 100;
+        document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + valpercentIrrigate + "% and is still above field capacity. No irrigation is needed.";
     }
 
 }
