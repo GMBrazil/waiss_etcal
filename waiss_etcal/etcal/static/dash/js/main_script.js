@@ -321,7 +321,7 @@ function soilWaterStatus() {
     var diffActualRAW;
     var currentMC, currentpercentMC, pathPercent;
     currentMC = (valFC[latest_index]-valdActualRAW[latest_index]);
-    currentperecentMC = parseInt((currentMC)/valFC[latest_index]*100);
+    currentpercentMC = parseInt((currentMC)/valFC[latest_index]*100);
     pathPercent = (360-(360*currentpercentMC));
     document.getElementById("valCurrentMC").textContent = currentMC.toFixed(2) + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
@@ -415,7 +415,7 @@ function dayToIrrigate() {
 
 function irrigateWater() {
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
-    var valpercentIrrigate = (valFC[latest_index] - valIrrigate)/valFC[latest_index] *100;
+    var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
     document.getElementById("irrigate-progress").style.width = parseInt(valpercentIrrigate) + "%";
     if (valIrrigate > 0) {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
