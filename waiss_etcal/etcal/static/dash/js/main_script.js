@@ -322,6 +322,7 @@ function soilWaterStatus() {
     var currentpercentMC, pathPercent, valMC;
     valMC = valdActualRAW[latest_index].toFixed(2)
     currentpercentMC = (valMC/valFC[latest_index])*100;
+    alert(valMC + ";" + currentpercentMC);
     pathPercent = (301.635-(301.635*currentpercentMC));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
