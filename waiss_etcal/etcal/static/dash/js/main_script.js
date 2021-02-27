@@ -323,7 +323,7 @@ function soilWaterStatus() {
     currentMC = (valFC[latest_index]-valdActualRAW[latest_index]);
     currentperecentMC = parseInt((currentMC)/valFC[latest_index]*100);
     pathPercent = (360-(360*currentpercentMC));
-    document.getElementById("valCurrentMC").textContent = currentMC + "mm";
+    document.getElementById("valCurrentMC").textContent = currentMC.toFixed(2) + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
     //>5% above FC level
     if (valdActualRAW[latest_index] > ((1 + threshold_level) * valFC[latest_index])) {
@@ -416,7 +416,7 @@ function dayToIrrigate() {
 function irrigateWater() {
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valFC[latest_index] - valIrrigate)/valFC[latest_index] *100;
-    document.getElementById("irrigate-progress").style.width = parseInt(valpercentIrrigate);
+    document.getElementById("irrigate-progress").style.width = parseInt(valpercentIrrigate) + "%";
     if (valIrrigate > 0) {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
