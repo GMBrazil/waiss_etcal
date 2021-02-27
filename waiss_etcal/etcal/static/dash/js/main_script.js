@@ -425,6 +425,8 @@ function irrigateWater() {
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
     var valpercentroundIrrigate = valpercentIrrigate.toFixed(2);
+    document.getElementById("mc-progress").style.width = currentpercentMC + "%";
+    document.getElementById("mc-progress").textContent = currentpercentMC + "%";
     document.getElementById("irrigate-progress").style.width = valpercentroundIrrigate + "%";
     document.getElementById("irrigate-progress").textContent = valpercentroundIrrigate + "%";
     if (valIrrigate > 0) {
