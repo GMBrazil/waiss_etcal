@@ -321,7 +321,7 @@ function soilWaterStatus() {
     var diffActualRAW;
     var currentpercentMC, pathPercent, valMC;
     valMC = valdActualRAW[latest_index].toFixed(2)
-    currentpercentMC = (valMC)/valFC[latest_index]*100;
+    currentpercentMC = (valMC/valFC[latest_index])*100;
     pathPercent = (301.635-(301.635*currentpercentMC));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
@@ -421,7 +421,7 @@ function dayToIrrigate() {
 
 function irrigateWater() {
     var valMC = valdActualRAW[latest_index].toFixed(2)
-    var currentpercentMC = ((valMC)/valFC[latest_index]*100).toFixed(2);
+    var currentpercentMC = ((valMC/valFC[latest_index])*100).toFixed(2);
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
     var valpercentroundIrrigate = valpercentIrrigate.toFixed(2);
