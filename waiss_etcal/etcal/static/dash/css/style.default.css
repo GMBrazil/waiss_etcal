@@ -847,9 +847,9 @@ nav.navbar a.menu-btn:hover {
 /* * ==========================================================
 *      STATISTICS
 * ========================================================== */
-.statistics {
-    /* User Activity ------------- */
-}
+/*.statistics {
+     User Activity ------------- 
+}*/
 
 .statistics div[class*='col-'] .card {
     padding: 20px;
@@ -919,9 +919,9 @@ nav.navbar a.menu-btn:hover {
     background: #f5f5f5;
 }
 
-.statistics .user-activity .progress .progress-bar.bg-primary {
-    /*background: #4fbfa8 !important*/;
-}
+/*.statistics .user-activity .progress .progress-bar.bg-primary {
+    background: #4fbfa8 !important;
+}*/
 
 .statistics .user-activity .page-statistics {
     margin-top: 20px;
