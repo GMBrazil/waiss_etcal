@@ -1873,5 +1873,5 @@ window.onload = function () {
     displayResults();
     //renderChart();
     //renderChart2();
-    renderChart3();
+    //renderChart3();
 }
