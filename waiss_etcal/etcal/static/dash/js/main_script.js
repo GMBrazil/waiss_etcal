@@ -424,8 +424,8 @@ function irrigateWater() {
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
     var valpercentroundIrrigate = valpercentIrrigate.toFixed(2);
-    document.getElementById("irrigate-progress").style.width = parseInt(valpercentIrrigate) + "%";
-    document.getElementById("irrigate-progress").textContent = parseInt(valpercentIrrigate) + "%";
+    document.getElementById("irrigate-progress").style.width = valpercentroundIrrigate + "%";
+    document.getElementById("irrigate-progress").textContent = valpercentroundIrrigate + "%";
     if (valIrrigate > 0) {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
