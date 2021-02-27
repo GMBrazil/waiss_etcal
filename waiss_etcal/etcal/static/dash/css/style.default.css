@@ -920,7 +920,7 @@ nav.navbar a.menu-btn:hover {
 }
 
 .statistics .user-activity .progress .progress-bar.bg-primary {
-    background: #4fbfa8 !important;
+    background: #4fbfa8;
 }
 
 .statistics .user-activity .page-statistics {
