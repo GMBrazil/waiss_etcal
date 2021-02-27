@@ -127,18 +127,64 @@
 <!-- Header Section-->
 <section class="dashboard-header section-padding">
     <div class="container-fluid">
-        <figure class="highcharts-figure">
-            <div id="container"></div>
-            <p class="highcharts-description">
-                This demo shows how related charts can be synchronized. Hover
-                over one chart to see the effect in the other charts as well.
-                This is a technique that is commonly seen in dashboards,
-                where multiple charts are often used to visualize related
-                information.
-            </p>
-        </figure>
+        <div class="row d-flex align-items-md-stretch">
+            <!-- To Do List-->
+            <div class="col-lg-3 col-md-3">
+                <div class="card to-do">
+                    <h2 class="display h4">To do List</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <ul class="check-lists list-unstyled">
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-1" name="list-1" class="form-control-custom">
+                            <label for="list-1">Similique sunt in culpa qui officia</label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-2" name="list-2" class="form-control-custom">
+                            <label for="list-2">Ed ut perspiciatis unde omnis iste</label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-3" name="list-3" class="form-control-custom">
+                            <label for="list-3">At vero eos et accusamus et iusto </label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-4" name="list-4" class="form-control-custom">
+                            <label for="list-4">Explicabo Nemo ipsam voluptatem</label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-5" name="list-5" class="form-control-custom">
+                            <label for="list-5">Similique sunt in culpa qui officia</label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-6" name="list-6" class="form-control-custom">
+                            <label for="list-6">At vero eos et accusamus et iusto </label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-7" name="list-7" class="form-control-custom">
+                            <label for="list-7">Similique sunt in culpa qui officia</label>
+                        </li>
+                        <li class="d-flex align-items-center"> 
+                            <input type="checkbox" id="list-8" name="list-8" class="form-control-custom">
+                            <label for="list-8">Ed ut perspiciatis unde omnis iste</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Pie Chart-->
+            <div class="col-lg-9 col-md-9">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                    <p class="highcharts-description">
+                        This demo shows how related charts can be synchronized. Hover
+                        over one chart to see the effect in the other charts as well.
+                        This is a technique that is commonly seen in dashboards,
+                        where multiple charts are often used to visualize related
+                        information.
+                    </p>
+                </figure>
+            </div>
+        </div>
     </div>
-</section> 
+</section>
 {% endblock %}
 
 {% block addtl_bottom_script_block %}
