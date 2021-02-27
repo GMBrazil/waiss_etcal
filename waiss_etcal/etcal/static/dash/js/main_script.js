@@ -319,6 +319,7 @@ function soilWaterStatus() {
     var threshold_level = 0.05;
     var critical_level = 0.5; //50% below MAD and above PWP
     var diffActualRAW;
+    document.getElementById("textActualRAW").textContent = valdActualRAW[latest_index];
     //>5% above FC level
     if (valdActualRAW[latest_index] > ((1 + threshold_level) * valFC[latest_index])) {
         document.getElementById("textActualRAW").textContent = "Sufficient";
