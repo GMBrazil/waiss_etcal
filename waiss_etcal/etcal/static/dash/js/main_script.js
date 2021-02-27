@@ -421,16 +421,12 @@ function irrigateWater() {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
         var percentRAWtoFC = (valdActualRAW[latest_index] / valFC[latest_index]) * 100;
-        //document.querySelector("#progressIrrigate").style.width = percentRAWtoFC + "%";
-        //$('#progressIrrigate').attr('aria-valuenow', percentRAWtoFC + '%');
     }
     else {
         valIrrigate = 0;
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "Still Above Field Capacity";
         var percentRAWtoFC = 100;
-        //document.querySelector("#progressIrrigate").style.width = percentRAWtoFC + "%";
-        //$('#progressIrrigate').attr('aria-valuenow', percentRAWtoFC + '%');
     }
 
 }
