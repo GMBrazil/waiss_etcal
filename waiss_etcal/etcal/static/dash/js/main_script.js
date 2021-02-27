@@ -425,6 +425,7 @@ function irrigateWater() {
     var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
     var valpercentroundIrrigate = valpercentIrrigate.toFixed(2);
     document.getElementById("irrigate-progress").style.width = parseInt(valpercentIrrigate) + "%";
+    document.getElementById("irrigate-progress").textContent = parseInt(valpercentIrrigate) + "%";
     if (valIrrigate > 0) {
         document.getElementById("valIrrigate").textContent = valIrrigate + "mm";
         document.getElementById("textIrrigate").textContent = "To reach Field Capacity";
