@@ -2,8 +2,6 @@
 {%load static %}
 
 {% block addtl_top_script_block %}
-<!--Custom Stylesheet-->
-<link rel="stylesheet" href={% static "dash/css/progress-circle.css" %}>
 <!-- Highcharts --->
 <link rel="stylesheet" href={% static "dash/css/highcharts.css" %}>
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -103,14 +101,12 @@
                     <h2 class="display h4">Soil Water Status</h2>
                     <div class="row d-flex align-items-center">
                         <div class="col-sm-6">
-                            <div class="progress blue">
-                                <span class="progress-left">
-                                    <span class="progress-bar"></span>
-                                </span>
-                                <span class="progress-right">
-                                    <span class="progress-bar"></span>
-                                </span>
-                                <div class="progress-value" id="valCurrentMC"></div>
+                            <div id="circleProgress5" class="progressbar-js-circle rounded p-3">
+                                <svg viewBox="0 0 100 100" style="display: block; width: 100%;">
+                                    <path d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="#eee" stroke-width="4" fill-opacity="0"></path>
+                                    <path id="path-circle" d="M 50,50 m 0,-48 a 48,48 0 1 1 0,96 a 48,48 0 1 1 0,-96" stroke="rgb(98,194,205)" stroke-width="4" fill-opacity="0" style="stroke-dasharray: 301.635, 301.635; stroke-dashoffset: 99.5396;"></path>
+                                </svg>
+                                <div class="progressbar-text" style="position: absolute; left: 50%; top: 50%; padding: 0px; margin: 0px; transform: translate(-50%, -50%); color: rgb(0, 0, 0); font-size: 1rem;" id="valCurrentMC"></div>
                             </div>
                         </div>
                         <div class="col-sm-6">
