@@ -101,7 +101,7 @@
                                     </li>                            
                                     {% if user.is_authenticated %}
                                     <li class="list-inline-item">
-                                        <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="30" height="30" avatar="{{ user.username }}"><b class="caret"></b></a>
+                                        <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="26" height="26" avatar="{{ user.username }}"><b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li class="dropdown-item">
                                                 <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
