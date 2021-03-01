@@ -617,7 +617,9 @@ table input[type="number"] {
   margin: 0;
 }
 
-.top-bar ul.social-custom ul.dropdown-menu li.dropdown-item{
+.top-bar ul.social-custom ul.dropdown-menu li.dropdown-item a{
+  color: #555 !important;
+  text-decoration: none !important;
   border-radius: 0% !important;
   font-size: 0.75rem !important;
   letter-spacing: 0.1em !important;
@@ -625,7 +627,7 @@ table input[type="number"] {
   border-bottom: 1px solid #eee !important;
 }
 
-.top-bar ul.social-custom ul.dropdown-menu li.dropdown-item:hover{
+.top-bar ul.social-custom ul.dropdown-menu li.dropdown-item:hover a{
   border-radius: 0% !important;
   -webkit-transform: translateX(5px) !important;
   transform: translateX(5px) !important;
