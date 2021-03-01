@@ -629,6 +629,21 @@ table input[type="number"] {
   margin: 0;
 }
 
+.top-bar ul.social-custom a .dropdown-toggle{
+  border-radius: 0% !important;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid #eee;
+  padding: 15px 20px !important;
+}
+
+.top-bar ul.social-custom a .dropdown-toggle:hover{
+  -webkit-transform: translateX(5px);
+  transform: translateX(5px);
+  color: #4fbfa8;
+}
+
 .top-bar ul.social-custom a:hover {
   background: #4fbfa8;
   color: #fff;

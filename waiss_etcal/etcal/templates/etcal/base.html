@@ -79,29 +79,14 @@
                                     </li>
                                 </ul>
                                 <div class="login">
-                                    {% block user_block %}
                                     {% if user.is_authenticated %}
-                                    <img class="rounded-circle" width="30" height="30" avatar="{{ user.username }}">
-                                    <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
                                     {% else %}
                                     <!--<a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log In</span></a>-->
                                     <a href={% url 'etcal:sign_up' %} class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Sign Up</span></a>
                                     <a href={% url 'login' %} class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log In</span></a>
                                     {% endif %}
-                                    {% endblock %}
                                 </div>
-                                <ul class="social-custom list-inline">                                    
-                                    {% if user.is_authenticated %}
-                                    <li class="list-inline-item">
-                                        <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="30" height="30" avatar="{{ user.username }}"><b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li class="dropdown-item">
-                                                <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    {% else %}
-                                    {% endif %}
+                                <ul class="social-custom list-inline">        
                                     <li class="list-inline-item">
                                         <a href="https://www.facebook.com/projectsarai" target="_blank" data-toggle="tooltip" title="@projectsarai"><i class="fa fa-facebook"></i></a>
                                     </li>
@@ -113,7 +98,18 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <a href="#" data-toggle="tooltip" title="Land and Water Resources Division, IABE, CEAT, UPLB"><i class="fa fa-map-marker"></i></a>
+                                    </li>                            
+                                    {% if user.is_authenticated %}
+                                    <li class="list-inline-item">
+                                        <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="30" height="30" avatar="{{ user.username }}"><b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item">
+                                                <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
+                                            </li>
+                                        </ul>
                                     </li>
+                                    {% else %}
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
