@@ -127,7 +127,7 @@ def get_started(request):
         soil = Soil.objects.get(id=soil_data.id)
 
         station_data, created = Station.objects.get_or_create(station_name=station_name, station_type=station_type, station_elev=station_elev,
-                                                              station_lat=station_lat, station_long=station_long, station_prov=station_prov, station_muni=station_muni, station_brgy=station_brgy, author = current_user)
+                                                              station_lat=station_lat, station_long=station_long, station_prov=station_prov, station_muni=station_muni, station_brgy=station_brgy)
         station_data.save()
         station = Station.objects.get(id=station_data.id)
 
