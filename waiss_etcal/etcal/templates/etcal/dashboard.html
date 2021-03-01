@@ -27,11 +27,19 @@
                     <div class="name">
                         <div class="count-number">Welcome!</div>
                         <span>Toggle through your farms through the select option</span>
-                        <strong class="align-items-center d-flex mt-2 text-uppercase"><div class="icon icon-home"></div><select class="form-control"> 
-                                <option>FARM A</option>                                             
-                                <option>FARM B</option>                                             
-                                <option>FARM C</option>                                             
-                            </select></strong>
+                        <strong class="align-items-center d-flex mt-2 text-uppercase"><div class="icon icon-home"></div>
+                            <select class="form-control"> 
+                                <optgroup label="Farms">
+                                    {% for item in farm_info %}
+                                    {% if forloop.first %}
+                                    <option value="{{ item.id }}" selected="">{{ item.name }}</option>
+                                    {% else %}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </optgroup>                                             
+                            </select>
+                        </strong>
                     </div>
                 </div>
             </div>
