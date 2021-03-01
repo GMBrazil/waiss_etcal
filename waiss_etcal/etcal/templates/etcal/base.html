@@ -81,6 +81,7 @@
                                 <div class="login">
                                     {% block user_block %}
                                     {% if user.is_authenticated %}
+                                    <img class="round" width="40" height="40" avatar="{{ user.username }}">
                                     <span>Hi {{ user.username }} !</span>
                                     <a href={% url 'logout' %} class="signup-btn"><i class="fa fa-sign-out"></i><span class="d-none d-md-inline-block">Log Out</span></a>
                                     {% else %}
@@ -628,6 +629,8 @@
         <script src={% static "base/js/front.js" %}></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         {% endblock %}
+        
+        <script src={% static "all/js/avatar.js" %}></script>
 
         {% block addtl_bottom_script_block %}
         {% endblock %}
