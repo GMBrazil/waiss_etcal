@@ -35,6 +35,8 @@ def calculator(request):
 
 @login_required
 def get_started(request):
+	current_user = request.user
+	farm_info = Farm.objects.filter(manager=current_user)
     crop_info = Crop.objects.all()
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
@@ -115,22 +117,22 @@ def get_started(request):
 
         # save to databases
         crop_data, created = Crop.objects.get_or_create(crop_type=crop_type, crop_drz=crop_drz, crop_dtm=crop_dtm, stage_init=stage_init,
-                                                         stage_dev=stage_dev, stage_mid=stage_mid, stage_late=stage_late, kc_init=kc_init, kc_mid=kc_mid, kc_late=kc_late)
+                                                         stage_dev=stage_dev, stage_mid=stage_mid, stage_late=stage_late, kc_init=kc_init, kc_mid=kc_mid, kc_late=kc_late, author = current_user)
         crop_data.save()
         crop = Crop.objects.get(id=crop_data.id)
 
         soil_data, created = Soil.objects.get_or_create(
-            soil_type=soil_type, soil_fc=soil_fc, soil_pwp=soil_pwp, percolation=percolation, init_depl=init_depl, mad=mad)
+            soil_type=soil_type, soil_fc=soil_fc, soil_pwp=soil_pwp, percolation=percolation, init_depl=init_depl, mad=mad, author = current_user)
         soil_data.save()
         soil = Soil.objects.get(id=soil_data.id)
 
         station_data, created = Station.objects.get_or_create(station_name=station_name, station_type=station_type, station_elev=station_elev,
-                                                              station_lat=station_lat, station_long=station_long, station_prov=station_prov, station_muni=station_muni, station_brgy=station_brgy)
+                                                              station_lat=station_lat, station_long=station_long, station_prov=station_prov, station_muni=station_muni, station_brgy=station_brgy, author = current_user)
         station_data.save()
         station = Station.objects.get(id=station_data.id)
 
         farm_data, created = Farm.objects.get_or_create(farm_name=farm_name, farm_prov=farm_prov, farm_muni=farm_muni, farm_brgy=farm_brgy,
-                                                        farm_lat=farm_lat, farm_long=farm_long, date_planted=dap, crop=crop, soil=soil, corr_factor=corr_factor)
+                                                        farm_lat=farm_lat, farm_long=farm_long, date_planted=dap, crop=crop, soil=soil, corr_factor=corr_factor, manager=current_user)
         farm_data.save()
         farm = Farm.objects.get(id=farm_data.id)
 
@@ -161,7 +163,20 @@ def get_started(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'etcal/dashboard.html')
+	current_user = request.user
+	farm_info = Farm.objects.filter(manager=current_user)
+    if not farm_info:
+        return HttpResponseRedirect(reverse('etcal:get_started'))
+    crop_info = Crop.objects.all()
+	soil_info = Soil.objects.all()
+	station_info = Station.objects.all()
+
+    context = {
+        "crop_info": crop_info,
+        "soil_info": soil_info,
+        "station_info": station_info
+    }
+    return render(request, 'etcal/dashboard.html', context)
 
 
 def contribute(request):
