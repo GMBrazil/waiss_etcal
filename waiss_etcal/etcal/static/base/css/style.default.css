@@ -653,6 +653,7 @@ table input[type="number"] {
   font-size: 0.9rem;
   text-decoration: none;
   border-top: .3rem solid transparent;
+  width:100% !important;
 }
 
 .top-bar ul.social-custom a.list-icon {
