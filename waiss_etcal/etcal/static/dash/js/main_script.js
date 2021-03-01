@@ -7,6 +7,7 @@ var latest_index;
 var valDBI_itr_1 = [], valKc_pred = [], valKc_multip = [], valETcs_pred = [], valSurplusDay_pred = [], valPerc_pred = [], valCWR_pred = [], valDBI_itr_2 = [], valDBI_itr_3 = [];
 var valDAP_init = [], valDAP_dev = [], valDAP_mid = [], valDAP_late = [];
 var date_data_init = [], date_data_dev = [], date_data_mid = [], date_data_late = [];
+var currentpercentMC, valMC, percentMAD, percentPWP;
 
 function dataHandler() {
     date_planted = '2021/1/11';
@@ -322,12 +323,14 @@ function soilWaterStatus() {
     var threshold_level = 0.05;
     var critical_level = 0.5; //50% below MAD and above PWP
     var diffActualRAW;
-    var currentpercentMC, pathPercent, valMC;
+    var pathPercent;
     valMC = valdActualRAW[latest_index].toFixed(2)
     currentpercentMC = (valMC/valFC[latest_index]);
+    percentMAD = (valdMAD[latest_index]/valFC[latest_index]);
+    percentPWP = (valPWP[latest_index]/valFC[latest_index]);
     pathPercent = (301.635-(301.635*currentpercentMC));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
-    document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
+    //document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
     //>5% above FC level
     if (valdActualRAW[latest_index] > ((1 + threshold_level) * valFC[latest_index])) {
         document.getElementById("textActualRAW").textContent = "Sufficient";
@@ -368,7 +371,128 @@ function soilWaterStatus() {
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm near PWP";
         document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valMC + "mm" + " which is in critical condition with" + diffActualRAW + "mm of soil moisture near permanent wilting point.";
     }
+    soilWaterGauge();
 }
+
+
+function soilWaterGauge(){
+/*gauge chart*/
+(function () {
+  var Needle, arc, arcEndRad, arcStartRad, barWidth, chart, chartInset, degToRad, el, endPadRad, height, i, margin, needle, numSections, padRad, percToDeg, percToRad, percent, radius, ref, sectionIndx, sectionPerc, startPadRad, svg, totalPercent, width, subIndicator;
+
+  percent = currentpercentMC;
+
+  barWidth = 60;
+
+  numSections = 3;
+
+  // / 2 for HALF circle
+  sectionPerc = [(percentPWP-0.5), (percentMAD-0.5), (0.5-(percentPWP-0.5)-(percentMAD-0.5))];
+
+  padRad = 0;
+
+  chartInset = 10;
+
+  // start at 270deg
+  totalPercent = .75;
+  
+  subIndicator = totalPercent + (percentMAD*100/200)
+
+  el = d3.select('.chart-gauge');
+
+  margin = {
+    top: 10,
+    right: 20,
+    bottom: 30,
+    left: 20 };
+
+
+  width = el[0][0].offsetWidth - margin.left - margin.right;
+
+  height = width;
+
+  radius = Math.min(width, height) / 2;
+
+  percToDeg = function (perc) {
+    return perc * 360;
+  };
+
+  percToRad = function (perc) {
+    return degToRad(percToDeg(perc));
+  };
+
+  degToRad = function (deg) {
+    return deg * Math.PI / 180;
+  };
+
+  svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+
+  chart = svg.append('g').attr('transform', `translate(${(width + margin.left) / 2}, ${(height + margin.top) / 2})`);
+
+  // build gauge bg
+  for (sectionIndx = i = 1, ref = numSections; 1 <= ref ? i <= ref : i >= ref; sectionIndx = 1 <= ref ? ++i : --i) {
+    arcStartRad = percToRad(totalPercent);
+    arcEndRad = arcStartRad + percToRad(sectionPerc[sectionIndx-1]);
+    totalPercent += sectionPerc[sectionIndx-1];
+    startPadRad = 0;
+    endPadRad = 0;
+    arc = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth).startAngle(arcStartRad + startPadRad).endAngle(arcEndRad - endPadRad);
+    chart.append('path').attr('class', `arc chart-color${sectionIndx}`).attr('d', arc);
+  }
+  
+  arc2 = d3.svg.arc().outerRadius(radius - chartInset + 10).innerRadius(radius - chartInset - barWidth - 10).startAngle(percToRad(subIndicator)).endAngle(percToRad(subIndicator));
+    chart.append('path').attr('d', arc2).style("stroke", "black").style("stroke-width", "2px");
+
+  Needle = class Needle {
+    constructor(len, radius1) {
+      this.len = len;
+      this.radius = radius1;
+    }
+
+    drawOn(el, perc) {
+      el.append('circle').attr('class', 'needle-center').attr('cx', 0).attr('cy', 0).attr('r', this.radius);
+      return el.append('path').attr('class', 'needle').attr('d', this.mkCmd(perc));
+    }
+
+    animateOn(el, perc) {
+      var self;
+      self = this;
+      return el.transition().delay(500).ease('elastic').duration(3000).selectAll('.needle').tween('progress', function () {
+        return function (percentOfPercent) {
+          var progress;
+          progress = percentOfPercent * perc;
+          return d3.select(this).attr('d', self.mkCmd(progress));
+        };
+      });
+    }
+
+    mkCmd(perc) {
+      var centerX, centerY, leftX, leftY, rightX, rightY, thetaRad, topX, topY;
+      thetaRad = percToRad(perc / 2); // half circle
+      centerX = 0;
+      centerY = 0;
+      topX = centerX - this.len * Math.cos(thetaRad);
+      topY = centerY - this.len * Math.sin(thetaRad);
+      leftX = centerX - this.radius * Math.cos(thetaRad - Math.PI / 2);
+      leftY = centerY - this.radius * Math.sin(thetaRad - Math.PI / 2);
+      rightX = centerX - this.radius * Math.cos(thetaRad + Math.PI / 2);
+      rightY = centerY - this.radius * Math.sin(thetaRad + Math.PI / 2);
+      return `M ${leftX} ${leftY} L ${topX} ${topY} L ${rightX} ${rightY}`;
+    }};
+
+
+
+  needle = new Needle(50, 10);
+
+  needle.drawOn(chart, 0);
+
+  needle.animateOn(chart, percent);
+
+}).call(this);
+
+//# sourceURL=coffeescript
+}
+
 
 function dayToIrrigate() {
     //Date To Irrigate
@@ -1883,6 +2007,7 @@ function renderChart3() {
         },
     });
 }
+
 
 window.onload = function () {
     resetArrayHolder();

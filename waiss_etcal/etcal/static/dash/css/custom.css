@@ -3,3 +3,33 @@
   height: 40px;
   padding: 5px;
 }
+
+/*gauge chart*/
+.chart-gauge {
+  width: 200px;
+  height: 100px;
+  margin: 0px ;
+}
+
+.chart-color1 {
+  fill: #D82724;
+}
+
+.chart-color2 {
+  fill: #FCBF02;
+}
+
+.chart-color3 {
+  fill: #92D14F;
+}
+
+.needle,
+.needle-center {
+  fill: #464A4F;
+}
+
+.prose {
+  text-align: center;
+  font-family: sans-serif;
+  color: #ababab;
+}
