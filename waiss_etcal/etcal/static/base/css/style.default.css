@@ -627,7 +627,6 @@ table input[type="number"] {
   font-size: 0.75rem !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  border-bottom: 1px solid #eee !important;
 }
 
 .top-bar ul.social-custom ul.dropdown-menu li.dropdown-item a:hover {
@@ -646,9 +645,9 @@ table input[type="number"] {
 
 .top-bar ul.social-custom ul.dropdown-menu > li > a {
   margin: 0;
-  padding: 1.4rem 1rem 1.6rem;
+  padding: 0rem 1rem 0rem;
   color: #555;
-  font-weight: 600;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.9rem;
