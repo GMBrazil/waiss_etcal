@@ -632,7 +632,7 @@ table input[type="number"] {
   color: #4fbfa8 !important;
 }
 
-.top-bar ul.social-custom a {
+.top-bar ul.social-custom a.list-icon {
   text-decoration: none !important;
   font-size: 0.7rem;
   width: 26px;
@@ -644,7 +644,7 @@ table input[type="number"] {
   margin: 0;
 }
 
-.top-bar ul.social-custom a:hover {
+.top-bar ul.social-custom a.list-icon:hover {
   background: #4fbfa8;
   color: #fff;
 }
