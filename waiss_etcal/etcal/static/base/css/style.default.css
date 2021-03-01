@@ -612,6 +612,10 @@ table input[type="number"] {
   margin-left: 20px;
 }
 
+.top-bar ul.social-custom a.dropdown-toggle::after{
+  content: none;
+}
+
 .top-bar ul.social-custom li {
   padding: 0;
   margin: 0;

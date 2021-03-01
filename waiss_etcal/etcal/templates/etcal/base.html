@@ -86,7 +86,18 @@
                                     <a href={% url 'login' %} class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Log In</span></a>
                                     {% endif %}
                                 </div>
-                                <ul class="social-custom list-inline">        
+                                <ul class="social-custom list-inline">                             
+                                    {% if user.is_authenticated %}
+                                    <li class="list-inline-item">
+                                        <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="25" height="25" avatar="{{ user.username }}"><b class="caret"></b></a>
+                                        <ul class="dropdown-menu">
+                                            <li class="dropdown-item">
+                                                <a href={% url 'logout' %} class="signup-btn">&nbsp;<i class="fa fa-sign-out"></i>Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    {% else %}
+                                    {% endif %}       
                                     <li class="list-inline-item">
                                         <a class="list-icon" href="https://www.facebook.com/projectsarai" target="_blank" data-toggle="tooltip" title="@projectsarai"><i class="fa fa-facebook"></i></a>
                                     </li>
@@ -98,18 +109,7 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <a class="list-icon" href="#" data-toggle="tooltip" title="Land and Water Resources Division, IABE, CEAT, UPLB"><i class="fa fa-map-marker"></i></a>
-                                    </li>                            
-                                    {% if user.is_authenticated %}
-                                    <li class="list-inline-item">
-                                        <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="25" height="25" avatar="{{ user.username }}"><b class="caret"></b></a>
-                                        <ul class="dropdown-menu">
-                                            <li class="dropdown-item">
-                                                <a href={% url 'logout' %} class="signup-btn">&nbsp;<i class="fa fa-sign-out"></i>Log Out</a>
-                                            </li>
-                                        </ul>
                                     </li>
-                                    {% else %}
-                                    {% endif %}
                                 </ul>
                             </div>
                         </div>
