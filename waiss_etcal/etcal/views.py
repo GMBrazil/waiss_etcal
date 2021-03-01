@@ -35,8 +35,8 @@ def calculator(request):
 
 @login_required
 def get_started(request):
-	current_user = request.user
-	farm_info = Farm.objects.filter(manager=current_user)
+    current_user = request.user
+    farm_info = Farm.objects.filter(manager=current_user)
     crop_info = Crop.objects.all()
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
@@ -163,13 +163,13 @@ def get_started(request):
 
 @login_required
 def dashboard(request):
-	current_user = request.user
-	farm_info = Farm.objects.filter(manager=current_user)
+    current_user = request.user
+    farm_info = Farm.objects.filter(manager=current_user)
     if not farm_info:
         return HttpResponseRedirect(reverse('etcal:get_started'))
     crop_info = Crop.objects.all()
-	soil_info = Soil.objects.all()
-	station_info = Station.objects.all()
+    soil_info = Soil.objects.all()
+    station_info = Station.objects.all()
 
     context = {
         "crop_info": crop_info,
