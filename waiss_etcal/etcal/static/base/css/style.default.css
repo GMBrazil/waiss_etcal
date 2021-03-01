@@ -618,7 +618,6 @@ table input[type="number"] {
 }
 
 .top-bar ul.social-custom ul.dropdown-menu li.dropdown-item a{
-  color: #555 !important;
   text-decoration: none !important;
   border-radius: 0% !important;
   font-size: 0.75rem !important;
@@ -627,11 +626,30 @@ table input[type="number"] {
   border-bottom: 1px solid #eee !important;
 }
 
-.top-bar ul.social-custom ul.dropdown-menu li.dropdown-item:hover a{
+.top-bar ul.social-custom ul.dropdown-menu li.dropdown-item a:hover {
   border-radius: 0% !important;
   -webkit-transform: translateX(5px) !important;
   transform: translateX(5px) !important;
   color: #4fbfa8 !important;
+}
+
+.top-bar ul.social-custom ul.dropdown-menu > li.active > a {
+  background: #4fbfa8 !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  border-color: #3aa18c !important;
+}
+
+.top-bar ul.social-custom ul.dropdown-menu > li > a {
+  margin: 0;
+  padding: 1.4rem 1rem 1.6rem;
+  color: #555;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-top: .3rem solid transparent;
 }
 
 .top-bar ul.social-custom a.list-icon {
