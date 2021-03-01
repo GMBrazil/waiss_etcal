@@ -623,10 +623,10 @@ table input[type="number"] {
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
   border-bottom: 1px solid #eee !important;
-  padding: 15px 20px !important;
 }
 
 .top-bar ul.social-custom ul.dropdown-menu li.dropdown-item:hover{
+  border-radius: 0% !important;
   -webkit-transform: translateX(5px) !important;
   transform: translateX(5px) !important;
   color: #4fbfa8 !important;
