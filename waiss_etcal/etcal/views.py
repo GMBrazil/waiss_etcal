@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import NewUserForm
+from decimal import Decimal
 
 # Create your views here.
 
@@ -138,11 +139,15 @@ def get_started(request):
 
         if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
-                if (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
+                if not date, eto, rainfall, irrigation:
+                    continue
+                elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
                     rainfall = 0
                     irrigation = 0
                 else:
-                    None
+                    eto = Decimal(eto)
+                    rainfall = Decimal(rainfall)
+                    irrigation = Decimal(irrigation)
                 data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
                 data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
