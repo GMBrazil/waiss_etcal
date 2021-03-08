@@ -519,14 +519,14 @@ function soilWaterGauge() {
 }
 
 
-function dayToIrrigate() {
+function dayToIrrigate(){
     //Date To Irrigate
     var days_bef_irrigate;
-    if (valDBI_itr_1[latest_index] != "") {
-        days_bef_irrigate = valDBI_itr_1[latest_index];
-    }
-    else {
+    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
         days_bef_irrigate = valDBI[latest_index];
+    }
+    else  {
+        days_bef_irrigate = valDBI_itr_2[latest_index];
     }
     var date_irrigate = new Date(date_data[latest_index]);
     date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
@@ -535,15 +535,15 @@ function dayToIrrigate() {
     var yyyy = date_irrigate.getFullYear()
     document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
     date_today = new Date();
-    if (date_irrigate.getTime() < date_today.getTime()) {
+    if (date_irrigate.getTime() < date_today.getTime()){
         dd = date_today.getDate();
         m = date_today.toLocaleString('default', { month: 'short' });
         yyyy = date_today.getFullYear()
         document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
     }
     //Days Before Irrigation
-    var DBI_today = (date_irrigate.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
-    if (DBI_today > 0) {
+    var DBI_today = (date_irrigate.getTime() - date_today.getTime())/(1000*3600*24);
+    if (DBI_today > 0){
         DBI_today = Math.floor(DBI_today);
     }
     else if (DBI_today <= 0) {
