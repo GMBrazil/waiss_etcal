@@ -349,10 +349,10 @@ function soilWaterStatus() {
     var diffActualRAW;
     var pathPercent;
     valMC = valdActualRAW[latest_index].toFixed(2)
-    currentpercentMC = (valMC/valFC[latest_index]);
-    percentMAD = (valdMAD[latest_index]/valFC[latest_index]);
-    percentPWP = (valPWP[latest_index]/valFC[latest_index]);
-    pathPercent = (301.635-(301.635*currentpercentMC));
+    currentpercentMC = (valMC / valFC[latest_index]);
+    percentMAD = (valdMAD[latest_index] / valFC[latest_index]);
+    percentPWP = (valPWP[latest_index] / valFC[latest_index]);
+    pathPercent = (301.635 - (301.635 * currentpercentMC));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     //document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
     //>5% above FC level
@@ -401,7 +401,7 @@ function soilWaterStatus() {
 function soilWaterGauge() {
     /*gauge chart*/
     (function () {
-        var Needle, arc, arcEndRad, arcStartRad, barWidth, chart, chartInset, degToRad, el, endPadRad, height, i, margin, needle, numSections, padRad, percToDeg, percToRad, percent, radius, ref, sectionIndx, sectionPerc, startPadRad, svg, totalPercent, width, subIndicator;
+        var Needle, arc, arcEndRad, arcStartRad, barWidth, chart, chartInset, degToRad, el, endPadRad, height, i, margin, needle, numSections, padRad, percToDeg, percToRad, percent, radius, ref, sectionIndx, sectionPerc, startPadRad, svg, totalPercent, width, subIndicator, label;
 
         percent = currentpercentMC;
 
@@ -506,8 +506,7 @@ function soilWaterGauge() {
         };
 
 
-
-        needle = new Needle(50, 10);
+        needle = new Needle(65, 10);
 
         needle.drawOn(chart, 0);
 
