@@ -143,11 +143,6 @@ def get_started(request):
                     irrigation = 0
                     data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
                     data.save()
-                elif (date == "") and (eto == "") and ((rainfall == "") or (irrigation == "")):
-                    date = None
-                    eto = None
-                    rainfall = None
-                    irrigation = None
             return HttpResponseRedirect(reverse('etcal:dashboard'))
         elif (date_measured == "") or (eto_data == "") or (rain_data == "") or (irrig_data == ""):
             return HttpResponseRedirect(reverse('etcal:dashboard'))
