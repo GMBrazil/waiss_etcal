@@ -520,11 +520,11 @@ function soilWaterGauge() {
 function dayToIrrigate() {
     //Date To Irrigate
     var days_bef_irrigate;
-    if (valDBI_itr_1[latest_index] != "") {
-        days_bef_irrigate = valDBI_itr_1[latest_index];
-    }
-    else {
+    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
         days_bef_irrigate = valDBI[latest_index];
+    }
+    else  {
+        days_bef_irrigate = valDBI_itr_2[latest_index];
     }
     var date_irrigate = new Date(date_data[latest_index]);
     date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
