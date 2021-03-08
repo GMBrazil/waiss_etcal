@@ -105,7 +105,7 @@ function calcData() {
             valEFR[i] = rain_data[i];
         }
         //Root Zone Water Deficit, RZWD        
-        if (valDAP[i] == 0) {
+        if ((i == 0) || (valDAP[i] == 0)) {
             valRZWD[i] = init_depl + valETc[i] - valEFR[i] - irrig_data[i];
             if (valRZWD[i] < 0) {
                 valRZWD[i] = 0;
@@ -120,7 +120,7 @@ function calcData() {
         //Negative Root Zone Water Deficit, negRZWD
         valnegRZWD[i] = -valRZWD[i];
         //Surplus Water
-        if (valDAP[i] == 0) {
+        if ((i == 0) || (valDAP[i] == 0)) {
             valSurplusWater[i] = -init_depl - valETc[i] + valEFR[i] + irrig_data[i];
             if (valRZWD[i] > 0) {
                 valSurplusWater[i] = 0;
@@ -641,7 +641,7 @@ function renderHighchart() {
             }
         }
     }
-    alert(growth_data[growth_data.length-1].x)
+    //alert(growth_data[growth_data.length-1].x)
 
     //catch mousemove event and have all 3 charts' crosshairs move along indicated values on x axis
 
