@@ -4,7 +4,7 @@ farm change in the dashboard. After the data has been requested from the
 server, the data will be assigned to the hidden div containing the input
 types which will hold the data to easily access it for later*/
 var date_planted, crop_dtm, crop_drz, stage_init, stage_dev, stage_mid, stage_late, kc_init, kc_mid, kc_late, mad, percolation, init_depl;
-var date_data = [], eto_data = [], rain_data = [], irrig_data = [];
+var date_data = [], eto_data = [], rain_data = [], irrig_data = [], adj_eto_data=[], value_holder=[];
 var DAP_js_converted, date_today, date_harvest, DAP_today, DOH_today;
 var valDAP = [], valKc = [], valETc = [], valEFR = [], valRZWD = [], valSurplusWater = [], valDRZ = [], valFC = [], valPWP = [], valTAW = [], valRAW = [], valActualRAW = [], valPerc = [], valKs = [], valETcs = [], valCWR = [], valAveCWR = [], valDBI = [];
 var valnegRZWD = [], valnegFC = [], valnegPWP = [], valnegRAW = [], valdMAD = [], valnegdMAD = [], valnegActualRAW = [], valdActualRAW = [];
@@ -96,9 +96,15 @@ function calcData() {
             date_data_late[i] = date_data[i];
         }
         //Crop Evapotranspiration, ETc
-        valETc[i] = eto_data[i] * valKc[i];
+        if (adj_eto_data[i] != ""){
+            value_holder[i] = adj_eto_data[i];
+        }
+        else {
+            value_holder[i] = eto_data[i]
+        }
+        valETc[i] = value_holder[i] * valKc[i];
         //Effective Rainfall
-        if (rain_data[i] < (0.2 * eto_data[i])) {
+        if (rain_data[i] < (0.2 * value_holder[i])){
             valEFR[i] = 0;
         }
         else {
@@ -590,7 +596,7 @@ function irrigateWater() {
 }
 
 function resetArrayHolder() {
-    date_data = []; eto_data = []; rain_data = []; irrig_data = [];
+    date_data = []; eto_data = []; rain_data = []; irrig_data = []; adj_eto_data=[]; value_holder=[];
     valDAP = []; valKc = []; valETc = []; valEFR = []; valRZWD = []; valSurplusWater = []; valDRZ = []; valFC = []; valPWP = []; valTAW = []; valRAW = []; valActualRAW = []; valPerc = []; valKs = []; valETcs = []; valCWR = []; valAveCWR = []; valDBI = [];
     valnegRZWD = []; valnegFC = []; valnegPWP = []; valnegRAW = []; valdMAD = []; valnegdMAD = []; valnegActualRAW = []; valdActualRAW = [];
     valDBI_itr_1 = []; valKc_pred = []; valKc_multip = []; valETcs_pred = []; valSurplusDay_pred = []; valPerc_pred = []; valCWR_pred = []; valDBI_itr_2 = []; valDBI_itr_3 = [];
