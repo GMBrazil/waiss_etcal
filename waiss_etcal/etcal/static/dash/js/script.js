@@ -1081,6 +1081,7 @@ $(document).ready(function () {
                 calcData();
                 iterateData();
                 displayResults();
+                renderHighchart();
             }
         });
     });
