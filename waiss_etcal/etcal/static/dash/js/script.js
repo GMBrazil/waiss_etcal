@@ -96,15 +96,9 @@ function calcData() {
             date_data_late[i] = date_data[i];
         }
         //Crop Evapotranspiration, ETc
-        if (adj_eto_data[i] != ""){
-            value_holder[i] = adj_eto_data[i];
-        }
-        else {
-            value_holder[i] = eto_data[i]
-        }
-        valETc[i] = value_holder[i] * valKc[i];
+        valETc[i] = eto_data[i] * valKc[i];
         //Effective Rainfall
-        if (rain_data[i] < (0.2 * value_holder[i])){
+        if (rain_data[i] < (0.2 * eto_data[i])) {
             valEFR[i] = 0;
         }
         else {
@@ -343,6 +337,58 @@ function displayResults() {
     }
 }*/
 
+function dayToIrrigate() {
+    //Date To Irrigate
+    var days_bef_irrigate;
+    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
+        days_bef_irrigate = valDBI[latest_index];
+    }
+    else  {
+        days_bef_irrigate = valDBI_itr_2[latest_index];
+    }
+    var date_irrigate = new Date(date_data[latest_index]);
+    date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
+    var dd = date_irrigate.getDate();
+    var m = date_irrigate.toLocaleString('default', { month: 'short' });
+    var yyyy = date_irrigate.getFullYear()
+    document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
+    date_today = new Date();
+    if (date_irrigate.getTime() < date_today.getTime()) {
+        dd = date_today.getDate();
+        m = date_today.toLocaleString('default', { month: 'short' });
+        yyyy = date_today.getFullYear()
+        document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
+    }
+    //Days Before Irrigation
+    var DBI_today = (date_irrigate.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
+    if (DBI_today > 0) {
+        DBI_today = Math.floor(DBI_today);
+    }
+    else if (DBI_today <= 0) {
+        DBI_today = Math.ceil(DBI_today);
+    }
+    if (DBI_today > 1) {
+        document.getElementById("valDBI").textContent = DBI_today + " days from now";
+        document.getElementById("textDBINote").textContent = " ";
+    }
+    else if (DBI_today == 1) {
+        document.getElementById("valDBI").textContent = "Tomorrow";
+        document.getElementById("textDBINote").textContent = " ";
+    }
+    else if (DBI_today == 0) {
+        document.getElementById("valDBI").textContent = "Today";
+        document.getElementById("textDBINote").textContent = " ";
+    }
+    else if (DBI_today == -1) {
+        document.getElementById("valDBI").textContent = "Today";
+        document.getElementById("textDBINote").textContent = "Needed since yesterday";
+    }
+    else if (DBI_today < -1) {
+        document.getElementById("valDBI").textContent = "Today";
+        document.getElementById("textDBINote").textContent = "Needed since " + Math.abs(DBI_today) + " days ago";
+    }
+}
+
 function soilWaterStatus() {
     var threshold_level = 0.05;
     var critical_level = 0.5; //50% below MAD and above PWP
@@ -516,58 +562,6 @@ function soilWaterGauge() {
     //# sourceURL=coffeescript
 }
 
-function dayToIrrigate() {
-    //Date To Irrigate
-    var days_bef_irrigate;
-    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
-        days_bef_irrigate = valDBI[latest_index];
-    }
-    else  {
-        days_bef_irrigate = valDBI_itr_2[latest_index];
-    }
-    var date_irrigate = new Date(date_data[latest_index]);
-    date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
-    var dd = date_irrigate.getDate();
-    var m = date_irrigate.toLocaleString('default', { month: 'short' });
-    var yyyy = date_irrigate.getFullYear()
-    document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
-    date_today = new Date();
-    if (date_irrigate.getTime() < date_today.getTime()) {
-        dd = date_today.getDate();
-        m = date_today.toLocaleString('default', { month: 'short' });
-        yyyy = date_today.getFullYear()
-        document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
-    }
-    //Days Before Irrigation
-    var DBI_today = (date_irrigate.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
-    if (DBI_today > 0) {
-        DBI_today = Math.floor(DBI_today);
-    }
-    else if (DBI_today <= 0) {
-        DBI_today = Math.ceil(DBI_today);
-    }
-    if (DBI_today > 1) {
-        document.getElementById("valDBI").textContent = DBI_today + " days from now";
-        document.getElementById("textDBINote").textContent = " ";
-    }
-    else if (DBI_today == 1) {
-        document.getElementById("valDBI").textContent = "Tomorrow";
-        document.getElementById("textDBINote").textContent = " ";
-    }
-    else if (DBI_today == 0) {
-        document.getElementById("valDBI").textContent = "Today";
-        document.getElementById("textDBINote").textContent = " ";
-    }
-    else if (DBI_today == -1) {
-        document.getElementById("valDBI").textContent = "Today";
-        document.getElementById("textDBINote").textContent = "Needed since yesterday";
-    }
-    else if (DBI_today < -1) {
-        document.getElementById("valDBI").textContent = "Today";
-        document.getElementById("textDBINote").textContent = "Needed since " + Math.abs(DBI_today) + " days ago";
-    }
-}
-
 function irrigateWater() {
     valMC = valdActualRAW[latest_index].toFixed(2)
     currentpercentMC = ((valMC / valFC[latest_index]) * 100).toFixed(2);
@@ -593,7 +587,7 @@ function irrigateWater() {
 }
 
 function resetArrayHolder() {
-    date_data = []; eto_data = []; rain_data = []; irrig_data = []; adj_eto_data=[]; value_holder=[];
+    date_data = []; eto_data = []; rain_data = []; irrig_data = [];
     valDAP = []; valKc = []; valETc = []; valEFR = []; valRZWD = []; valSurplusWater = []; valDRZ = []; valFC = []; valPWP = []; valTAW = []; valRAW = []; valActualRAW = []; valPerc = []; valKs = []; valETcs = []; valCWR = []; valAveCWR = []; valDBI = [];
     valnegRZWD = []; valnegFC = []; valnegPWP = []; valnegRAW = []; valdMAD = []; valnegdMAD = []; valnegActualRAW = []; valdActualRAW = [];
     valDBI_itr_1 = []; valKc_pred = []; valKc_multip = []; valETcs_pred = []; valSurplusDay_pred = []; valPerc_pred = []; valCWR_pred = []; valDBI_itr_2 = []; valDBI_itr_3 = [];
@@ -1058,6 +1052,7 @@ function renderHighchart() {
             });
         });
     })();
+
 }
 
 /* For the dash change every time the a farm
