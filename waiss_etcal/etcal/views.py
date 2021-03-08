@@ -139,7 +139,7 @@ def get_started(request):
 
         if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
-                if not date, eto, rainfall, irrigation:
+                if not date:
                     continue
                 elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
                     rainfall = 0
