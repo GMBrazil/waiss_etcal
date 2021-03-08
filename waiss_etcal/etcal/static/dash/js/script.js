@@ -395,7 +395,6 @@ function soilWaterStatus() {
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm near PWP";
         document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valMC + "mm" + " which is in critical condition with" + diffActualRAW + "mm of soil moisture near permanent wilting point.";
     }
-    soilWaterGauge();
 }
 
 function soilWaterGauge() {
