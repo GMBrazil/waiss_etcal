@@ -12,7 +12,7 @@ var latest_index;
 var valDBI_itr_1 = [], valKc_pred = [], valKc_multip = [], valETcs_pred = [], valSurplusDay_pred = [], valPerc_pred = [], valCWR_pred = [], valDBI_itr_2 = [], valDBI_itr_3 = [];
 var valDAP_init = [], valDAP_dev = [], valDAP_mid = [], valDAP_late = [];
 var date_data_init = [], date_data_dev = [], date_data_mid = [], date_data_late = [];
-var currentpercentMC, valMC, percentMAD, percentPWP;
+var currentpercentMC, currentpercentMCdec, valMC, percentMAD, percentPWP;
 
 function dataHandler() {
     date_planted = $("#DAP-holder").val();
@@ -349,10 +349,10 @@ function soilWaterStatus() {
     var diffActualRAW;
     var pathPercent;
     valMC = valdActualRAW[latest_index].toFixed(2)
-    currentpercentMC = (valMC / valFC[latest_index]);
+    currentpercentMCdec = (valMC / valFC[latest_index]);
     percentMAD = (valdMAD[latest_index] / valFC[latest_index]);
     percentPWP = (valPWP[latest_index] / valFC[latest_index]);
-    pathPercent = (301.635 - (301.635 * currentpercentMC));
+    pathPercent = (301.635 - (301.635 * currentpercentMCdec));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     //document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
     //>5% above FC level
@@ -395,15 +395,15 @@ function soilWaterStatus() {
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm near PWP";
         document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valMC + "mm" + " which is in critical condition with" + diffActualRAW + "mm of soil moisture near permanent wilting point.";
     }
+    soilWaterGauge();
 }
-
 
 function soilWaterGauge() {
     /*gauge chart*/
     (function () {
         var Needle, arc, arcEndRad, arcStartRad, barWidth, chart, chartInset, degToRad, el, endPadRad, height, i, margin, needle, numSections, padRad, percToDeg, percToRad, percent, radius, ref, sectionIndx, sectionPerc, startPadRad, svg, totalPercent, width, subIndicator, label;
 
-        percent = currentpercentMC;
+        percent = currentpercentMCdec;
 
         barWidth = 60;
 
@@ -517,15 +517,14 @@ function soilWaterGauge() {
     //# sourceURL=coffeescript
 }
 
-
-function dayToIrrigate(){
+function dayToIrrigate() {
     //Date To Irrigate
     var days_bef_irrigate;
-    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
-        days_bef_irrigate = valDBI[latest_index];
+    if (valDBI_itr_1[latest_index] != "") {
+        days_bef_irrigate = valDBI_itr_1[latest_index];
     }
-    else  {
-        days_bef_irrigate = valDBI_itr_2[latest_index];
+    else {
+        days_bef_irrigate = valDBI[latest_index];
     }
     var date_irrigate = new Date(date_data[latest_index]);
     date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
@@ -534,15 +533,15 @@ function dayToIrrigate(){
     var yyyy = date_irrigate.getFullYear()
     document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
     date_today = new Date();
-    if (date_irrigate.getTime() < date_today.getTime()){
+    if (date_irrigate.getTime() < date_today.getTime()) {
         dd = date_today.getDate();
         m = date_today.toLocaleString('default', { month: 'short' });
         yyyy = date_today.getFullYear()
         document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
     }
     //Days Before Irrigation
-    var DBI_today = (date_irrigate.getTime() - date_today.getTime())/(1000*3600*24);
-    if (DBI_today > 0){
+    var DBI_today = (date_irrigate.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
+    if (DBI_today > 0) {
         DBI_today = Math.floor(DBI_today);
     }
     else if (DBI_today <= 0) {
@@ -571,10 +570,10 @@ function dayToIrrigate(){
 }
 
 function irrigateWater() {
-    var valMC = valdActualRAW[latest_index].toFixed(2)
-    var currentpercentMC = ((valMC/valFC[latest_index])*100).toFixed(2);
+    valMC = valdActualRAW[latest_index].toFixed(2)
+    currentpercentMC = ((valMC / valFC[latest_index]) * 100).toFixed(2);
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
-    var valpercentIrrigate = (valIrrigate)/valFC[latest_index] *100;
+    var valpercentIrrigate = (valIrrigate) / valFC[latest_index] * 100;
     var valpercentroundIrrigate = valpercentIrrigate.toFixed(2);
     document.getElementById("mc-progress").style.width = currentpercentMC + "%";
     document.getElementById("mc-progress").textContent = currentpercentMC + "%";
