@@ -395,7 +395,6 @@ function soilWaterStatus() {
     var diffActualRAW;
     var pathPercent;
     valMC = (valdActualRAW[latest_index]).toFixed(2)
-    alert(valdActualRAW[latest_index]);
     currentpercentMCdec = (valMC / valFC[latest_index]);
     percentMAD = (valdMAD[latest_index] / valFC[latest_index]);
     percentPWP = (valPWP[latest_index] / valFC[latest_index]);
