@@ -394,7 +394,7 @@ function soilWaterStatus() {
     var critical_level = 0.5; //50% below MAD and above PWP
     var diffActualRAW;
     var pathPercent;
-    valMC = valdActualRAW[latest_index].toFixed(2)
+    valMC = (valdActualRAW[latest_index]).toFixed(2)
     currentpercentMCdec = (valMC / valFC[latest_index]);
     percentMAD = (valdMAD[latest_index] / valFC[latest_index]);
     percentPWP = (valPWP[latest_index] / valFC[latest_index]);
@@ -563,7 +563,7 @@ function soilWaterGauge() {
 }
 
 function irrigateWater() {
-    valMC = valdActualRAW[latest_index].toFixed(2)
+    valMC = (valdActualRAW[latest_index]).toFixed(2)
     currentpercentMC = ((valMC / valFC[latest_index]) * 100).toFixed(2);
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate) / valFC[latest_index] * 100;
