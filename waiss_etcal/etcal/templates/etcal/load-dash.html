@@ -1,0 +1,67 @@
+<div class="row text-left justify-content-start">
+    <div class="col-xl-2"><span>Date Planted: </span></div>
+    <div class="col-xl-10"><input class="border rounded" id="DAP-holder" type="date" value="{{ farm_details.date_planted|date:"Y-m-d" }}"style="width: 181px;" /></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Crop Type:  </span></div>
+    <div class="col-xl-3"><input type="text" class="border rounded" id="crop-holder" value="{{ crop_data.crop_type }}"/></div>
+    <div class="col-xl-2"><span>Soil Type:  </span></div>
+    <div class="col-xl-3"><input type="text" class="border rounded" id="soil-holder" value="{{ soil_data.soil_type }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Days to Maturity:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="dtm-holder" value="{{ crop_data.crop_dtm }}"/></div>
+    <div class="col-xl-2"><span>FC (mm/mm):  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="fc-holder" value="{{ soil_data.soil_fc }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Crop DRZ (mm):  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="drz-holder" value="{{ crop_data.crop_drz }}"/></div>
+    <div class="col-xl-2"><span>PWP (mm/mm):  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="pwp-holder" value="{{ soil_data.soil_pwp }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Initial Stage:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="init-stage-holder" value="{{crop_data.stage_init }}"/></div>
+    <div class="col-xl-2"><span>Percolation:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="perc-holder" value="{{ soil_data.percolation }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Developmental:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="dev-stage-holder" value="{{ crop_data.stage_dev }}"/></div>
+    <div class="col-xl-2"><span>Initial Depletion:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="init-depl-holder" value="{{ soil_data.init_depl }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Mid-Season:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="mid-stage-holder" value="{{ crop_data.stage_mid }}"/></div>
+    <div class="col-xl-2"><span>MAD:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="mad-holder" value="{{ soil_data.mad }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Late Season:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="late-stage-holder" value="{{ crop_data.stage_late }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Kc, initial:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="kc-init-holder" value="{{ crop_data.kc_init }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Kc, mid:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="kc-mid-holder" value="{{ crop_data.kc_mid }}"/></div>
+</div>
+<div class="row">
+    <div class="col-xl-2"><span>Kc, late:  </span></div>
+    <div class="col-xl-3"><input type="number" class="border rounded" id="kc-late-holder" value="{{ crop_data.kc_late }}"/></div>
+</div>
+<div class="row" style="margin-top: 5px;">
+    <div class="col-xl-2"><strong>Data Measured:  </strong></div>
+</div>
+{% for data in latest_farm_data %}
+<div class="row">
+    <div class="col-xl-3"><span>Date:  </span><input class="border rounded" name="date-data-holder" type="date" value="{{ data.timestamp|date:"Y-m-d" }}" style="width: 162px;" /></div>
+    <div class="col-xl-3"><span>ETo (mm):  </span><input type="number" class="border rounded" name="eto-data-holder" value="{{ data.eto }}" style="width: 80px;" /></div>
+    <div class="col-xl-3"><span>Rainfall (mm):  </span><input type="number" class="border rounded" name="rain-data-holder" value="{{ data.rainfall }}" style="width: 80px;" /></div>
+    <div class="col-xl-3"><span>Irrigation (mm):  </span><input type="number" class="border rounded" name="irrig-data-holder" value="{{ data.irrigation }}" style="width: 80px;" /></div>
+</div>
+{% endfor %}

@@ -212,3 +212,19 @@ def load_station(request):
         "stations": stations,
     }
     return render(request, 'etcal/load-station.html', context)
+
+
+def load_dash(request):
+	farm_id = request.GET.get('farm')
+	farm_details = Farm.objects.get(id=farm_id)
+	crop_data = Crop.objects.get(crop_type=farm_details.crop)
+	soil_data = Soil.objects.get(soil_type=farm_details.soil)
+	latest_farm_data = Data.objects.filter(farm=farm_details).order_by('timestamp')
+
+	context = {
+		"farm_details": farm_details,
+		"crop_data": crop_data,
+		"soil_data": soil_data,
+		"latest_farm_data": latest_farm_data,
+	}
+	return render(request, 'etcal/load-dash.html', context)
