@@ -270,7 +270,7 @@ def load_file(request):
         for row in worksheet.iter_rows():
             row_data = list()
             for cell in row:
-                row_data.apped(str(cell.value))
+                row_data.append(str(cell.value))
             excel_data.append(row_data)
 
         context = {
