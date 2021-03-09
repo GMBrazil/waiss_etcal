@@ -464,6 +464,7 @@ $(document).ready(function () {
                 $("#data-file-form").html(data);
             }
         });
+        return false
     });
     //-------------end of AJAX HTML DATA------------//
 

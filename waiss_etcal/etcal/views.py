@@ -298,9 +298,6 @@ def load_file(request):
         array_handler = excel_data
 
         context = {
-            "crop_info": crop_info,
-            "soil_info": soil_info,
-            "station_info": station_info,
             "excel_data": excel_data
         }
 
