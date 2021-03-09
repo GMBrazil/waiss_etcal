@@ -321,14 +321,14 @@ $(document).ready(function () {
             $('#upload-excel-data-form').removeAttr('hidden');
             $('#customFile').prop('required', true);
         }
-    })
-    
+    });
+
     $('#customFile').on('change',function(){
         //get the file name
         var fileName = $(this).val();
         //replace the "Choose a file" label
         $(this).next('.custom-file-label').html(fileName);
-    })
+    });
     //------------end of initializaation after ajax-----------------//
 
 
