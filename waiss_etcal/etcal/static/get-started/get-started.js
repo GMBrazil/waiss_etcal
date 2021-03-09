@@ -311,7 +311,7 @@ $(document).ready(function () {
     });
 
     $('.form-card').on('change', '#input-type', function (){ //activate select button for data input (if single input or through excel file)
-        var value = $(this).val()
+        var value = $(this).val();
         if (value == "single-data"){
             $('#enter-single-data-form').removeAttr('hidden');
             $('#upload-excel-data-form').attr('hidden', '');
