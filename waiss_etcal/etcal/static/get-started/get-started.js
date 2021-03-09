@@ -308,6 +308,18 @@ $(document).ready(function () {
         sy = document.getElementById("sta-long");
         getLocationforStation();//onclick functions are removed in the load-station.html (after ajax call) and then called again
     });
+
+    $('select.list-dt').on('change', '#input-type', function (){ //activate select button for data input (if single input or through excel file)
+        var value = $(this).val()
+        if (value == "single-data"){
+            $('#enter-single-data-form').removeAttr('hidden');
+            $('#upload-excel-data-form').attr('hidden', '');
+        }
+        else if (value == "excel-data"){
+            $('#enter-single-data-form').attr('hidden', '');
+            $('#upload-excel-data-form').removeAttr('hidden');
+        }
+    })
     //------------end of initializaation after ajax-----------------//
 
 

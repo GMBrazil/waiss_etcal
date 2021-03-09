@@ -367,61 +367,69 @@
                                             <div class="col-4"> <label>How do you want to add data?</label> </div>
                                             <div class="col-8">
                                                 <select class="list-dt others" id="input-type" name="input-type">
-                                                    <option selected>Single Data Input</option>
-                                                    <option>Upload Formatted Excel File</option>
+                                                    <option selected value="single-data">Single Data Input</option>
+                                                    <option value="excel-data">Upload Formatted Excel File</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row" data-pg-collapsed>
                                             <div class="col">
-                                                <div class="table-responsive">                                                
-                                                    <table class="table-borderless table table-sm data-table input-data">
-                                                        <thead>
-                                                            <tr>
-                                                                <th><i class="fas fa-folder-minus"></i></th>
-                                                                <th><label>Date</label></th>
-                                                                <th><label>ETo(mm/day)</label></th>
-                                                                <th><label>Rainfall(mm)</label></th>
-                                                                <th><label>Irrigation(mm)</label></th>
-                                                                <th><i class="fas fa-folder-plus"></i></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>
-                                                                <td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>
-                                                                <td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>
-                                                                <td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>
-                                                                <td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>
-                                                                <td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>
-                                                            </tr>
-                                                        </tbody>                                                    
-                                                    </table>
-                                                    <script type="text/javascript">
-                                                        $(document).on('click', '.add-row', function () {
-                                                            //adding rows to data table
-                                                            var counter = $('table.input-data tbody tr').length + 1;
-                                                            var newRow = $("<tr>");
-                                                            var cols = "";
-                                                            cols += "<td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>";
-                                                            cols += "<td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>";
-                                                            cols += "<td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>";
-                                                            cols += "<td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>";
-                                                            cols += "<td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>";
-                                                            cols += "<td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>";
-                                                            newRow.append(cols);
-                                                            newRow.insertAfter($(this).closest("tr"));
-                                                        });
-                                                        $("table.input-data").on('click', '.delete-row', function (event) {
-                                                            //deleting selected row in data table
-                                                            $("table.input-data tbody").find('button[name="data"]').each(function () {
-                                                                if ($(this).is(":focus")) {
-                                                                    $(this).parents("tr").remove();
-                                                                }
+                                                <section id="enter-single-data-form">
+                                                    <div class="table-responsive">                                                
+                                                        <table class="table-borderless table table-sm data-table input-data">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th><i class="fas fa-folder-minus"></i></th>
+                                                                    <th><label>Date</label></th>
+                                                                    <th><label>ETo(mm/day)</label></th>
+                                                                    <th><label>Rainfall(mm)</label></th>
+                                                                    <th><label>Irrigation(mm)</label></th>
+                                                                    <th><i class="fas fa-folder-plus"></i></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>
+                                                                    <td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>
+                                                                    <td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>
+                                                                    <td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>
+                                                                    <td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>
+                                                                    <td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>
+                                                                </tr>
+                                                            </tbody>                                                    
+                                                        </table>
+                                                        <script type="text/javascript">
+                                                            $(document).on('click', '.add-row', function () {
+                                                                //adding rows to data table
+                                                                var counter = $('table.input-data tbody tr').length + 1;
+                                                                var newRow = $("<tr>");
+                                                                var cols = "";
+                                                                cols += "<td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>";
+                                                                cols += "<td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>";
+                                                                newRow.append(cols);
+                                                                newRow.insertAfter($(this).closest("tr"));
                                                             });
-                                                        });
-                                                    </script>
-                                                </div>
+                                                            $("table.input-data").on('click', '.delete-row', function (event) {
+                                                                //deleting selected row in data table
+                                                                $("table.input-data tbody").find('button[name="data"]').each(function () {
+                                                                    if ($(this).is(":focus")) {
+                                                                        $(this).parents("tr").remove();
+                                                                    }
+                                                                });
+                                                            });
+                                                        </script>
+                                                    </div>
+                                                </section>
+                                                <section id="upload-excel-data-form" hidden>
+                                                    <p class="lead text-center">Do you want to upload your data via a formatted excel file?</p>
+                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                        <button id='upload-now' type='button' class='btn btn-template-outlined' data-toggle='modal' data-target='#modalUploadFile'>YES</button>
+                                                    </div>
+                                                </section>
                                             </div>
                                         </div>
                                     </section>
@@ -452,6 +460,55 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block addtl_modal_block %}
+<div class="modal pg-show-modal fade" data-pg-collapsed id="modalUploadFile">
+    <div class="modal-dialog" role="document">
+        <form action="{% url 'etcal:load_file' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-primary"><i class="fa fa-upload"></i>&nbsp;Upload File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>To add data by uploading a formatted excel file, select the file below then click upload. Kindly take note of the format of excel file to upload presented below.</p>
+                    <div data-pg-collapsed="">
+                        <div class="custom-file" data-pg-collapsed="">
+                            <input type="file" class="custom-file-input" id="customFile" name="excel_file">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                        <hr>
+                        <div class="row" data-pg-collapsed>
+                            <div class="col">
+                                <div class="table-responsive">
+                                    <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            {% for row in excel_data %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+                    <input type="submit" class="btn btn-primary" value="Upload">
+                </div>
+            </div>            
+        </form>
     </div>
 </div>
 {% endblock %}

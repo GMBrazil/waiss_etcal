@@ -17,4 +17,5 @@ urlpatterns = [
     path('load/station/', views.load_station, name='load_station'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('load/dash/', views.load_dash, name='load_dash'),
+    path('load/file/', views.load_file, name='load_file'),
 ]

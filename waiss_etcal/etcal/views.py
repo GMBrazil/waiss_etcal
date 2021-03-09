@@ -158,7 +158,6 @@ def get_started(request):
                 data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
 
-
     context = {
         "crop_info": crop_info,
         "soil_info": soil_info,
@@ -242,3 +241,41 @@ def load_dash(request):
 		"latest_farm_data": latest_farm_data,
 	}
 	return render(request, 'etcal/load-dash.html', context)
+
+def load_file(request):
+    current_user = request.user
+    farm_info = Farm.objects.filter(manager=current_user)
+    crop_info = Crop.objects.all()
+    soil_info = Soil.objects.all()
+    station_info = Station.objects.all()
+
+    context = {
+        "crop_info": crop_info,
+        "soil_info": soil_info,
+        "station_info": station_info
+    }
+
+    if "GET" == request.method:
+        return render(request, 'etcal/get-started.html', context)
+    
+    else:
+        excel_file = request.FILES["excel_file"]
+        workbook = openpyxl.load_workbook(excel_file)
+        # getting a particular sheet by name out of many sheets
+        worksheet = workbook["Sheet1"]
+        print(worksheet)
+        excel_data = list()
+        # iterating over the rows and getting value from each cell in row
+        for row in worksheet.iter_rows():
+            row_data = list()
+            for cell in row:
+                row_data.apped(str(cell.value))
+            excel_data.append(row_data)
+
+        context = {
+            "crop_info": crop_info,
+            "soil_info": soil_info,
+            "station_info": station_info,
+            "excel_data": excel_data
+        }
+        return render(request, 'etcal/get-started.html', context)
