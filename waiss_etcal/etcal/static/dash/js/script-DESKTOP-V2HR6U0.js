@@ -111,7 +111,7 @@ function calcData() {
             valEFR[i] = rain_data[i];
         }
         //Root Zone Water Deficit, RZWD        
-        if ((i == 0) || (valDAP[i] == 0)) {
+        if (valDAP[i] == 0) {
             valRZWD[i] = init_depl + valETc[i] - valEFR[i] - irrig_data[i];
             if (valRZWD[i] < 0) {
                 valRZWD[i] = 0;
@@ -126,7 +126,7 @@ function calcData() {
         //Negative Root Zone Water Deficit, negRZWD
         valnegRZWD[i] = -valRZWD[i];
         //Surplus Water
-        if ((i == 0) || (valDAP[i] == 0)) {
+        if (valDAP[i] == 0) {
             valSurplusWater[i] = -init_depl - valETc[i] + valEFR[i] + irrig_data[i];
             if (valRZWD[i] > 0) {
                 valSurplusWater[i] = 0;
@@ -313,14 +313,14 @@ function displayResults() {
     document.getElementById("valDOH").textContent = DOH_today;
     document.getElementById("dPlanted").textContent = date_planted;
     document.getElementById("dHarvest").textContent = date_harvest;
-    lastDataUpdate();
+    //lastDataUpdate();
     soilWaterStatus();
     soilWaterGauge();
     dayToIrrigate();
     irrigateWater();
 }
 
-function lastDataUpdate() {
+/*function lastDataUpdate() {
     var last_data = new Date(date_data[latest_index]);
     date_today = new Date();
     data_update_diff = (last_data.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
@@ -341,59 +341,7 @@ function lastDataUpdate() {
         document.getElementById("lastDataAlert_text").textContent = "Your last data input was " + Math.abs(data_update_diff) + " days ago. It is recommended to update your data for more accurate advisories. Thank you!";
         $("#lastDataAlert").show();
     }
-}
-
-function dayToIrrigate() {
-    //Date To Irrigate
-    var days_bef_irrigate;
-    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
-        days_bef_irrigate = valDBI[latest_index];
-    }
-    else  {
-        days_bef_irrigate = valDBI_itr_2[latest_index];
-    }
-    var date_irrigate = new Date(date_data[latest_index]);
-    date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
-    var dd = date_irrigate.getDate();
-    var m = date_irrigate.toLocaleString('default', { month: 'short' });
-    var yyyy = date_irrigate.getFullYear()
-    document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
-    date_today = new Date();
-    if (date_irrigate.getTime() < date_today.getTime()) {
-        dd = date_today.getDate();
-        m = date_today.toLocaleString('default', { month: 'short' });
-        yyyy = date_today.getFullYear()
-        document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
-    }
-    //Days Before Irrigation
-    var DBI_today = (date_irrigate.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
-    if (DBI_today > 0) {
-        DBI_today = Math.floor(DBI_today);
-    }
-    else if (DBI_today <= 0) {
-        DBI_today = Math.ceil(DBI_today);
-    }
-    if (DBI_today > 1) {
-        document.getElementById("valDBI").textContent = DBI_today + " days from now";
-        document.getElementById("textDBINote").textContent = " ";
-    }
-    else if (DBI_today == 1) {
-        document.getElementById("valDBI").textContent = "Tomorrow";
-        document.getElementById("textDBINote").textContent = " ";
-    }
-    else if (DBI_today == 0) {
-        document.getElementById("valDBI").textContent = "Today";
-        document.getElementById("textDBINote").textContent = " ";
-    }
-    else if (DBI_today == -1) {
-        document.getElementById("valDBI").textContent = "Today";
-        document.getElementById("textDBINote").textContent = "Needed since yesterday";
-    }
-    else if (DBI_today < -1) {
-        document.getElementById("valDBI").textContent = "Today";
-        document.getElementById("textDBINote").textContent = "Needed since " + Math.abs(DBI_today) + " days ago";
-    }
-}
+}*/
 
 function soilWaterStatus() {
     var threshold_level = 0.05;
@@ -447,6 +395,7 @@ function soilWaterStatus() {
         document.getElementById("valActualRAW").textContent = diffActualRAW + "mm near PWP";
         document.getElementById("textSoilWaterNote").textContent = "The current soil moisture content is " + valMC + "mm" + " which is in critical condition with" + diffActualRAW + "mm of soil moisture near permanent wilting point.";
     }
+    soilWaterGauge();
 }
 
 function soilWaterGauge() {
@@ -472,7 +421,6 @@ function soilWaterGauge() {
 
         subIndicator = totalPercent + (percentMAD * 100 / 200)
 
-        d3.select('#soilwatergauge').remove();
         el = d3.select('.chart-gauge');
 
         margin = {
@@ -501,7 +449,7 @@ function soilWaterGauge() {
             return deg * Math.PI / 180;
         };
 
-        svg = el.append('svg').attr('id', 'soilwatergauge').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+        svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
 
         chart = svg.append('g').attr('transform', `translate(${(width + margin.left) / 2}, ${(height + margin.top) / 2})`);
 
@@ -569,6 +517,58 @@ function soilWaterGauge() {
     //# sourceURL=coffeescript
 }
 
+function dayToIrrigate() {
+    //Date To Irrigate
+    var days_bef_irrigate;
+    if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
+        days_bef_irrigate = valDBI[latest_index];
+    }
+    else  {
+        days_bef_irrigate = valDBI_itr_2[latest_index];
+    }
+    var date_irrigate = new Date(date_data[latest_index]);
+    date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
+    var dd = date_irrigate.getDate();
+    var m = date_irrigate.toLocaleString('default', { month: 'short' });
+    var yyyy = date_irrigate.getFullYear()
+    document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
+    date_today = new Date();
+    if (date_irrigate.getTime() < date_today.getTime()) {
+        dd = date_today.getDate();
+        m = date_today.toLocaleString('default', { month: 'short' });
+        yyyy = date_today.getFullYear()
+        document.getElementById("textDBI").innerHTML = dd + " " + m + " " + yyyy;
+    }
+    //Days Before Irrigation
+    var DBI_today = (date_irrigate.getTime() - date_today.getTime()) / (1000 * 3600 * 24);
+    if (DBI_today > 0) {
+        DBI_today = Math.floor(DBI_today);
+    }
+    else if (DBI_today <= 0) {
+        DBI_today = Math.ceil(DBI_today);
+    }
+    if (DBI_today > 1) {
+        document.getElementById("valDBI").textContent = DBI_today + " days from now";
+        document.getElementById("textDBINote").textContent = " ";
+    }
+    else if (DBI_today == 1) {
+        document.getElementById("valDBI").textContent = "Tomorrow";
+        document.getElementById("textDBINote").textContent = " ";
+    }
+    else if (DBI_today == 0) {
+        document.getElementById("valDBI").textContent = "Today";
+        document.getElementById("textDBINote").textContent = " ";
+    }
+    else if (DBI_today == -1) {
+        document.getElementById("valDBI").textContent = "Today";
+        document.getElementById("textDBINote").textContent = "Needed since yesterday";
+    }
+    else if (DBI_today < -1) {
+        document.getElementById("valDBI").textContent = "Today";
+        document.getElementById("textDBINote").textContent = "Needed since " + Math.abs(DBI_today) + " days ago";
+    }
+}
+
 function irrigateWater() {
     valMC = valdActualRAW[latest_index].toFixed(2)
     currentpercentMC = ((valMC / valFC[latest_index]) * 100).toFixed(2);
@@ -594,7 +594,7 @@ function irrigateWater() {
 }
 
 function resetArrayHolder() {
-    date_data = []; eto_data = []; rain_data = []; irrig_data = [], value_holder = [], adj_eto_data=[];
+    date_data = []; eto_data = []; rain_data = []; irrig_data = []; adj_eto_data=[]; value_holder=[];
     valDAP = []; valKc = []; valETc = []; valEFR = []; valRZWD = []; valSurplusWater = []; valDRZ = []; valFC = []; valPWP = []; valTAW = []; valRAW = []; valActualRAW = []; valPerc = []; valKs = []; valETcs = []; valCWR = []; valAveCWR = []; valDBI = [];
     valnegRZWD = []; valnegFC = []; valnegPWP = []; valnegRAW = []; valdMAD = []; valnegdMAD = []; valnegActualRAW = []; valdActualRAW = [];
     valDBI_itr_1 = []; valKc_pred = []; valKc_multip = []; valETcs_pred = []; valSurplusDay_pred = []; valPerc_pred = []; valCWR_pred = []; valDBI_itr_2 = []; valDBI_itr_3 = [];
@@ -606,10 +606,8 @@ function resetArrayHolder() {
 /*render highcharts for dashboard, values are extracted from the input types
 and then calculated through the function*/
 function renderHighchart() {
-    var soilwater_title = "Soil Water Condition";
-    var appliedwater_title = "Applied Water";
+    var container_title = "Root Zone Soil Moisture Depletion:";
     var xrange_title = "Growth Stages";
-    var et_title = "Evapotranspiration";
 
     var chart1;
     var chart2;
@@ -617,41 +615,13 @@ function renderHighchart() {
 
     var hasPlotBand = false;
 
-    var actualRAW_chartdata=[], growth_data = [], eto_chartdata=[], actualet_chartdata=[], rain_chartdata=[], irrig_chartdata=[];
-    for (i=0; i<date_data.length; i++){
-        date_data[i] = new Date(date_data[i]).getTime();
-        date_data_init[i] = new Date(date_data_init[i]).getTime();
-        date_data_dev[i] = new Date(date_data_dev[i]).getTime();
-        date_data_mid[i] = new Date(date_data_mid[i]).getTime();
-        date_data_late[i] = new Date(date_data_late[i]).getTime();
-        actualRAW_chartdata.push({
-            x: date_data[i],
-            y: valdActualRAW[i]
-        });
-        rain_chartdata.push({
-            x: date_data[i],
-            y: rain_data[i]
-        });
-        irrig_chartdata.push({
-            x: date_data[i],
-            y: irrig_data[i]
-        });
-        eto_chartdata.push({
-            x: date_data[i],
-            y: eto_data[i]
-        });
-        actualet_chartdata.push({
-            x: date_data[i],
-            y: valETcs[i]
-        });
-    }
+    var growth_data = [];
     if (date_data_init != ""){
         growth_data.push({
             x: (date_data_init[0]),
             x2: (date_data_init[date_data_init.length-1]),
             y:0,
             color: "#acd14f",
-            stage: "Initial Stage",
         });
         if (date_data_dev != ""){
             growth_data.push({
@@ -659,7 +629,6 @@ function renderHighchart() {
                 x2: (date_data_dev[date_data_dev.length-1]),
                 y:0,
                 color: "#86d640",
-                stage: "Developmental Stage",
             });
             if (date_data_mid != ""){
                 growth_data.push({
@@ -667,7 +636,6 @@ function renderHighchart() {
                     x2: (date_data_mid[date_data_mid.length-1]),
                     y:0,
                     color: "#40d656",
-                    stage: "Mid-season",
                 });
                 if (date_data_late != ""){
                     growth_data.push({
@@ -675,12 +643,12 @@ function renderHighchart() {
                         x2: (date_data_late[date_data_late.length-1]),
                         y:0,
                         color: "#1ebd4e",
-                        stage: "Late Season",
                     });
                 }
             }
         }
     }
+    alert(growth_data[growth_data.length-1].x)
 
     //catch mousemove event and have all 3 charts' crosshairs move along indicated values on x axis
 
@@ -723,25 +691,9 @@ function renderHighchart() {
                 //dashStyle: 'dash',                   
                 id: "myPlotLineId"
             });
-
+            //remove old crosshair and draw new crosshair on chart2
             var xAxis2 = chart2.xAxis[0];
-            var points2 = [chart2.series[0].points,chart2.series[1].points];
-            Highcharts.each(points2, function (point, i) {
-                if (i + 1 < points2.length && point.x <= xVal && points2[i + 1].x > xVal) {
-                    //reset state
-                    point.setState();
-                    points2[i + 1].setState();
-
-                    if (xVal - point.x <= points2[i + 1].x - xVal) {
-                        chart2.tooltip.refresh(point);
-                        point.setState('hover');
-                    } else {
-                        chart2.tooltip.refresh(points2[i + 1]);
-                        points2[i + 1].setState('hover');
-                    }
-                }
-            });
-
+            var points2 = chart2.series[0].points;
             xAxis2.removePlotLine("myPlotLineId");
             xAxis2.addPlotLine({
                 value: chart.xAxis[0].translate(x, true),
@@ -751,22 +703,10 @@ function renderHighchart() {
                 id: "myPlotLineId"
             });
 
-            //remove old crosshair and draw new crosshair on chart2
-            var xAxis3 = chart3.xAxis[0];
-            var points3 = chart3.series[0].points;
-            xAxis3.removePlotLine("myPlotLineId");
-            xAxis3.addPlotLine({
-                value: chart.xAxis[0].translate(x, true),
-                width: 1,
-                color: 'red',
-                //dashStyle: 'dash',                   
-                id: "myPlotLineId"
-            });
-
-            Highcharts.each(points3, function (point) {
+            Highcharts.each(points2, function (point) {
 
                 if (point.x < xVal && point.x2 > xVal) {
-                    chart3.tooltip.refresh(point);
+                    chart2.tooltip.refresh(point);
                     point.update({
                         color: '#4879b2'
                     });
@@ -777,26 +717,26 @@ function renderHighchart() {
                 }
             });
 
-            var xAxis4 = chart4.xAxis[0];
-            var points4 = [chart4.series[0].points,chart4.series[1].points];
-            Highcharts.each(points4, function (point, i) {
-                if (i + 1 < points4.length && point.x <= xVal && points4[i + 1].x > xVal) {
+            var xAxis3 = chart3.xAxis[0];
+            var points3 = chart3.series[0].points;
+            Highcharts.each(points3, function (point, i) {
+                if (i + 1 < points3.length && point.x <= xVal && points3[i + 1].x > xVal) {
                     //reset state
                     point.setState();
-                    points4[i + 1].setState();
+                    points3[i + 1].setState();
 
-                    if (xVal - point.x <= points4[i + 1].x - xVal) {
-                        chart4.tooltip.refresh(point);
+                    if (xVal - point.x <= points3[i + 1].x - xVal) {
+                        chart3.tooltip.refresh(point);
                         point.setState('hover');
                     } else {
-                        chart4.tooltip.refresh(points4[i + 1]);
-                        points4[i + 1].setState('hover');
+                        chart3.tooltip.refresh(points3[i + 1]);
+                        points3[i + 1].setState('hover');
                     }
                 }
             });
 
-            xAxis4.removePlotLine("myPlotLineId");
-            xAxis4.addPlotLine({
+            xAxis3.removePlotLine("myPlotLineId");
+            xAxis3.addPlotLine({
                 value: chart.xAxis[0].translate(x, true),
                 width: 1,
                 color: 'red',
@@ -808,13 +748,11 @@ function renderHighchart() {
         });
     }
 
-    //Soil Water container
-    chart1 = Highcharts.chart('soilwaterChart', {
+    chart1 = Highcharts.chart('container', {
         chart: {
             type: 'spline',
             marginLeft: 87,
             zoomType: 'x',
-            height: 400,
             plotBackgroundColor: {
                 linearGradient: [0, 0, 0, 400],
                 stops: [
@@ -833,15 +771,15 @@ function renderHighchart() {
             }
         },
 
-        /*tooltip: {
+        tooltip: {
             formatter: function () {
                 $('#test').html(this.y + '%');
                 return this.y;
             }
-        },*/
+        },
 
         title: {
-            text: soilwater_title,
+            text: container_title,
             align: 'left',
             margin: 10,
             x: 0
@@ -861,12 +799,13 @@ function renderHighchart() {
             plotLines: [{ // mark the weekend
                 color: '#9B9B9B',
                 width: 1,
-                value: new Date(date_harvest).getTime(),
+                value: new Date(date_data[1]),
             }],
             type: 'datetime',
             labels: {
                 format: '{value:%b %e}'
             },
+            categories: date_data
         },
         yAxis: {
             reversed: false,
@@ -882,35 +821,24 @@ function renderHighchart() {
             labels: {
                 format: '{value} mm'
             },
-            gridLineColor: 'transparent',
-            min: Math.min.apply(Math, valPWP),
-            startOnTick: true,
 
             //Allowable Depletion line     
             plotLines: [{
                 value: Math.min.apply(Math, valdMAD),
                 width: 3,
-                color: '#ffc629',
-                label: {
-                    text: 'Management Allowable Depletion Line',
-                    style: {
-                        color: '#ffc629',
-                    },
-                    textAlign: 'left',
-                    x: 320,
-                    y: 15,
-                },
+                color: '#ffae00'
             },
 
             //Permanent Wilting Point Line       
             {
                 value: Math.min.apply(Math, valPWP),
-                width: 3,
+                width: 1,
                 color: '#ff4229',
                 label: {
                     text: 'Permanent Wilting Point',
                     style: {
-                        color: '#ff4229',
+                        color: 'white',
+                        textShadow: "2px 2px #E58E60"
                     },
                     textAlign: 'left',
                     x: 380,
@@ -918,18 +846,18 @@ function renderHighchart() {
                 },
             },
 
-            //Field Capacity Line        
+            //Saturation Line        
             {
                 value: Math.min.apply(Math, valFC),
-                width: 3,
-                color: '#41d165',
+                width: 1,
+                color: '#96b058',
                 label: {
-                    text: 'Field Capacity',
+                    text: 'Saturation',
                     style: {
-                        color: '#41d165',
+                        color: 'grey',
                     },
                     textAlign: 'left',
-                    x: 470,
+                    x: 500,
                     y: -4,
                     rotation: 0
                 },
@@ -939,18 +867,15 @@ function renderHighchart() {
 
         },
         series: [{
-            name: 'Current Soil Moisture Content',
-            data: actualRAW_chartdata,
+            data: valdActualRAW,
             //pointStart: new Date(date_data[0]),
             //pointInterval: 24 * 3600 * 1000 * 1,
-            //zoneAxis: 'y',
-            zones: [{
-                value: Math.min.apply(Math, valPWP),
-                dashStyle: 'dot'
+            //zoneAxis: 'x',
+            /*zones: [{
+                value: Date.UTC(2017, 6, 14)
             }, {
-                value: Math.min.apply(Math, valdMAD),
                 dashStyle: 'dot'
-            }],
+            }],*/
             color: {
                 linearGradient: [0, 0, 0, 200],
                 stops: [
@@ -960,119 +885,26 @@ function renderHighchart() {
                 ]
             }
         }],
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            //shared: true,
-            useHTML: true
-        },
+
         plotOptions: {
             spline: {
                 marker: {
                     enabled: false
                 }
             },
-        },
-        credits: {
-            enabled: false
-        },
-    }, function (chart) {
-        syncronizeCrossHairs(chart);
-    });
 
-    //Applied Water container
-    chart2 = Highcharts.chart('appliedwaterChart', {
-        chart: {
-            type: 'line',
-            marginLeft: 87,
-            height: 250,
-            zoomType: 'x',
-        },
-        title: {
-            text: appliedwater_title,
-            align: 'left',
-            margin: 10,
-            x: 0
-        },
-        xAxis: {
-            //today
-            events: {
-                afterSetExtremes: function () {
-                    var xMin = this.chart.xAxis[0].min;
-                    var xMax = this.chart.xAxis[0].max;
 
-                    chart1.xAxis[0].setExtremes(xMin, xMax);
-                    chart2.xAxis[0].setExtremes(xMin, xMax);
-                }
-            },
-            plotLines: [{ // mark the weekend
-                color: '#9B9B9B',
-                width: 1,
-                value: new Date(date_harvest).getTime(),
-            }],
-            type: 'datetime',
-            labels: {
-                format: '{value:%b %e}'
-            },
-        },
-        yAxis: {
-            title:'',
-            labels: {
-                format: '{value} mm'
-            },
-        },
-        plotOptions: {
-            line: {
-                lineWidth: 1,
-                states: {
-                    hover: {
-                        lineWidth: 2
-                    }
-                },
-                marker: {
-                    enabled: false
-                },
-            },
-
-        },
-        series: [{
-            name: 'Rainfall',
-            color: '#47ceff',
-            data: rain_chartdata,
-            //pointStart: new Date(date_data[0]),
-            //pointInterval: 24 * 3600 * 1000 * 1
-        }, {
-            name: 'Irrigation',
-            color: '#8ccc64',
-            data: irrig_chartdata,
-            //pointStart: new Date(date_data[0]),
-            //pointInterval: 24 * 3600 * 1000 * 1
-        }],
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        credits: {
-            enabled: false
-        },
-
+        }
     }, function (chart) {
         syncronizeCrossHairs(chart);
     });
 
     //Growth Stage container
-    chart3 = new Highcharts.chart('growthstageChart', {
+    chart2 = new Highcharts.chart('xrange_container', {
         chart: {
             type: 'xrange',
             zoomType: 'x',
             marginLeft: 87,
-            height: 200,
             resetZoomButton: {
                 theme: {
                     fill: 'white',
@@ -1110,18 +942,8 @@ function renderHighchart() {
             labels: {
                 format: '{value:%b %e}'
             },
-            //maxPadding: 0.06,
-            plotLines: [{ // mark the weekend
-                color: '#9B9B9B',
-                width: 1,
-                value: new Date(date_harvest).getTime(),
-            }],
-        },
-        yAxis:{
-            categories: ['Stage'],
-            title:{
-                text: ''
-            },
+            maxPadding: 0.06,
+            categories: date_data
         },
         plotOptions: {
             xrange: {
@@ -1129,45 +951,32 @@ function renderHighchart() {
             }
         },
         series: [{
-            name: 'Plant Growth Stage',
+            name: 'Growth Stages',
             // pointPadding: 0,
             // groupPadding:
-            borderColor: '#53c447',
+            borderColor: '#4A90E2',
             pointWidth: 18,
             data: growth_data,
             //pointStart: Date.UTC(2017, 6, 2),
             //pointInterval: 24 * 3600 * 1000 * 2,
             dataLabels: {
               enabled: true,
-              //color: '#53c447',
-            },
-            maxPointWidth:20,
-        }],
-        tooltip: {
-            formatter: function () {
-                return  this.series.name + '<br> <b>' + this.point.stage + '</b>';
+              color: '#4A90E2',
             }
-        },
-        credits: {
-            enabled: false
-        },
+        }]
     }, function (chart) {
         syncronizeCrossHairs(chart);
     });
 
-    //Evapotranspiration container
-    chart4 = Highcharts.chart('etChart', {
+
+    chart3 = Highcharts.chart('growthStage_container', {
         chart: {
             type: 'line',
             marginLeft: 87,
-            height: 300,
             zoomType: 'x',
-        },
-        title: {
-            text: et_title,
-            align: 'left',
-            margin: 10,
-            x: 0
+            title: {
+                text: 'TEST',
+            },
         },
         xAxis: {
             //today
@@ -1183,15 +992,15 @@ function renderHighchart() {
             plotLines: [{ // mark the weekend
                 color: '#9B9B9B',
                 width: 1,
-                value: new Date(date_harvest).getTime(),
+                value: new Date(date_harvest),
             }],
             type: 'datetime',
             labels: {
                 format: '{value:%b %e}'
             },
+            categories: date_data
         },
         yAxis: {
-            title:'',
             labels: {
                 format: '{value} mm'
             },
@@ -1213,24 +1022,17 @@ function renderHighchart() {
         series: [{
             name: 'Reference ET',
             color: '#4797ff',
-            data: eto_chartdata,
+            data: eto_data,
             //pointStart: new Date(date_data[0]),
             //pointInterval: 24 * 3600 * 1000 * 1
         }, {
             name: 'Actual ET',
             color: '#ffb753',
-            data: actualet_chartdata,
+            data: valETcs,
             //pointStart: new Date(date_data[0]),
             //pointInterval: 24 * 3600 * 1000 * 1
         }],
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
+
         credits: {
             enabled: false
         },
@@ -1241,14 +1043,14 @@ function renderHighchart() {
 
     (function () {
         var longestW = chart1.plotLeft;
-        var charts = [chart1, chart2, chart3, chart4];
+        var charts = [chart1, chart2, chart3];
         Highcharts.each(charts, function (chart, i) {
             if (i < charts.length - 1 && charts[i].plotLeft < charts[i + 1].plotLeft) {
                 longestW = charts[i + 1].plotLeft;
             }
         });
         Highcharts.each(charts, function (chart) {
-            chart3.update({
+            chart2.update({
                 yAxis: {
                     labels: {
                         padding: 150
@@ -1257,7 +1059,6 @@ function renderHighchart() {
             });
         });
     })();
-
 }
 
 /* For the dash change every time the a farm

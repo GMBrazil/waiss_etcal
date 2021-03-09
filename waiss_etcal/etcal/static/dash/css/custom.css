@@ -50,4 +50,11 @@
   margin: 0 auto;
 }
 
+/*Data buttons*/
+.data-option {
+  width: 60px;
+  height: 60px;
+}
+
+
 /* </style> <!-- http://doc.jsfiddle.net/use/hacks.html#css-panel-hack --> <meta name="viewport" content="width=device-width, initial-scale=1" /> <style> */
