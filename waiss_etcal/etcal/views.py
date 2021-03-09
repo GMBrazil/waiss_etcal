@@ -170,13 +170,15 @@ def get_started(request):
 @login_required
 def dashboard(request):
     current_user = request.user
-    new_farm = handler
     farm_info = Farm.objects.filter(manager=current_user)
     if not farm_info:
         return HttpResponseRedirect(reverse('etcal:get_started'))
     crop_info = Crop.objects.all()
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
+    
+    global handler
+    new_farm = handler
 
     context = {
         "new_farm" : new_farm,
@@ -185,9 +187,8 @@ def dashboard(request):
         "soil_info": soil_info,
         "station_info": station_info
     }
-    
+
     new_farm = ""
-    global handler
     handler = ""
 
     return render(request, 'etcal/dashboard.html', context)
