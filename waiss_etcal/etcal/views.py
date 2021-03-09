@@ -145,7 +145,22 @@ def get_started(request):
         global value_handler
         value_handler = farm
 
-        if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
+        global array_handler
+        excel_data = list()
+        excel_data = array_handler
+        if not excel_data:
+            for row in excel_data:
+                if not row[0]:
+                    for date, eto, rainfall, irrigation in row:
+                        date = date
+                        eto = eto
+                        rainfall = rainfall
+                        irrigation = irrigation
+                        data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                        data.save()
+            return HttpResponseRedirect(reverse('etcal:dashboard'))
+
+        elif (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
                 if not date:
                     continue
@@ -160,11 +175,16 @@ def get_started(request):
                 data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
 
+
     context = {
         "crop_info": crop_info,
         "soil_info": soil_info,
         "station_info": station_info
     }
+
+    excel_data = list()
+    array_handler = list()
+
     return render(request, 'etcal/get-started.html', context)
 
 
@@ -273,6 +293,9 @@ def load_file(request):
             for cell in row:
                 row_data.append(str(cell.value))
             excel_data.append(row_data)
+
+        global array_handler
+        array_handler = excel_data
 
         context = {
             "crop_info": crop_info,

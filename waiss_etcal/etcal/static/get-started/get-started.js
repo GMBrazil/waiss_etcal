@@ -445,7 +445,7 @@ $(document).ready(function () {
             $("#sta-type option[value='']").attr('selected', 'selected');
         }
     });
-    
+
     $("#upload-button").click(function () {//for crop select
         url = $("#uploadform").attr("action");
         var form_data = new FormData();
@@ -461,7 +461,7 @@ $(document).ready(function () {
             contentType: false,
             success: function (data) {
                 alert("File has been uploaded!");
-                $("#load-data-file").html(data);
+                $("#data-file-form").html(data);
             }
         });
     });
