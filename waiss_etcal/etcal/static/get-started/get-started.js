@@ -56,13 +56,14 @@ $(document).ready(function () {
             'dap': { required: '#data-form:visible' },
             'data-type': { required: '#data-form:visible'  },
             'corr-factor': { required: '#data-form:visible' },
-            'date_measured[]': { required: '#data-form:visible'  },
-            'eto_data[]': { required: '#data-form:visible'  },
+            'date_measured[]': { required: '#enter-single-data-form:visible'  },
+            'eto_data[]': { required: '#enter-single-data-form:visible'  },
             'excel_file': { required: '#upload-excel-data-form:visible'  },
         },
         messages: {
             'date_measured[]': { required: "There are missing fields." },
             'eto_data[]': { required: "There are missing fields." },
+            'excel_file': { required: "There are no file uploaded."}
         },
     });
 
@@ -149,41 +150,45 @@ $(document).ready(function () {
                 validateField('#data-type', validationArray);
                 validateField('#corr-factor', validationArray);
 
-                $("table.input-data tbody").find('input[name="date_measured[]"]').each(function () {
-                    //alert("1");
-                    validateField(this, validationArray);
-                    if (validationPassed) {
-                        $("table.input-data tbody").find('input[name="eto_data[]"]').each(function () {
-                            //alert("2");
-                            validateField(this, validationArray);
-                            if (validationPassed) {
-                                $("table.input-data tbody").find('input[name="rain_data[]"]').each(function () {
-                                    //alert("3");
-                                    if ($(this).val() == "") {
-                                        //alert("4");
-                                        num = 0.
-                                        $(this).val(num.toFixed(2));
-                                        $(this).focus();
-                                        validateField(this, validationArray);
-                                        if (validationPassed) {
-                                            //alert("5");
-                                            $("table.input-data tbody").find('input[name="irrig_data[]"]').each(function () {
-                                                //alert("6");
-                                                if ($(this).val() == "") {
-                                                    //alert("7");
-                                                    num = 0.
-                                                    $(this).val(num.toFixed(2));
-                                                    $(this).focus();
-                                                    validateField(this, validationArray);
-                                                }
-                                            });
+                if ($("#enter-single-data-form").is(':visible') == true) {
+                    $("table.input-data tbody").find('input[name="date_measured[]"]').each(function () {
+                        //alert("1");
+                        validateField(this, validationArray);
+                        if (validationPassed) {
+                            $("table.input-data tbody").find('input[name="eto_data[]"]').each(function () {
+                                //alert("2");
+                                validateField(this, validationArray);
+                                if (validationPassed) {
+                                    $("table.input-data tbody").find('input[name="rain_data[]"]').each(function () {
+                                        //alert("3");
+                                        if ($(this).val() == "") {
+                                            //alert("4");
+                                            num = 0.
+                                            $(this).val(num.toFixed(2));
+                                            $(this).focus();
+                                            validateField(this, validationArray);
+                                            if (validationPassed) {
+                                                //alert("5");
+                                                $("table.input-data tbody").find('input[name="irrig_data[]"]').each(function () {
+                                                    //alert("6");
+                                                    if ($(this).val() == "") {
+                                                        //alert("7");
+                                                        num = 0.
+                                                        $(this).val(num.toFixed(2));
+                                                        $(this).focus();
+                                                        validateField(this, validationArray);
+                                                    }
+                                                });
+                                            }
                                         }
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+                else if ($("#upload-excel-data-form").is(':visible') == true){                    
+                }
             }
             else {
                 $("#data-form").find('input').each(function(){
@@ -439,6 +444,26 @@ $(document).ready(function () {
             $("#sta-my-loc").val('Get my location');
             $("#sta-type option[value='']").attr('selected', 'selected');
         }
+    });
+    
+    $("#upload-button").click(function () {//for crop select
+        url = $("#uploadform").attr("action");
+        var form_data = new FormData();
+        var file_data = $('#customFile')[0].files[0];
+        form_data.append('excel_file', file_data);
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: url,
+            data: form_data,
+            processData:false,
+            contentType: false,
+            success: function (data) {
+                alert("File has been uploaded!");
+                $("#load-data-file").html(data);
+            }
+        });
     });
     //-------------end of AJAX HTML DATA------------//
 

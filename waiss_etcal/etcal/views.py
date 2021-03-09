@@ -11,7 +11,8 @@ import openpyxl
 
 # Create your views here.
 
-handler = ""
+value_handler = ""
+array_handler = list()
 
 def index(request):
     return render(request, 'etcal/index.html')
@@ -141,8 +142,8 @@ def get_started(request):
         farm = Farm.objects.get(id=farm_data.id)
 
         #save farm id to global to access in dash function after redirecting, for organizing farms in the select tab in dash
-        global handler
-        handler = farm
+        global value_handler
+        value_handler = farm
 
         if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
@@ -177,8 +178,8 @@ def dashboard(request):
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
     
-    global handler
-    new_farm = handler
+    global value_handler
+    new_farm = value_handler
 
     context = {
         "new_farm" : new_farm,
@@ -189,7 +190,7 @@ def dashboard(request):
     }
 
     new_farm = ""
-    handler = ""
+    value_handler = ""
 
     return render(request, 'etcal/dashboard.html', context)
 
@@ -279,4 +280,5 @@ def load_file(request):
             "station_info": station_info,
             "excel_data": excel_data
         }
-        return render(request, 'etcal/get-started.html', context)
+
+        return render(request, 'etcal/load-file.html', context)

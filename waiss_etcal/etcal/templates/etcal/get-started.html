@@ -425,9 +425,9 @@
                                                     </div>
                                                 </section>
                                                 <section id="upload-excel-data-form" class="text-center" hidden>
-                                                    <p class="lead text-center">Do you want to upload your data via a formatted excel file?</p>
+                                                    <p class="text-small text-center">To upload your file, click on the button below.</p>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button id='upload-now' type='button' class='btn btn-template-outlined' data-toggle='modal' data-target='#modalUploadFile'>YES</button>
+                                                        <button id='upload-now' type='button' class='btn btn-template-outlined' data-toggle='modal' data-target='#modalUploadFile'>UPLOAD NOW</button>
                                                     </div>
                                                 </section>
                                             </div>
@@ -467,7 +467,7 @@
 {% block addtl_modal_block %}
 <div class="modal pg-show-modal fade" data-pg-collapsed id="modalUploadFile">
     <div class="modal-dialog" role="document">
-        <form action="{% url 'etcal:load_file' %}" method="post" enctype="multipart/form-data">
+        <form id="uploadform" action="{% url 'etcal:load_file' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="modal-content">
                 <div class="modal-header">
@@ -480,32 +480,16 @@
                     <p>To add data by uploading a formatted excel file, select the file below then click upload. Kindly take note of the format of excel file to upload presented below.</p>
                     <div data-pg-collapsed="">
                         <div class="custom-file" data-pg-collapsed="">
-                            <input type="file" class="custom-file-input" id="customFile" name="excel_file">
+                            <input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
-                        <hr>
-                        <div class="row" data-pg-collapsed>
-                            <div class="col">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless table-sm">
-                                        <tbody>
-                                            {% for row in excel_data %}
-                                            <tr>
-                                                {% for cell in row %}
-                                                <td>{{ cell }}</td>
-                                                {% endfor %}
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                        <section id="load-data-file">
+                        </section>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-                    <input type="submit" class="btn btn-primary" value="Upload">
+                    <input id="upload-button" type="submit" class="btn btn-primary" value="Upload">
                 </div>
             </div>            
         </form>
