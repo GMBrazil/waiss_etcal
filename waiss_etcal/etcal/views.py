@@ -185,6 +185,11 @@ def dashboard(request):
         "soil_info": soil_info,
         "station_info": station_info
     }
+    
+    new_farm = ""
+    global handler
+    handler = ""
+
     return render(request, 'etcal/dashboard.html', context)
 
 
