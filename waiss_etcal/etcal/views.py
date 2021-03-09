@@ -7,6 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .forms import NewUserForm
 from decimal import Decimal
+import openpyxl
 
 # Create your views here.
 
