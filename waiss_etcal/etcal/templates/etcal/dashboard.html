@@ -33,7 +33,9 @@
                                 <select class="form-control" id="farms"> 
                                     <optgroup label="Farms">
                                         {% for item in farm_info %}
-                                        {% if forloop.first %}
+                                        {% if item == new_farm %}
+                                        <option value="{{ item.id }}" selected="">{{ item.farm_name }}</option>
+                                        {% elif forloop.first %}
                                         <option value="{{ item.id }}" selected="">{{ item.farm_name }}</option>
                                         {% else %}
                                         <option value="{{ item.id }}">{{ item.farm_name }}</option>

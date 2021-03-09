@@ -10,6 +10,8 @@ from decimal import Decimal
 
 # Create your views here.
 
+handler = ""
+
 def index(request):
     return render(request, 'etcal/index.html')
 
@@ -137,6 +139,10 @@ def get_started(request):
         farm_data.save()
         farm = Farm.objects.get(id=farm_data.id)
 
+        #save farm id to global to access in dash function after redirecting, for organizing farms in the select tab in dash
+        global handler
+        handler = farm
+
         if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
                 if not date:
@@ -164,6 +170,7 @@ def get_started(request):
 @login_required
 def dashboard(request):
     current_user = request.user
+    new_farm = handler
     farm_info = Farm.objects.filter(manager=current_user)
     if not farm_info:
         return HttpResponseRedirect(reverse('etcal:get_started'))
@@ -172,6 +179,7 @@ def dashboard(request):
     station_info = Station.objects.all()
 
     context = {
+        "new_farm" : new_farm,
         "farm_info": farm_info,
         "crop_info": crop_info,
         "soil_info": soil_info,
