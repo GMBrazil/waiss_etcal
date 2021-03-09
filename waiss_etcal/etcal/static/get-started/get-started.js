@@ -58,6 +58,7 @@ $(document).ready(function () {
             'corr-factor': { required: '#data-form:visible' },
             'date_measured[]': { required: '#data-form:visible'  },
             'eto_data[]': { required: '#data-form:visible'  },
+            'excel_file': { required: '#upload-excel-data-form:visible'  },
         },
         messages: {
             'date_measured[]': { required: "There are missing fields." },
@@ -309,7 +310,7 @@ $(document).ready(function () {
         getLocationforStation();//onclick functions are removed in the load-station.html (after ajax call) and then called again
     });
 
-    $('select.list-dt').on('change', '#input-type', function (){ //activate select button for data input (if single input or through excel file)
+    $('.form-card').on('change', '#input-type', function (){ //activate select button for data input (if single input or through excel file)
         var value = $(this).val()
         if (value == "single-data"){
             $('#enter-single-data-form').removeAttr('hidden');
@@ -318,6 +319,7 @@ $(document).ready(function () {
         else if (value == "excel-data"){
             $('#enter-single-data-form').attr('hidden', '');
             $('#upload-excel-data-form').removeAttr('hidden');
+            $('#customFile').prop('required', true);
         }
     })
     //------------end of initializaation after ajax-----------------//
