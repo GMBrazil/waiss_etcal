@@ -95,8 +95,6 @@ def get_started(request):
         eto_data = request.POST.getlist('eto_data[]')
         rain_data = request.POST.getlist('rain_data[]')
         irrig_data = request.POST.getlist('irrig_data[]')
-        #------Excel Data-------#
-        excel_file = request.FILES["excel_file"]
 
         # check if there are new inputs in crops, soils, stations
         if (crop_def == "") or (crop_def != "Other"):
@@ -151,46 +149,32 @@ def get_started(request):
         global value_handler
         value_handler = farm
 
-        if (excel_file != ""):
-            workbook = openpyxl.load_workbook(excel_file)
-            # getting a particular sheet by name out of many sheets
-            worksheet = workbook["Sheet1"]
-            print(worksheet)
-            excel_data = list()
-            # iterating over the rows and getting value from each cell in row
-            for row in worksheet.iter_rows():
-                row_data = list()
-                for cell in row:
-                    row_data.append(str(cell.value))
-                excel_data.append(row_data)
+        if not excel_data:
+            for row in excel_data:
+                if not row[0]:
+                    for date, eto, rainfall, irrigation in row:
+                        date = date
+                        eto = eto
+                        rainfall = rainfall
+                        irrigation = irrigation
+                        data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                        data.save()
+            return HttpResponseRedirect(reverse('etcal:dashboard'))
 
-            if not excel_data:
-                for row in excel_data:
-                    if not row[0]:
-                        for date, eto, rainfall, irrigation in row:
-                            date = date
-                            eto = eto
-                            rainfall = rainfall
-                            irrigation = irrigation
-                            data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
-                            data.save()
-                return HttpResponseRedirect(reverse('etcal:dashboard'))
-
-        elif (excel_file == ""):
-            if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
-                for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
-                    if not date:
-                        continue
-                    elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
-                        rainfall = 0
-                        irrigation = 0
-                    else:
-                        eto = Decimal(eto)
-                        rainfall = Decimal(rainfall)
-                        irrigation = Decimal(irrigation)
-                    data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
-                    data.save()
-                return HttpResponseRedirect(reverse('etcal:dashboard'))
+        if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
+            for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
+                if not date:
+                    continue
+                elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
+                    rainfall = 0
+                    irrigation = 0
+                else:
+                    eto = Decimal(eto)
+                    rainfall = Decimal(rainfall)
+                    irrigation = Decimal(irrigation)
+                data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                data.save()
+            return HttpResponseRedirect(reverse('etcal:dashboard'))
 
 
     context = {
@@ -205,6 +189,46 @@ def get_started(request):
 
     return render(request, 'etcal/get-started.html', context)
 
+@login_required
+def get_started_upload_file(request):
+    current_user = request.user
+    farm_info = Farm.objects.filter(manager=current_user)
+    crop_info = Crop.objects.all()
+    soil_info = Soil.objects.all()
+    station_info = Station.objects.all()
+
+    context = {
+        "crop_info": crop_info,
+        "soil_info": soil_info,
+        "station_info": station_info
+    }
+
+    if "GET" == request.method:
+        return render(request, 'etcal/upload-file.html', context)
+    
+    else:
+        excel_file = request.FILES["excel_file"]
+        workbook = openpyxl.load_workbook(excel_file)
+        # getting a particular sheet by name out of many sheets
+        worksheet = workbook["Sheet1"]
+        print(worksheet)
+        excel_data = list()
+        # iterating over the rows and getting value from each cell in row
+        for row in worksheet.iter_rows():
+            row_data = list()
+            for cell in row:
+                row_data.append(str(cell.value))
+            excel_data.append(row_data)
+
+        global array_handler
+        array_handler = excel_data
+
+        context = {
+            "excel_data": excel_data,
+            "message": "File uploaded! You can now go back to your previous tab."
+        }
+
+        return render(request, 'etcal/upload-file.html', context)
 
 @login_required
 def dashboard(request):

@@ -18,4 +18,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('load/dash/', views.load_dash, name='load_dash'),
     path('load/file/', views.load_file, name='load_file'),
+    path('getstarted/upload/file', views.get_started_upload_file, name='get_started_upload_file'),
 ]

@@ -429,14 +429,10 @@
                                                     <div class="btn-group" role="group" aria-label="Basic example">
                                                         <button id='upload-now' type='button' class='btn btn-template-outlined' data-toggle='modal' data-target='#modalUploadFile'>UPLOAD NOW</button>
                                                     </div>-->
-                                                    <p>To add data by uploading a formatted excel file, select the file below then click upload. Kindly take note of the format of
-                                                    excel file to upload presented below.</p>
-                                                    <div data-pg-collapsed="">
-                                                        <div class="custom-file" data-pg-collapsed="">
-                                                            <input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
-                                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                                        </div>
-                                                    </div>
+                                                    <p class="text-small">To add data by uploading a formatted excel file,
+                                                        <a href={% url 'etcal:get_started_upload_file' %} class="text-primary" target="_blank">click here.</a>
+                                                        Do not close this tab, since you will go back to this page.
+                                                    </p>
                                                 </section>
                                             </div>
                                         </div>
