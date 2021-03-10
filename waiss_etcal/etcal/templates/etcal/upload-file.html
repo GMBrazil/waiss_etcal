@@ -13,53 +13,56 @@
                     <div class="col-md-12 mx-0">
                         <form id="uploadform" action="{% url 'etcal:get_started_upload_file' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <fieldset data-step="1">
+                            <fieldset>
                                 <div class="form-card">
                                     <h2 class="fs-title">Upload File</h2>
                                     <p>To add data by uploading a formatted excel file, select the file below then click
                                         upload.
                                         Kindly take note of the format of excel file to upload presented below.</p>
-                                    <div data-pg-collapsed="">
-                                        <div class="custom-file" data-pg-collapsed="">
-                                            <input type="file" class="custom-file-input" id="customFile"
-                                                name="excel_file" required>
+                                    <div class="row">
+                                        <div class="col-12"><input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
                                             <label class="custom-file-label" for="customFile">Choose file</label>
                                         </div>
-                                        {% if message %}
-                                        <p>{{ message }}</p>
-                                        {% else %}
-                                        {% endif %}
-                                        <section id="data-file-form">
-                                            <hr>
-                                            <div class="row" data-pg-collapsed>
-                                                <div class="col">
-                                                    {% if excel_data %}
-                                                    <hr>
-                                                    <div class="row" data-pg-collapsed>
-                                                        <div class="col">
-                                                            <div class="table-responsive">
-                                                                <table class="table table-borderless table-sm">
-                                                                    <tbody>
-                                                                        {% for row in excel_data %}
-                                                                        <tr>
-                                                                            {% for cell in row %}
-                                                                            <td>{{ cell }}</td>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {% if message %}
+                                            <p>{{ message }}</p>
+                                            {% else %}
+                                            {% endif %}
+                                            <section id="data-file-form">
+                                                <hr>
+                                                <div class="row" data-pg-collapsed>
+                                                    <div class="col">
+                                                        {% if excel_data %}
+                                                        <hr>
+                                                        <div class="row" data-pg-collapsed>
+                                                            <div class="col">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-borderless table-sm">
+                                                                        <tbody>
+                                                                            {% for row in excel_data %}
+                                                                            <tr>
+                                                                                {% for cell in row %}
+                                                                                <td>{{ cell }}</td>
+                                                                                {% endfor %}
+                                                                            </tr>
                                                                             {% endfor %}
-                                                                        </tr>
-                                                                        {% endfor %}
-                                                                    </tbody>
-                                                                </table>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        {% else %}
+                                                        {% endif %}
                                                     </div>
-                                                    {% else %}
-                                                    {% endif %}
                                                 </div>
-                                            </div>
-                                        </section>
+                                            </section>
+                                        </div>
                                     </div>
-                                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-                                    <input id="upload-button" type="submit" class="btn btn-primary" value="Upload">
+                                </div>
+                                <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
+                                <input id="upload-button" type="submit" class="btn btn-primary" value="Upload">
                             </fieldset>
                         </form>
                     </div>
