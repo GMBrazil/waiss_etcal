@@ -179,7 +179,8 @@ def get_started(request):
     context = {
         "crop_info": crop_info,
         "soil_info": soil_info,
-        "station_info": station_info
+        "station_info": station_info,
+        "excel_data": excel_data
     }
 
     excel_data = list()
@@ -301,4 +302,4 @@ def load_file(request):
             "excel_data": excel_data
         }
 
-        return render(request, 'etcal/load-file.html', context)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

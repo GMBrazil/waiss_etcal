@@ -446,7 +446,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#uploadform").on("submit", function () {//for crop select
+    /*$("#uploadform").on("submit", function () {//for crop select
         url = $("#uploadform").attr("action");
         var form_data = new FormData();
         var file_data = $('#customFile')[0].files[0];
@@ -465,7 +465,7 @@ $(document).ready(function () {
             }
         });
         return false;
-    });
+    });*/
     //-------------end of AJAX HTML DATA------------//
 
 

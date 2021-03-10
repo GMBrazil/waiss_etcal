@@ -486,6 +486,27 @@
                         <section id="data-file-form"><hr>
                             <div class="row" data-pg-collapsed>
                                 <div class="col">
+                                    {% if excel_data %}
+                                    <hr>
+                                    <div class="row" data-pg-collapsed>
+                                        <div class="col">
+                                            <div class="table-responsive">
+                                                <table class="table table-borderless table-sm">
+                                                    <tbody>
+                                                        {% for row in excel_data %}
+                                                        <tr>
+                                                            {% for cell in row %}
+                                                            <td>{{ cell }}</td>
+                                                            {% endfor %}
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </section>
