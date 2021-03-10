@@ -446,7 +446,7 @@ $(document).ready(function () {
         }
     });
 
-    /*$("#uploadform").on("submit", function () {//for crop select
+    $("#upload-button").click(function () {//for crop select
         url = $("#uploadform").attr("action");
         var form_data = new FormData();
         var file_data = $('#customFile')[0].files[0];
@@ -459,13 +459,12 @@ $(document).ready(function () {
             data: form_data,
             processData:false,
             contentType: false,
-            success: function (response) {
+            success: function (data) {
                 alert("File has been uploaded!");
-                $("#data-file-form").html(response);
+                $("#data-file-form").html(data);
             }
         });
-        return false;
-    });*/
+    });
     //-------------end of AJAX HTML DATA------------//
 
 

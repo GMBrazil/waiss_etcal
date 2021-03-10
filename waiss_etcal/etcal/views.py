@@ -45,7 +45,7 @@ def get_started(request):
     crop_info = Crop.objects.all()
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
-    
+
     global array_handler
     excel_data = list()
     excel_data = array_handler
@@ -303,4 +303,4 @@ def load_file(request):
             "excel_data": excel_data
         }
 
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return render(request, 'etcal/load-file.html', context)
