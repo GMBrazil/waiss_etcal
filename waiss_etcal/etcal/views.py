@@ -152,7 +152,7 @@ def get_started(request):
         excel_data = array_handler
         if (excel_data != ""):
             for row in excel_data[1:]:
-                date = datetime.datetime.strptime(row[0],"%Y-%m-%d")
+                date = datetime.datetime.strptime(row[0],"%b %d %Y %I:%M%p").strftime("%Y-%m-%d")
                 eto = row[1]
                 rainfall = row[2]
                 irrigation = row[3]
