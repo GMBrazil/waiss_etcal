@@ -151,7 +151,7 @@ def get_started(request):
         global value_handler
         value_handler = farm
 
-        if not excel_file:
+        if (excel_file != ""):
             workbook = openpyxl.load_workbook(excel_file)
             # getting a particular sheet by name out of many sheets
             worksheet = workbook["Sheet1"]
@@ -176,7 +176,7 @@ def get_started(request):
                             data.save()
                 return HttpResponseRedirect(reverse('etcal:dashboard'))
 
-        if (excel_file == ""):
+        elif (excel_file == ""):
             if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
                 for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
                     if not date:
