@@ -149,7 +149,7 @@ def get_started(request):
         value_handler = farm
         
         excel_data = array_handler
-        if not excel_data:
+        if (excel_data != ""):
             for row in excel_data[1:]:
                 for date, eto, rainfall, irrigation in row:
                     date = date
