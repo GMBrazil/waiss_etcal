@@ -45,6 +45,10 @@ def get_started(request):
     crop_info = Crop.objects.all()
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
+    
+    global array_handler
+    excel_data = list()
+    excel_data = array_handler
 
     if request.method == 'POST':
         #-----Farm Form-----#
@@ -145,9 +149,6 @@ def get_started(request):
         global value_handler
         value_handler = farm
 
-        global array_handler
-        excel_data = list()
-        excel_data = array_handler
         if not excel_data:
             for row in excel_data:
                 if not row[0]:
