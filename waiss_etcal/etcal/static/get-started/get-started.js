@@ -446,7 +446,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#upload-button").click(function () {//for crop select
+    $("#uploadform").on("submit", function () {//for crop select
         url = $("#uploadform").attr("action");
         var form_data = new FormData();
         var file_data = $('#customFile')[0].files[0];
@@ -459,9 +459,9 @@ $(document).ready(function () {
             data: form_data,
             processData:false,
             contentType: false,
-            success: function (data) {
+            success: function (response) {
                 alert("File has been uploaded!");
-                $("#data-file-form").html(data);
+                $("#data-file-form").html(response);
             }
         });
         return false;
