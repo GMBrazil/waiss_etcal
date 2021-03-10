@@ -446,7 +446,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#upload-button").click(function () {//for crop select
+    $("#customFile").change(function () {//for crop select
         url = $("#uploadform").attr("data-file-url");
         var form_data = new FormData();
         var file_data = $('#customFile')[0].files[0];
