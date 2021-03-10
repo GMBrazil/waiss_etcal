@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import NewUserForm
 from decimal import Decimal
 import openpyxl
+import datetime
 
 # Create your views here.
 
@@ -151,7 +152,7 @@ def get_started(request):
         excel_data = array_handler
         if (excel_data != ""):
             for row in excel_data[1:]:
-                date = row[0]
+                date = datetime.datetime.strptime(row[0],"%Y-%m-%d")
                 eto = row[1]
                 rainfall = row[2]
                 irrigation = row[3]
