@@ -163,7 +163,7 @@ def get_started(request):
                 for cell in row:
                     row_data.append(str(cell.value))
                 excel_data.append(row_data)
-                
+
             if not excel_data:
                 for row in excel_data:
                     if not row[0]:
@@ -176,20 +176,21 @@ def get_started(request):
                             data.save()
                 return HttpResponseRedirect(reverse('etcal:dashboard'))
 
-        elif (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
-            for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
-                if not date:
-                    continue
-                elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
-                    rainfall = 0
-                    irrigation = 0
-                else:
-                    eto = Decimal(eto)
-                    rainfall = Decimal(rainfall)
-                    irrigation = Decimal(irrigation)
-                data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
-                data.save()
-            return HttpResponseRedirect(reverse('etcal:dashboard'))
+        if (excel_file == ""):
+            if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
+                for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
+                    if not date:
+                        continue
+                    elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
+                        rainfall = 0
+                        irrigation = 0
+                    else:
+                        eto = Decimal(eto)
+                        rainfall = Decimal(rainfall)
+                        irrigation = Decimal(irrigation)
+                    data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                    data.save()
+                return HttpResponseRedirect(reverse('etcal:dashboard'))
 
 
     context = {
