@@ -95,6 +95,8 @@ def get_started(request):
         eto_data = request.POST.getlist('eto_data[]')
         rain_data = request.POST.getlist('rain_data[]')
         irrig_data = request.POST.getlist('irrig_data[]')
+        #------Excel Data-------#
+        excel_file = request.FILES["excel_file"]
 
         # check if there are new inputs in crops, soils, stations
         if (crop_def == "") or (crop_def != "Other"):
@@ -149,17 +151,30 @@ def get_started(request):
         global value_handler
         value_handler = farm
 
-        if not excel_data:
-            for row in excel_data:
-                if not row[0]:
-                    for date, eto, rainfall, irrigation in row:
-                        date = date
-                        eto = eto
-                        rainfall = rainfall
-                        irrigation = irrigation
-                        data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
-                        data.save()
-            return HttpResponseRedirect(reverse('etcal:dashboard'))
+        if not excel_file:
+            workbook = openpyxl.load_workbook(excel_file)
+            # getting a particular sheet by name out of many sheets
+            worksheet = workbook["Sheet1"]
+            print(worksheet)
+            excel_data = list()
+            # iterating over the rows and getting value from each cell in row
+            for row in worksheet.iter_rows():
+                row_data = list()
+                for cell in row:
+                    row_data.append(str(cell.value))
+                excel_data.append(row_data)
+                
+            if not excel_data:
+                for row in excel_data:
+                    if not row[0]:
+                        for date, eto, rainfall, irrigation in row:
+                            date = date
+                            eto = eto
+                            rainfall = rainfall
+                            irrigation = irrigation
+                            data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                            data.save()
+                return HttpResponseRedirect(reverse('etcal:dashboard'))
 
         elif (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):

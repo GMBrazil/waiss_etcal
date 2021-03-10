@@ -425,9 +425,17 @@
                                                     </div>
                                                 </section>
                                                 <section id="upload-excel-data-form" class="text-center" hidden>
-                                                    <p class="text-small text-center">To upload your file, click on the button below.</p>
+                                                    <!--<p class="text-small text-center">To upload your file, click on the button below.</p>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
                                                         <button id='upload-now' type='button' class='btn btn-template-outlined' data-toggle='modal' data-target='#modalUploadFile'>UPLOAD NOW</button>
+                                                    </div>-->
+                                                    <p>To add data by uploading a formatted excel file, select the file below then click upload. Kindly take note of the format of
+                                                    excel file to upload presented below.</p>
+                                                    <div data-pg-collapsed="">
+                                                        <div class="custom-file" data-pg-collapsed="">
+                                                            <input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
+                                                            <label class="custom-file-label" for="customFile">Choose file</label>
+                                                        </div>
                                                     </div>
                                                 </section>
                                             </div>
@@ -465,7 +473,7 @@
 {% endblock %}
 
 {% block addtl_modal_block %}
-<div class="modal pg-show-modal fade" data-pg-collapsed id="modalUploadFile">
+<!--<div class="modal pg-show-modal fade" data-pg-collapsed id="modalUploadFile">
     <div class="modal-dialog" role="document">
         <form id="uploadform" method="post" data-file-url="{% url 'etcal:load_file' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -519,7 +527,7 @@
             </div>            
         </form>
     </div>
-</div>
+</div>-->
 {% endblock %}
 
 {% block addtl_bottom_script_block %}
