@@ -48,7 +48,6 @@ def get_started(request):
 
     global array_handler
     excel_data = list()
-    excel_data = array_handler
 
     if request.method == 'POST':
         #-----Farm Form-----#
@@ -148,7 +147,8 @@ def get_started(request):
         #save farm id to global to access in dash function after redirecting, for organizing farms in the select tab in dash
         global value_handler
         value_handler = farm
-
+        
+        excel_data = array_handler
         if not excel_data:
             for row in excel_data:
                 if not row[0]:
