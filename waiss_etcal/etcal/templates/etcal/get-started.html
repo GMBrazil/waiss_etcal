@@ -467,7 +467,7 @@
 {% block addtl_modal_block %}
 <div class="modal pg-show-modal fade" data-pg-collapsed id="modalUploadFile">
     <div class="modal-dialog" role="document">
-        <form id="uploadform" action="{% url 'etcal:load_file' %}" method="post" enctype="multipart/form-data">
+        <form id="uploadform" data-file-url="{% url 'etcal:load_file' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="modal-content">
                 <div class="modal-header">
@@ -514,7 +514,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-                    <input id="upload-button" type="submit" class="btn btn-primary" value="Upload">
+                    <input id="upload-button" type="button" class="btn btn-primary" value="Upload">
                 </div>
             </div>            
         </form>
