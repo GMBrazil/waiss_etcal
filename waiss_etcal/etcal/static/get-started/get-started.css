@@ -316,3 +316,130 @@ select.list-dt:focus {
     width: 100%;
     object-fit: cover
 }
+
+#uploadform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+#uploadform fieldset .form-card {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 20px 40px 30px 40px;
+    box-sizing: border-box;
+    width: 94%;
+    margin: 0 3% 20px 3%;
+    position: relative;
+    text-align: left;
+    color: #9E9E9E
+}
+
+#uploadform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 20px;
+    position: relative
+}
+
+#uploadform input,
+#uploadform textarea {
+    padding: 4px 8px 4px 8px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    /*font-family: montserrat;*/
+    color: #44a793;
+    font-size: 12px;
+    letter-spacing: 1px
+}
+
+#uploadform .row label,
+#uploadform .row select,
+#uploadform .row input{
+    padding: 4px 8px 4px 8px;
+    margin-bottom: 15px;
+    margin-top: 2px;
+    box-sizing: border-box;
+    /*font-family: montserrat;*/
+    color: #7e7e7e;
+    font-size: 12px;
+    letter-spacing: 1px;
+    /*width: 32.7%;*/
+    margin-right: 5px;
+}
+
+#uploadform .row label{
+    padding: 4px 8px 4px 8px;
+    margin-top: 2px;
+    box-sizing: border-box;
+    /*font-family: montserrat;*/
+    color: #7e7e7e;
+    font-size: 12px;
+    letter-spacing: 1px;
+    width: 100%;
+    margin-right: 5px;
+}
+
+#uploadform .row select,
+#uploadform .row input{    
+    color: #44a793;
+}
+
+
+
+#uploadform table input{
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+#uploadform input:focus,
+#uploadform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    font-weight: bold;
+    border-bottom: 2px solid #4fbfa8;
+    outline-width: 0
+}
+
+#uploadform .action-button {
+    width: 100px;
+    background: #4fbfa8;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#uploadform .action-button:hover,
+#uploadform .action-button:focus{
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #4fbfa8
+}
+
+#uploadform .action-button-previous {
+    width: 100px;
+    background: #616161;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 0px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px
+}
+
+#uploadform .action-button-previous:hover,
+#uploadform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #616161
+}

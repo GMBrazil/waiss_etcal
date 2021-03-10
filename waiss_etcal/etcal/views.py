@@ -150,15 +150,14 @@ def get_started(request):
         
         excel_data = array_handler
         if not excel_data:
-            for row in excel_data:
-                if not row[0]:
-                    for date, eto, rainfall, irrigation in row:
-                        date = date
-                        eto = eto
-                        rainfall = rainfall
-                        irrigation = irrigation
-                        data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
-                        data.save()
+            for row in excel_data[1:]:
+                for date, eto, rainfall, irrigation in row:
+                    date = date
+                    eto = eto
+                    rainfall = rainfall
+                    irrigation = irrigation
+                    data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                    data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
 
         if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
