@@ -14,53 +14,36 @@
                         <form id="uploadform" action="{% url 'etcal:get_started_upload_file' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <fieldset>
-                                <div class="form-card">
+                                <div class="form-card text-black-50">
                                     <h2 class="fs-title">Upload File</h2>
-                                    <p>To add data by uploading a formatted excel file, select the file below then click
-                                        upload.
-                                        Kindly take note of the format of excel file to upload presented below.</p>
-                                    <div class="row">
-                                        <div class="col-12"><input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
+                                    <p>To add data by uploading a formatted excel file, select the file below then click                                        upload.                                        Kindly take note of the format of excel file to upload presented below.</p>
+                                    <div class="custom-file"> 
+                                        <input type="file" class="custom-file-input" id="custom-file1"> 
+                                        <label class="custom-file-label" for="custom-file1">Choose file</label>                                                     
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            {% if message %}
-                                            <p class="text-small">{{ message }}</p>
-                                            <a class="text-primary" id="upload-go-back-link">Click here to proceed.</a>
-                                            {% else %}
-                                            {% endif %}
-                                            <section id="data-file-form">
-                                                <hr>
-                                                <div class="row" data-pg-collapsed>
-                                                    <div class="col">
-                                                        {% if excel_data %}
-                                                        <hr>
-                                                        <div class="row" data-pg-collapsed>
-                                                            <div class="col">
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-borderless table-sm">
-                                                                        <tbody>
-                                                                            {% for row in excel_data %}
-                                                                            <tr>
-                                                                                {% for cell in row %}
-                                                                                <td>{{ cell }}</td>
-                                                                                {% endfor %}
-                                                                            </tr>
-                                                                            {% endfor %}
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {% else %}
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
+                                    {% if message %}
+                                    <hr>
+                                    <section class="bg-primary p-2 text-center text-white">
+                                        <p>{{ message }}</p>
+                                        <h3 id="upload-go-back-link">Click here to go back to submission!</h3>
+                                    </section>
+                                    <hr>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if excel_data %}
+                                    <table class="table table-sm table-striped text-center"> 
+                                        <tbody>
+                                            {% for row in excel_data %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}                                              
+                                        </tbody>                                                     
+                                    </table>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
                                 <input id="upload-button" type="submit" class="action-button" value="Upload">
                             </fieldset>
