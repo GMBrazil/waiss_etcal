@@ -499,7 +499,7 @@ $(document).ready(function () {
     $("#upload-link").click(function () {
         window.open("/getstarted/upload/file", "UploadWindow", "width=800,height=500");
     });
-    $("#go-back-upload-link").click(function () {
+    $("#upload-go-back-link").click(function () {
         UploadWindow.close();
     });
 });
