@@ -150,7 +150,7 @@ def get_started(request):
         value_handler = farm
         
         excel_data = array_handler
-        if (excel_data != ""):
+        if not excel_data:
             for row in excel_data[1:]:
                 date = datetime.datetime.strptime(row[0],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
                 eto = row[1]
@@ -312,6 +312,10 @@ def load_file(request):
     soil_info = Soil.objects.all()
     station_info = Station.objects.all()
 
+    global array_handler
+    array_handler = list()
+    excel_data = list()
+
     context = {
         "crop_info": crop_info,
         "soil_info": soil_info,
@@ -327,7 +331,6 @@ def load_file(request):
         # getting a particular sheet by name out of many sheets
         worksheet = workbook["Sheet1"]
         print(worksheet)
-        excel_data = list()
         # iterating over the rows and getting value from each cell in row
         for row in worksheet.iter_rows():
             row_data = list()
@@ -335,7 +338,6 @@ def load_file(request):
                 row_data.append(str(cell.value))
             excel_data.append(row_data)
 
-        global array_handler
         array_handler = excel_data
 
         context = {
