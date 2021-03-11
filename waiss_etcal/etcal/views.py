@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import NewUserForm
 from decimal import Decimal
 import openpyxl
+import datetime
 
 # Create your views here.
 
@@ -149,15 +150,14 @@ def get_started(request):
         value_handler = farm
         
         excel_data = array_handler
-        if not excel_data:
+        if (excel_data != ""):
             for row in excel_data[1:]:
-                for date, eto, rainfall, irrigation in row:
-                    date = date
-                    eto = eto
-                    rainfall = rainfall
-                    irrigation = irrigation
-                    data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
-                    data.save()
+                date = datetime.datetime.strptime(row[0],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
+                eto = row[1]
+                rainfall = row[2]
+                irrigation = row[3]
+                data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
 
         if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
