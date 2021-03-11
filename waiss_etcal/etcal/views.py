@@ -160,7 +160,7 @@ def get_started(request):
                 data.save()
             return HttpResponseRedirect(reverse('etcal:dashboard'))
 
-        if (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
+        elif (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
             for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
                 if not date:
                     continue
