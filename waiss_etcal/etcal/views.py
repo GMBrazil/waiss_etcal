@@ -224,7 +224,7 @@ def get_started_upload_file(request):
 
         context = {
             "excel_data": excel_data,
-            "message": "File has been uploaded! You can now submit your form."
+            "message": "File has been uploaded! Your data are shown below."
         }
 
         return render(request, 'etcal/upload-file.html', context)

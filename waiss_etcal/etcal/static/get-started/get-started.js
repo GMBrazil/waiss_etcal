@@ -498,9 +498,13 @@ $(document).ready(function () {
     a new window will open and pop up for uploading file*/
     var uploadWindow, uploadForm;
     $("#upload-link").click(function () {
-        uploadWindow = window.open("/getstarted/upload/file", "uploadWindow", "width=800,height=500");
-        uploadForm = document.getElementById("uploadform");
-        uploadForm.scrollIntoView();
+        uploadWindow = window.open("/getstarted/upload/file", "uploadWindow", "width=800,height=700");
+        if ($("#upload-message").is(':visible')){
+            $("#upload-message").scrollIntoView();
+        }
+        else{
+            $("#uploadform").scrollIntoView();
+        }
     });
     $("#upload-go-back-link").click(function () {
         uploadWindow.close();
