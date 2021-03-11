@@ -1,6 +1,12 @@
 {% extends 'etcal/get-started.html' %}
 {% load static %}
 
+{% block navbar_block %}
+{% endblock %}
+
+{% block head_block %}
+{% endblock %}
+
 {% block main_block %}
 <!-- MultiStep Form -->
 <div class="container-fluid" id="grad1">
@@ -21,11 +27,14 @@
                                         <input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
                                         <label class="custom-file-label" for="customFile">Choose file</label>                                                    
                                     </div>
+                                    <div class="pt-3 text-center"> 
+                                        <a><img class="w-100 img-thumbnail" src={% static "get-started/sample_file_snip.PNG" %} alt="">  </a> 
+                                    </div>
                                     {% if message %}
                                     <hr>
                                     <section class="bg-primary p-2 text-center text-white">
                                         <p>{{ message }}</p>
-                                        <h3 id="upload-go-back-link">Click here to go back to submission!</h3>
+                                        <h3 id="upload-go-back-link">You can now close this tab and proceed to submission!</h3>
                                     </section>
                                     <hr>
                                     {% else %}
@@ -54,4 +63,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block footer_block %}
 {% endblock %}
