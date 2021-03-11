@@ -497,7 +497,7 @@ $(document).ready(function () {
     /*when user choose to upload formatted excel file,
     a new window will open and pop up for uploading file*/
     $("#upload-link").click(function () {
-        window.open("get_started_upload_file", "UploadWindow", "width=800,height=500");
+        window.open("/upload/file", "UploadWindow", "width=800,height=500");
     });
     $("#go-back-upload-link").click(function () {
         UploadWindow.close();
