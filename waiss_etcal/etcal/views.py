@@ -150,7 +150,7 @@ def get_started(request):
         value_handler = farm
         
         excel_data = array_handler
-        if not excel_data:
+        if excel_data:
             for row in excel_data[1:]:
                 date = datetime.datetime.strptime(row[0],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
                 eto = row[1]
