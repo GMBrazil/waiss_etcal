@@ -425,12 +425,8 @@
                                                     </div>
                                                 </section>
                                                 <section id="upload-excel-data-form" class="text-center" hidden>
-                                                    <!--<p class="text-small text-center">To upload your file, click on the button below.</p>
-                                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <button id='upload-now' type='button' class='btn btn-template-outlined' data-toggle='modal' data-target='#modalUploadFile'>UPLOAD NOW</button>
-                                                    </div>-->
                                                     <p class="text-small">To add data by uploading a formatted excel file,
-                                                        <a href={% url 'etcal:get_started_upload_file' %} class="text-primary" target="_blank">click here.</a>
+                                                        <a id="upload-link" href={% url 'etcal:get_started_upload_file' %} class="text-primary" target="_blank">click here.</a>
                                                         Do not close this tab, since you will go back to this page.
                                                     </p>
                                                 </section>
@@ -457,7 +453,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--<input type="button" name="previous" class="previous action-button-previous" value="Previous" />-->
                             </fieldset>
                         </form>
                     </div>
@@ -469,61 +464,6 @@
 {% endblock %}
 
 {% block addtl_modal_block %}
-<!--<div class="modal pg-show-modal fade" data-pg-collapsed id="modalUploadFile">
-    <div class="modal-dialog" role="document">
-        <form id="uploadform" method="post" data-file-url="{% url 'etcal:load_file' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-primary"><i class="fa fa-upload"></i>&nbsp;Upload File</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>To add data by uploading a formatted excel file, select the file below then click upload. Kindly take note of the format of excel file to upload presented below.</p>
-                    <div data-pg-collapsed="">
-                        <div class="custom-file" data-pg-collapsed="">
-                            <input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                        </div>
-                        <section id="data-file-form"><hr>
-                            <div class="row" data-pg-collapsed>
-                                <div class="col">
-                                    {% if excel_data %}
-                                    <hr>
-                                    <div class="row" data-pg-collapsed>
-                                        <div class="col">
-                                            <div class="table-responsive">
-                                                <table class="table table-borderless table-sm">
-                                                    <tbody>
-                                                        {% for row in excel_data %}
-                                                        <tr>
-                                                            {% for cell in row %}
-                                                            <td>{{ cell }}</td>
-                                                            {% endfor %}
-                                                        </tr>
-                                                        {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% else %}
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Close">
-                    <input id="upload-button" type="submit" class="btn btn-primary" value="Upload">
-                </div>
-            </div>            
-        </form>
-    </div>
-</div>-->
 {% endblock %}
 
 {% block addtl_bottom_script_block %}

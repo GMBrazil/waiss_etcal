@@ -446,25 +446,6 @@ $(document).ready(function () {
         }
     });
 
-    /*$("#customFile").change(function () {//for crop select
-        url = $("#uploadform").attr("data-file-url");
-        var form_data = new FormData();
-        var file_data = $('#customFile')[0].files[0];
-        form_data.append('excel_file', file_data);
-
-        $.ajax({
-            type: "POST",
-            enctype: 'multipart/form-data',
-            url: url,
-            data: form_data,
-            processData:false,
-            contentType: false,
-            success: function (data) {
-                alert("File has been uploaded!");
-                $("#data-file-form").html(data);
-            }
-        });
-    });*/
     //-------------end of AJAX HTML DATA------------//
 
 
@@ -512,6 +493,15 @@ $(document).ready(function () {
             $(this).attr('hidden', '');
         });
     });*/
+
+    /*when user choose to upload formatted excel file,
+    a new window will open and pop up for uploading file*/
+    $("#upload-link").click(function () {
+        window.open("/getstarted/upload/file", "UploadWindow", "width=800,height=500");
+    });
+    $("#upload-go-back-link").click(function () {
+        UploadWindow.close();
+    });
 });
 
 
