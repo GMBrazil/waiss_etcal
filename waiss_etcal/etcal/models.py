@@ -38,7 +38,7 @@ class Soil(models.Model):
 
 class Farm(models.Model):
     manager = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True, blank=True)
-    farm_name = models.CharField(max_length=50, verbose_name="Farm Name", unique=True)
+    farm_name = models.CharField(max_length=50, verbose_name="Farm Name", null=True)
     farm_prov = models.CharField(max_length=30, default=None, verbose_name="Province")
     farm_muni = models.CharField(max_length=30, default=None, verbose_name="Municipality")
     farm_brgy = models.CharField(max_length=30, default=None, verbose_name="Barangay")
