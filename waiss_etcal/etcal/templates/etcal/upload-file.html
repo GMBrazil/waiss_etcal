@@ -1,66 +1,56 @@
 {% extends 'etcal/get-started.html' %}
 {% load static %}
 
+{% block navbar_block %}
+{% endblock %}
+
+{% block head_block %}
+{% endblock %}
+
 {% block main_block %}
 <!-- MultiStep Form -->
 <div class="container-fluid" id="grad1">
     <div class="row justify-content-center mt-0">
         <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                <h2><strong>Let's get you started</strong></h2>
-                <p>Fill all form field to go to next step</p>
                 <div class="row">
                     <div class="col-md-12 mx-0">
                         <form id="uploadform" action="{% url 'etcal:get_started_upload_file' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <fieldset>
-                                <div class="form-card">
+                                <div class="form-card text-black-50">
                                     <h2 class="fs-title">Upload File</h2>
-                                    <p>To add data by uploading a formatted excel file, select the file below then click
-                                        upload.
-                                        Kindly take note of the format of excel file to upload presented below.</p>
-                                    <div class="row">
-                                        <div class="col-12"><input type="file" class="custom-file-input" id="customFile" name="excel_file" required>
-                                            <label class="custom-file-label" for="customFile">Choose file</label>
-                                        </div>
+                                    <p>To add data by uploading a formatted excel file, select the file below then click                                        upload.                                        Kindly take note of the format of excel file to upload presented below.</p>
+                                    <div class="custom-file"> 
+                                        <input type="file" class="custom-file-input" id="customFile" name="excel_file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+                                        <label class="custom-file-label" for="customFile">Choose file</label>                                                    
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            {% if message %}
-                                            <p class="text-small">{{ message }}</p>
-                                            <a class="text-primary" id="upload-go-back-link">Click here to proceed.</a>
-                                            {% else %}
-                                            {% endif %}
-                                            <section id="data-file-form">
-                                                <hr>
-                                                <div class="row" data-pg-collapsed>
-                                                    <div class="col">
-                                                        {% if excel_data %}
-                                                        <hr>
-                                                        <div class="row" data-pg-collapsed>
-                                                            <div class="col">
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-borderless table-sm">
-                                                                        <tbody>
-                                                                            {% for row in excel_data %}
-                                                                            <tr>
-                                                                                {% for cell in row %}
-                                                                                <td>{{ cell }}</td>
-                                                                                {% endfor %}
-                                                                            </tr>
-                                                                            {% endfor %}
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {% else %}
-                                                        {% endif %}
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
+                                    <div class="pt-3 text-center"> 
+                                        <a><img class="w-100 img-thumbnail" src={% static "get-started/sample_file_snip.PNG" %} alt="">  </a> 
                                     </div>
+                                    {% if message %}
+                                    <hr>
+                                    <section id="upload-message" class="bg-primary p-2 text-center text-white">
+                                        <p>{{ message }}</p>
+                                        <h3 id="upload-go-back-link">You can now close this tab and proceed to submission!</h3>
+                                    </section>
+                                    <hr>
+                                    {% else %}
+                                    {% endif %}
+                                    {% if excel_data %}
+                                    <table class="table table-sm table-striped text-center"> 
+                                        <tbody>
+                                            {% for row in excel_data %}
+                                            <tr>
+                                                {% for cell in row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}                                              
+                                        </tbody>                                                     
+                                    </table>
+                                    {% else %}
+                                    {% endif %}
                                 </div>
                                 <input id="upload-button" type="submit" class="action-button" value="Upload">
                             </fieldset>
@@ -71,4 +61,7 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block footer_block %}
 {% endblock %}

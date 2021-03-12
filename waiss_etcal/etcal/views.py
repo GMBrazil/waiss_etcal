@@ -150,7 +150,7 @@ def get_started(request):
         value_handler = farm
         
         excel_data = array_handler
-        if not excel_data:
+        if excel_data:
             for row in excel_data[1:]:
                 date = datetime.datetime.strptime(row[0],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
                 eto = row[1]
@@ -224,7 +224,7 @@ def get_started_upload_file(request):
 
         context = {
             "excel_data": excel_data,
-            "message": "File has been uploaded! You can now submit your form."
+            "message": "File has been uploaded! Your data are shown below."
         }
 
         return render(request, 'etcal/upload-file.html', context)

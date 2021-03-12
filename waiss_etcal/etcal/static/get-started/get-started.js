@@ -496,11 +496,18 @@ $(document).ready(function () {
 
     /*when user choose to upload formatted excel file,
     a new window will open and pop up for uploading file*/
+    var uploadWindow, uploadForm;
     $("#upload-link").click(function () {
-        window.open("/getstarted/upload/file", "UploadWindow", "width=800,height=500");
+        uploadWindow = window.open("/getstarted/upload/file", "uploadWindow", "width=800,height=700");
+        if ($("#upload-message").is(':visible')){
+            $("#upload-message").scrollIntoView();
+        }
+        else{
+            $("#uploadform").scrollIntoView();
+        }
     });
     $("#upload-go-back-link").click(function () {
-        UploadWindow.close();
+        uploadWindow.close();
     });
 });
 
