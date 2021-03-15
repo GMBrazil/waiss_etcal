@@ -353,9 +353,11 @@ function dayToIrrigate() {
     var days_bef_irrigate;
     if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
         days_bef_irrigate = valDBI[latest_index];
+        alert(1);
     }
     else  {
         days_bef_irrigate = valDBI_itr_2[latest_index];
+        alert(2);
     }
     var date_irrigate = new Date(date_data[latest_index]);
     date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
