@@ -19,4 +19,9 @@ urlpatterns = [
     path('load/dash/', views.load_dash, name='load_dash'),
     path('load/file/', views.load_file, name='load_file'),
     path('getstarted/upload/file', views.get_started_upload_file, name='get_started_upload_file'),
+    path('add/data/', views.add_data, name='add_data'),
+    path('add/farm/', views.add_farm, name='add_farm'),
+    path('add/station/', views.add_station, name='add_station'),
+    path('add/crop/', views.add_crop, name='add_crop'),
+    path('add/soil/', views.add_soil, name='add_soil'),
 ]

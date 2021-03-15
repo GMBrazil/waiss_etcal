@@ -120,6 +120,20 @@
                     <input type="text" class="border rounded" id="farm-coor-holder" value=""/>
                     {% endif %}
                 </div>                 
+            </div>
+            <div class="row"> 
+                <div class="col-xl-2">
+                    <span>Station Id:  </span>
+                </div>                 
+                <div class="col-xl-3">
+                    <input type="number" class="border rounded" id="dtm-holder" value="{{ crop_data.crop_dtm }}"/>
+                </div>                 
+                <div class="col-xl-2">
+                    <span>Soil Type:  </span>
+                </div>                 
+                <div class="col-xl-3">
+                    <input type="text" class="border rounded" id="soil-holder" value="{{ soil_data.soil_type }}"/>
+                </div>                 
             </div>             
             <div class="row"> 
                 <div class="col-xl-2">
@@ -336,10 +350,10 @@
                 <div class="card to-do">
                     <section class="mb-3 " data-pg-collapsed>
                         <h2 class="display h4 text-primary"><b>Farm Details</b></h2>
-                        <p id="textFarmLocation">Batong Malake, Los Baños, Laguna</p>
-                        <p id="textFarmCoordinates" class="mt-n3">14.00001 N 121.122111 E</p>
-                        <p id="textFarmCrop">Corn (Sweet)</p>
-                        <p id="textFarmSoil">Sandy Clay</p>
+                        <p id="textFarmLocation">Location</p>
+                        <p id="textFarmCoordinates">Coordinates</p>
+                        <p id="textFarmCrop">Crop</p>
+                        <p id="textFarmSoil">Soil</p>
                     </section>
                     <section data-pg-collapsed>
                         <div class="alert alert-info alert-dismissible fade show" role="alert" id="lastDataAlert">
@@ -352,22 +366,22 @@
                     </section>
                     <section class="mb-3 mt-3" data-pg-collapsed>
                         <h2 class="display h4 text-primary"><b>Data Options</b></h2>
-                        <p id="lastDataUpdate">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                        <p id="lastDataUpdate">Last Data Update</p>
                         <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
                             <section class="align-items-center d-flex justify-content-center">
-                                <button type="button" class="align-items-center btn btn-primary d-flex data-option justify-content-center" data-target="#modalAddData" data-toggle="modal">
+                                <button type="button" id="btnAddData" class="align-items-center btn btn-primary d-flex data-option justify-content-center" data-target="#modalAddData" data-toggle="modal">
                                     <i class="fa fa-2x fa-plus-square-o"></i>
                                 </button>
                                 <span class="text-muted">&nbsp;Add Data</span>
                             </section>
                             <section class="align-items-center d-flex justify-content-center">
-                                <button type="button" class="align-items-center btn btn-secondary d-flex data-option justify-content-center" data-target="#modalAddFarm" data-toggle="modal">
+                                <button type="button" id="btnAddFarm" class="align-items-center btn btn-secondary d-flex data-option justify-content-center" data-target="#modalAddFarm" data-toggle="modal">
                                     <i class="fa fa-2x fa-home"></i>
                                 </button>
                                 <span class="text-muted">&nbsp;Add Farm</span>
                             </section>
                             <section class="align-items-center d-flex justify-content-center">
-                                <button type="button" class="align-items-center btn btn-info d-flex data-option justify-content-center" data-target="#modalAddStation" data-toggle="modal">
+                                <button type="button" id="btnAddStation" class="align-items-center btn btn-info d-flex data-option justify-content-center" data-target="#modalAddStation" data-toggle="modal">
                                     <i class="fa fa-2x fa-sitemap"></i>
                                 </button>
                                 <span class="text-muted">&nbsp;Add Station</span>
@@ -392,137 +406,150 @@
 <div class="modal pg-show-modal fade" id="modalAddData" data-pg-collapsed>
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-primary"><i class="fa fa-plus-square-o"></i>&nbsp;Add Data</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Enter the following information to add data to your farm.</p>
-                <div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group"> 
-                                <label for="formInput15">Farm</label>
-                                <input type="text" class="form-control" id="textAddDataFarmName"> 
-                            </div>                             
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group"> 
-                                <label for="formInput15">Station</label>                                 
-                                <select id="selectAddDataStation" class="form-control"> 
-                                    <option>National Agromet Station</option>                                     
-                                </select>                                 
-                            </div>                             
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group"> 
-                                <label for="formInput15">Type of Data Input</label>                                 
-                                <select id="selectAddDataInputType" class="form-control"> 
-                                    <option>Reference evapotranspiration</option>                                     
-                                </select>                                 
-                            </div>                             
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group"> 
-                                <label for="formInput15">How do you want to add your data?</label>                                 
-                                <select id="selectAddDataInputMethod" class="form-control"> 
-                                    <option>Single data input</option>                                     
-                                    <option>Upload formatted excel file</option>                                     
-                                </select>                                 
-                            </div>                             
-                        </div>
-                    </div>
+            <form id="addData">
+                <div class="modal-header">
+                    <h3 class="modal-title text-primary"><i class="fa fa-plus-square-o"></i>&nbsp;Add Data</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                <section class="mt-3" id="single-data">
-                    <p class="text-muted"><i class="fa fa-pencil"></i>&nbsp;Add your data here:</p>
-                    <div class="table-responsive"> 
-                        <table class="table-borderless table table-sm data-table input-data">
-                            <thead>
-                                <tr>
-                                    <th><i class="fas fa-folder-minus"></i></th>
-                                    <th>
-                                        <label>Date</label>
-                                    </th>
-                                    <th>
-                                        <label>ETo(mm/day)</label>
-                                    </th>
-                                    <th>
-                                        <label>Rainfall(mm)</label>
-                                    </th>
-                                    <th>
-                                        <label>Irrigation(mm)</label>
-                                    </th>
-                                    <th><i class="fas fa-folder-plus"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <button name="data" type="button" class="btn btn-sm btn-template-outlined delete-row">
-                                            <i class="fa fa-minus-circle fa-sm"></i>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <input class="form-control form-control-sm" name="date_measured[]" type="date">
-                                    </td>
-                                    <td>
-                                        <input class="form-control form-control-sm" name="eto_data[]" type="number" min="0" step="0.01">
-                                    </td>
-                                    <td>
-                                        <input class="form-control form-control-sm" name="rain_data[]" type="number" min="0" step="0.01">
-                                    </td>
-                                    <td>
-                                        <input class="form-control form-control-sm" name="irrig_data[]" type="number" min="0" step="0.01">
-                                    </td>
-                                    <td>
-                                        <button name="add" type="button" class="add-row btn btn-primary btn-sm btn-template-main">
-                                            <i class="fa fa-plus-circle fa-sm"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>                             
-                        </table>
-                        <script>
-                                                            $(document).on('click', '.add-row', function () {
-                                                                //adding rows to data table
-                                                                var counter = $('table.input-data tbody tr').length + 1;
-                                                                var newRow = $("<tr>");
-                                                                var cols = "";
-                                                                cols += "<td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>";
-                                                                cols += "<td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>";
-                                                                cols += "<td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>";
-                                                                cols += "<td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>";
-                                                                cols += "<td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>";
-                                                                cols += "<td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>";
-                                                                newRow.append(cols);
-                                                                newRow.insertAfter($(this).closest("tr"));
-                                                            });
-                                                            $("table.input-data").on('click', '.delete-row', function (event) {
-                                                                //deleting selected row in data table
-                                                                $("table.input-data tbody").find('button[name="data"]').each(function () {
-                                                                    if ($(this).is(":focus")) {
-                                                                        $(this).parents("tr").remove();
-                                                                    }
-                                                                });
-                                                            });
-                                                        </script>
+                <div class="modal-body">
+                    <p>Enter the following information to add data to your farm.</p>
+                    <div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group"> 
+                                    <label for="formInput15">Farm</label>
+                                    <input type="text" class="form-control" id="textAddDataFarmName">
+                                    <select class="form-control" id="selectAddDataFarmName"> 
+                                        <optgroup label="Farms">
+                                            <option value="" selected=""></option>
+                                        </optgroup>                                             
+                                    </select> 
+                                </div>                             
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"> 
+                                    <label for="formInput15">Station</label>                                 
+                                    <select id="selectAddDataStation" class="form-control"> 
+                                        <option>National Agromet Station</option>                                     
+                                    </select>                                 
+                                </div>                             
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group"> 
+                                    <label for="formInput15">Type of Data Input</label>                                 
+                                    <select id="selectAddDataInputType" class="form-control"> 
+                                        <option>Reference evapotranspiration</option>                                     
+                                    </select>                                 
+                                </div>                             
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"> 
+                                    <label for="formInput15">How do you want to add your data?</label>                                 
+                                    <select id="selectAddDataInputMethod" class="form-control"> 
+                                        <option>Single data input</option>                                     
+                                        <option>Upload formatted excel file</option>                                     
+                                    </select>                                 
+                                </div>                             
+                            </div>
+                        </div>
                     </div>
-                </section>
-                <section class="mt-3" id="upload-data">
-                    <p class="text-center">To add data by uploading a formatted excel file, <a class="text-primary">click here</a>.</p>
-                </section>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                    <section class="mt-3" id="single-data">
+                        <p class="text-muted"><i class="fa fa-pencil"></i>&nbsp;Add your data here:</p>
+                        <div class="table-responsive"> 
+                            <table id="add-data-table" class="table-borderless table table-sm data-table input-data">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fas fa-folder-minus"></i></th>
+                                        <th>
+                                            <label>Date</label>
+                                        </th>
+                                        <th>
+                                            <label>ETo(mm/day)</label>
+                                        </th>
+                                        <th>
+                                            <label>Rainfall(mm)</label>
+                                        </th>
+                                        <th>
+                                            <label>Irrigation(mm)</label>
+                                        </th>
+                                        <th><i class="fas fa-folder-plus"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <button name="data" type="button" class="btn btn-sm btn-template-outlined delete-row">
+                                                <i class="fa fa-minus-circle fa-sm"></i>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <input class="form-control form-control-sm" name="date_measured[]" type="date">
+                                        </td>
+                                        <td>
+                                            <input class="form-control form-control-sm" name="eto_data[]" type="number" min="0" step="0.01">
+                                        </td>
+                                        <td>
+                                            <input class="form-control form-control-sm" name="rain_data[]" type="number" min="0" step="0.01">
+                                        </td>
+                                        <td>
+                                            <input class="form-control form-control-sm" name="irrig_data[]" type="number" min="0" step="0.01">
+                                        </td>
+                                        <td>
+                                            <button name="add" type="button" class="add-row btn btn-primary btn-sm btn-template-main">
+                                                <i class="fa fa-plus-circle fa-sm"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>                             
+                            </table>
+                            <script>
+                                $(document).on('click', '.add-row', function () {
+                                    //adding rows to data table
+                                    var counter = $('table.input-data tbody tr').length + 1;
+                                    var newRow = $("<tr class='dynamic-row'>");
+                                    var cols = "";
+                                    cols += "<td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>";
+                                    cols += "<td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>";
+                                    cols += "<td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>";
+                                    cols += "<td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>";
+                                    cols += "<td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>";
+                                    cols += "<td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>";
+                                    newRow.append(cols);
+                                    newRow.insertAfter($(this).closest("tr"));
+                                });
+                                $("table.input-data").on('click', '.delete-row', function (event) {
+                                    //deleting selected row in data table
+                                    $("table.input-data tbody").find('button[name="data"]').each(function (i) {
+                                        if ($(this).is(":focus")) {
+                                            if (i === 0){
+                                                continue
+                                            }
+                                            else {
+                                                $(this).parents("tr").remove();
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </section>
+                    <section class="mt-3" id="upload-data">
+                        <p class="text-center">To add data by uploading a formatted excel file, <a class="text-primary">click here</a>.</p>
+                    </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
-</div><div class="modal pg-show-modal fade" id="modalAddFarm" data-pg-collapsed>
+</div>
+<div class="modal pg-show-modal fade" id="modalAddFarm" data-pg-collapsed>
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -624,7 +651,8 @@
             </div>
         </div>
     </div>
-</div><div class="modal pg-show-modal fade" id="modalAddStation" data-pg-collapsed>
+</div>
+<div class="modal pg-show-modal fade" id="modalAddStation" data-pg-collapsed>
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" data-pg-collapsed>
@@ -733,4 +761,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 <!--<script src={% static "dash/js/main_script.js" %}></script>-->
 <script src={% static "dash/js/script.js" %}></script>
+<script src={% static "dash/js/script-modal.js" %}></script>
 {% endblock %}

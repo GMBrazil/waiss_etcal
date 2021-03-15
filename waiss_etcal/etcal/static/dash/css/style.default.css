@@ -3215,3 +3215,17 @@ a > code {
         margin-left: 15px;
     }
 }
+
+.btn-template-outlined {
+    background: none;
+    border: 1px solid #379392!important;
+    color: #379392;
+    border-radius: 0 !important;
+    text-decoration: none;
+}
+
+.btn-template-outlined:hover,
+.btn-template-outlined:focus {
+    background: #379392;
+    color: #fff !important;
+}
