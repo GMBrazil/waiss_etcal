@@ -3218,14 +3218,14 @@ a > code {
 
 .btn-template-outlined {
     background: none;
-    border: 1px solid #379392!important;
-    color: #379392;
+    border: 1px solid  #4fbfa8!important;
+    color: #4fbfa8;
     border-radius: 0 !important;
     text-decoration: none;
 }
 
 .btn-template-outlined:hover,
 .btn-template-outlined:focus {
-    background: #379392;
+    background:  #4fbfa8;
     color: #fff !important;
 }
