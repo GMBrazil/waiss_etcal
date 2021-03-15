@@ -224,7 +224,7 @@ function calcData() {
         valDBI[i] = Math.round(valActualRAW[i] / (valAveCWR[i]));
     }
     latest_index = date_data.length - 1;
-    //alert("DAP="+valDAP + " Kc="+valKc+" ETc=" +valETc+" EFR="+valEFR+" RZWD="+valRZWD+" Surplus="+valSurplusWater+" DRZ="+valDRZ+" FC="+valFC+" PWP="+valPWP+" TAW="+valTAW+" RAW="+valRAW+" Actual RAW="+valActualRAW+ " Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
+    alert("DAP="+valDAP + " Kc="+valKc+" ETc=" +valETc+" EFR="+valEFR+" RZWD="+valRZWD+" Surplus="+valSurplusWater+" DRZ="+valDRZ+" FC="+valFC+" PWP="+valPWP+" TAW="+valTAW+" RAW="+valRAW+" Actual RAW="+valActualRAW+ " Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
 }
 
 function iterateData() {
