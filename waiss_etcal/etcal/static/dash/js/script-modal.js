@@ -4,9 +4,7 @@ $(document).ready(function () {
         document.getElementById('addData').reset();
         $('#add-data-table tbody .dynamic-row').remove();
         var farm_id = $("#farms").val();
-        var farm_name = $("#farms").text();
-        $("#selectAddDataFarmName").val(farm_id);
-        $("#selectAddDataFarmName").text(farm_name);
+        $("#selectAddDataFarmName").val(farm_id).change();
     });
     $('#btnAddFarm').on('click', function () {
     });
