@@ -368,7 +368,7 @@ def add_data (request):
         rain_data = request.POST.getlist('rain_data[]')
         irrig_data = request.POST.getlist('irrig_data[]')
 
-    excel_data = array_handler
+        excel_data = array_handler
         if excel_data:
             for row in excel_data[1:]:
                 date = datetime.datetime.strptime(row[0],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
@@ -393,6 +393,9 @@ def add_data (request):
                 data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
                 data.save()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        excel_data = list()
+        array_handler = list()
 
 def add_farm (request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
