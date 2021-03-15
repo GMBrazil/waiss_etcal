@@ -116,13 +116,13 @@ def get_started(request):
         elif (station_other != "") and (station_def == "Other"):
             station_name = station_other
 
-        if (station_lat == "") or (station_lat_dir = "") or (station_long == "") or (station_long_dir == ""):
+        if (station_lat == "") or (station_long == ""):
             station_lat = None
             station_lat_dir = None
             station_long = None
             station_long_dir = None
 
-        if (farm_lat == "") or (farm_lat_dir = "") or (farm_long == "") or (farm_long_dir == ""):
+        if (farm_lat == "") or (farm_long == ""):
             farm_lat = None
             farm_lat_dir = None
             farm_long = None
