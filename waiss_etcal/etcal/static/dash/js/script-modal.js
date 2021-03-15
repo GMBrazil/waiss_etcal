@@ -27,8 +27,8 @@ $(document).ready(function () {
     /*when user choose to upload formatted excel file,
     a new window will open and pop up for uploading file*/
     var uploadWindow, uploadForm;
-    $("#upload-link").click(function () {
-        uploadWindow = window.open("/getstarted/upload/file", "uploadWindow", "width=800,height=700");
+    $("#upload-file-link").click(function () {
+        uploadWindow = window.open("/upload/file", "uploadWindow", "width=800,height=700");
         if ($("#upload-message").is(':visible')){
             $("#upload-message").scrollIntoView();
         }

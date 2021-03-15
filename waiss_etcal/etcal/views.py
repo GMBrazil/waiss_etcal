@@ -356,8 +356,43 @@ def load_file(request):
 
         return render(request, 'etcal/load-file.html', context)
 
-def add_data (request):
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+def add_data (request):    
+    global array_handler
+    excel_data = list()
+
+    if request.method == 'POST':
+        farm = request.POST['farm']
+        station = request.POST["station"]
+        date_measured = request.POST.getlist('date_measured[]')
+        eto_data = request.POST.getlist('eto_data[]')
+        rain_data = request.POST.getlist('rain_data[]')
+        irrig_data = request.POST.getlist('irrig_data[]')
+
+    excel_data = array_handler
+        if excel_data:
+            for row in excel_data[1:]:
+                date = datetime.datetime.strptime(row[0],"%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
+                eto = row[1]
+                rainfall = row[2]
+                irrigation = row[3]
+                data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                data.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+        elif (date_measured != "") or (eto_data != "") or (rain_data != "") or (irrig_data != ""):
+            for date, eto, rainfall, irrigation in zip(date_measured, eto_data, rain_data, irrig_data):
+                if not date:
+                    continue
+                elif (date != "") and (eto != "") and ((rainfall == "") or (irrigation == "")):
+                    rainfall = 0
+                    irrigation = 0
+                else:
+                    eto = Decimal(eto)
+                    rainfall = Decimal(rainfall)
+                    irrigation = Decimal(irrigation)
+                data, created = Data.objects.get_or_create(farm=farm, station=station, timestamp=date, eto=eto, rainfall=rainfall, irrigation=irrigation)
+                data.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def add_farm (request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
