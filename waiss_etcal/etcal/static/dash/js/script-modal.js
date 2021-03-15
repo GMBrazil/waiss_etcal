@@ -5,6 +5,8 @@ $(document).ready(function () {
         $('#add-data-table tbody .dynamic-row').remove();
         var farm_id = $("#farms").val();
         $("#selectAddDataFarmName").val(farm_id).change();
+        $('#single-data').removeAttr('hidden');
+        $('#upload-data').attr('hidden', '');
     });
     $('#btnAddFarm').on('click', function () {
     });
