@@ -303,7 +303,7 @@ def load_dash(request):
 	farm_details = Farm.objects.get(id=farm_id)
 	crop_data = Crop.objects.get(crop_type=farm_details.crop)
 	soil_data = Soil.objects.get(soil_type=farm_details.soil)
-    station_data = Station.objects.all()
+	station_data = Station.objects.all()
 	latest_farm_data = Data.objects.filter(farm=farm_details).order_by('timestamp')
 
 	context = {
