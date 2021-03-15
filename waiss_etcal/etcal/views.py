@@ -290,7 +290,7 @@ def load_soil(request):
 
 def load_station(request):
     station_id = request.GET.get('station')
-    stations = Station.objects.filter(station_name=station_id)
+    stations = Station.objects.filter(id=station_id)
 
     context = {
         "stations": stations,

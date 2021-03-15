@@ -398,6 +398,7 @@ function dayToIrrigate() {
         document.getElementById("valDBI").textContent = "Today";
         document.getElementById("textDBINote").textContent = "Needed since " + Math.abs(DBI_today) + " days ago";
     }
+    alert("days_bef_irrigate:"+days_bef_irrigate+" date_irrigate:"+date_irrigate+" DBI_today:"+DBI_today);
 }
 
 function soilWaterStatus() {
