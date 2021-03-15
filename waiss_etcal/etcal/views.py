@@ -57,7 +57,9 @@ def get_started(request):
         farm_muni = request.POST["farm-muni"]
         farm_brgy = request.POST["farm-brgy"]
         farm_lat = request.POST["farm-lat"]
+        farm_lat_dir = request.POST["farm-lat-dir"]
         farm_long = request.POST["farm-long"]
+        farm_long_dir = request.POST["farm-long-dir"]
         #-----Crop Form-----#
         crop_def = request.POST["crops"]
         crop_other = request.POST["crop-other"]
@@ -84,7 +86,9 @@ def get_started(request):
         station_type = request.POST["sta-type"]
         station_elev = request.POST["sta-elev"]
         station_lat = request.POST["sta-lat"]
+        station_lat_dir = request.POST["sta-lat-dir"]
         station_long = request.POST["sta-long"]
+        station_long_dir = request.POST["sta-long-dir"]
         station_prov = request.POST["sta-prov"]
         station_muni = request.POST["sta-muni"]
         station_brgy = request.POST["sta-brgy"]
@@ -112,13 +116,17 @@ def get_started(request):
         elif (station_other != "") and (station_def == "Other"):
             station_name = station_other
 
-        if (station_lat == "") or (station_long == ""):
+        if (station_lat == "") or (station_lat_dir = "") or (station_long == "") or (station_long_dir == ""):
             station_lat = None
+            station_lat_dir = None
             station_long = None
+            station_long_dir = None
 
-        if (farm_lat == "") or (farm_long == ""):
+        if (farm_lat == "") or (farm_lat_dir = "") or (farm_long == "") or (farm_long_dir == ""):
             farm_lat = None
+            farm_lat_dir = None
             farm_long = None
+            farm_long_dir = None
         
         if (dap == "") or (corr_factor == ""):
             dap = None
@@ -136,12 +144,12 @@ def get_started(request):
         soil = Soil.objects.get(id=soil_data.id)
 
         station_data, created = Station.objects.get_or_create(station_name=station_name, station_type=station_type, station_elev=station_elev,
-                                                              station_lat=station_lat, station_long=station_long, station_prov=station_prov, station_muni=station_muni, station_brgy=station_brgy)
+                                                              station_lat=station_lat, station_lat_dir=station_lat_dir, station_long=station_long, station_long_dir=station_long_dir, station_prov=station_prov, station_muni=station_muni, station_brgy=station_brgy)
         station_data.save()
         station = Station.objects.get(id=station_data.id)
 
         farm_data, created = Farm.objects.get_or_create(farm_name=farm_name, farm_prov=farm_prov, farm_muni=farm_muni, farm_brgy=farm_brgy,
-                                                        farm_lat=farm_lat, farm_long=farm_long, date_planted=dap, crop=crop, soil=soil, corr_factor=corr_factor, manager=current_user)
+                                                        farm_lat=farm_lat, farm_lat_dir=farm_lat_dir, farm_long=farm_long, farm_long_dir=farm_long_dir, date_planted=dap, crop=crop, soil=soil, corr_factor=corr_factor, manager=current_user)
         farm_data.save()
         farm = Farm.objects.get(id=farm_data.id)
 
