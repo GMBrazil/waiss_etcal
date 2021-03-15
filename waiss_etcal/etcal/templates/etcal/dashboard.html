@@ -120,21 +120,7 @@
                     <input type="text" class="border rounded" id="farm-coor-holder" value=""/>
                     {% endif %}
                 </div>                 
-            </div>
-            <div class="row"> 
-                <div class="col-xl-2">
-                    <span>Station Id:  </span>
-                </div>                 
-                <div class="col-xl-3">
-                    <input type="number" class="border rounded" id="dtm-holder" value="{{ crop_data.crop_dtm }}"/>
-                </div>                 
-                <div class="col-xl-2">
-                    <span>Soil Type:  </span>
-                </div>                 
-                <div class="col-xl-3">
-                    <input type="text" class="border rounded" id="soil-holder" value="{{ soil_data.soil_type }}"/>
-                </div>                 
-            </div>             
+            </div>           
             <div class="row"> 
                 <div class="col-xl-2">
                     <span>Crop Type:  </span>
@@ -525,7 +511,6 @@
                                     $("table.input-data tbody").find('button[name="data"]').each(function (i) {
                                         if ($(this).is(":focus")) {
                                             if (i === 0){
-                                                continue;
                                             }
                                             else {
                                                 $(this).parents("tr").remove();
