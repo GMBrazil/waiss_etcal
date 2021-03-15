@@ -52,7 +52,7 @@
 </div>
 <div class="row" data-pg-collapsed>
     <div class="col-2"> 
-        <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude">
+        <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude" value="{{ item.station_lat }}">
     </div>
     <div class="col-2"> 
         <select class="list-dt others" id="sta-lat-dir" name="sta-lat-dir">
@@ -63,7 +63,7 @@
         </select>
     </div>
     <div class="col-2"> 
-        <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude">
+        <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude" value="{{ item.station_long }}">
     </div>
     <div class="col-2"> 
         <select class="list-dt others" id="sta-long-dir" name="sta-long-dir">
