@@ -361,12 +361,15 @@ def add_data (request):
     excel_data = list()
 
     if request.method == 'POST':
-        farm = request.POST['farm']
-        station = request.POST["station"]
+        farm_id = request.POST['farm']
+        station_id = request.POST["station"]
         date_measured = request.POST.getlist('date_measured[]')
         eto_data = request.POST.getlist('eto_data[]')
         rain_data = request.POST.getlist('rain_data[]')
         irrig_data = request.POST.getlist('irrig_data[]')
+
+        farm = Farm.objects.get(id=farm_id)
+        station = Station.objects.get(id=station_id)
 
         excel_data = array_handler
         if excel_data:
