@@ -425,7 +425,7 @@
                                     <select id="selectAddDataStation" name="station" class="form-control">
                                         <option value="" selected="">Choose</option>
                                         {% for item in station_info %}
-                                        <option value="{{ item.station_name }}">{{ item.station_name }}</option>
+                                        <option value="{{ item.id }}">{{ item.station_name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>                             
