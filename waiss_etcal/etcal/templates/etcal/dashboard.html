@@ -420,7 +420,6 @@
                             <div class="col-md-6">
                                 <div class="form-group"> 
                                     <label for="formInput15">Farm</label>
-                                    <input type="text" class="form-control" id="textAddDataFarmName">
                                     <select class="form-control" id="selectAddDataFarmName"> 
                                         <optgroup label="Farms">
                                             <option value="" selected=""></option>
@@ -526,7 +525,7 @@
                                     $("table.input-data tbody").find('button[name="data"]').each(function (i) {
                                         if ($(this).is(":focus")) {
                                             if (i === 0){
-                                                continue
+                                                continue;
                                             }
                                             else {
                                                 $(this).parents("tr").remove();
