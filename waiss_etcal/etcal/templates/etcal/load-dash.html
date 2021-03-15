@@ -13,7 +13,13 @@
         <span>Farm Coordinates:  </span>
     </div>                 
     <div class="col-xl-3">
+        {% if farm_details.farm_lat and farm_details.farm_lat_dir and farm_details.farm_long and farm_details.farm_long_dir %}
         <input type="text" class="border rounded" id="farm-coor-holder" value="{{ farm_details.farm_lat }} {{ farm_details.farm_lat_dir }} {{ farm_details.farm_long }} {{ farm_details.farm_long_dir }}"/>
+        {% elif farm_details.farm_lat and farm_details.farm_long %}
+        <input type="text" class="border rounded" id="farm-coor-holder" value="{{ farm_details.farm_lat }} {{ farm_details.farm_long }}"/>
+        {% else %}
+        <input type="text" class="border rounded" id="farm-coor-holder" value=""/>
+        {% endif %}
     </div>                 
 </div> 
 <div class="row">

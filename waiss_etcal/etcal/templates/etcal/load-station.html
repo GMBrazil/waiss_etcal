@@ -123,15 +123,31 @@
 <div class="row">
     <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
 </div>
-<div class="row">
-    <div class="col-4"> 
-        <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude" />
+<div class="row" data-pg-collapsed>
+    <div class="col-2"> 
+        <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude">
+    </div>
+    <div class="col-2"> 
+        <select class="list-dt others" id="sta-lat-dir" name="sta-lat-dir">
+            <optgroup label="Latitude">
+                <option value="N" selected="">N</option>
+                <option value="S">S</option>
+            </optgroup>
+        </select>
+    </div>
+    <div class="col-2"> 
+        <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude">
+    </div>
+    <div class="col-2"> 
+        <select class="list-dt others" id="sta-long-dir" name="sta-long-dir">
+            <optgroup label="Longitude">
+                <option value="E" selected="">E</option>
+                <option value="W">W</option>
+            </optgroup>
+        </select>
     </div>
     <div class="col-4"> 
-        <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude" />
-    </div>
-    <div class="col-4"> 
-        <input id="sta-my-loc" type="button" name="get-sta-coordinates" class="input-loc btn-template-outlined" value="Get my location" >
+        <input id="sta-my-loc" type="button" name="get-sta-coordinates" class="input-loc btn-template-outlined" value="Get my location" onclick="getLocationforStation();">
     </div>
 </div>
 <div class="row">
