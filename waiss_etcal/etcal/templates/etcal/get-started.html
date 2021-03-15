@@ -34,13 +34,13 @@
                                     <div class="row">
                                         <div class="col-4"> <label>Farm Name:</label> </div>
                                         <div class="col-8">
-                                            <input id="farm-name" type="text" name="farm-name" data-toggle="popover" data-trigger="hover" data-placement="right" title="Farm Name" data-content="A unique name will make your farm more recognizable."/>
+                                            <input id="farm-name" type="text" name="farm-name"/>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-12"> <label>Location:</label> </div>
                                     </div>
-                                    <div class="row" data-toggle="popover" data-trigger="hover" title="Farm Location" data-content="The local address of your farm is required for site-specific references.">
+                                    <div class="row">
                                         <div class="col-4"> 
                                             <input id="farm-brgy" type="text" class="input-loc" name="farm-brgy" placeholder="Barangay" />
                                         </div>
@@ -54,12 +54,28 @@
                                     <div class="row">
                                         <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
                                     </div>
-                                    <div class="row" data-toggle="popover" data-trigger="hover" data-placement="right" title="Farm Coordinates" data-content="The coordinates of your farm may not be filled out if the local address is already provided. Further, if you are near your farm, you can get your current location by clicking the button.">
-                                        <div class="col-4"> 
-                                            <input id="farm-lat" type="number" class="input-loc" name="farm-lat" min="0" placeholder="Latitude" />
+                                    <div class="row">
+                                        <div class="col-2"> 
+                                            <input id="farm-lat" type="number" class="input-loc" name="farm-lat" min="0" placeholder="Latitude"/>
                                         </div>
-                                        <div class="col-4"> 
-                                            <input id="farm-long" type="number" class="input-loc" name="farm-long" min="0" placeholder="Longitude" />
+                                        <div class="col-2"> 
+                                            <select class="list-dt others" id="farm-lat-dir" name="farm-lat-dir">
+                                                <optgroup label="Latitude">
+                                                    <option value="N" selected="">N</option>
+                                                    <option value="S">S</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="col-2" data-pg-collapsed> 
+                                            <input id="farm-long" type="number" class="input-loc" name="farm-long" min="0" placeholder="Longitude"/>
+                                        </div>
+                                        <div class="col-2"> 
+                                            <select class="list-dt others" id="farm-lat-dir" name="farm-long-dir">
+                                                <optgroup label="Longitude">
+                                                    <option value="E" selected="">E</option>
+                                                    <option value="W">W</option>
+                                                </optgroup>
+                                            </select>
                                         </div>
                                         <div class="col-4"> 
                                             <input id="get-my-loc" type="button" name="get-farm-coordinates" class="input-loc btn-template-outlined" value="Get my location" onclick="getLocationforFarm();" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="By clicking this button, you may need to allow this site to access your current location.">
@@ -301,12 +317,28 @@
                                         <div class="row">
                                             <div class="col-12"> <label>Coordinates (degree decimal):</label> </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-4"> 
-                                                <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude" />
+                                        <div class="row" data-pg-collapsed>
+                                            <div class="col-2"> 
+                                                <input id="sta-lat" name="sta-lat" type="number" class="input-loc" min="0" placeholder="Latitude">
                                             </div>
-                                            <div class="col-4"> 
-                                                <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude" />
+                                            <div class="col-2"> 
+                                                <select class="list-dt others" id="sta-lat-dir" name="sta-lat-dir">
+                                                    <optgroup label="Latitude">
+                                                        <option value="N" selected="">N</option>
+                                                        <option value="S">S</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                            <div class="col-2"> 
+                                                <input id="sta-long" name="sta-long" type="number" class="input-loc" min="0" placeholder="Longitude">
+                                            </div>
+                                            <div class="col-2"> 
+                                                <select class="list-dt others" id="sta-long-dir" name="sta-long-dir">
+                                                    <optgroup label="Longitude">
+                                                        <option value="E" selected="">E</option>
+                                                        <option value="W">W</option>
+                                                    </optgroup>
+                                                </select>
                                             </div>
                                             <div class="col-4"> 
                                                 <input id="sta-my-loc" type="button" name="get-sta-coordinates" class="input-loc btn-template-outlined" value="Get my location" onclick="getLocationforStation();">

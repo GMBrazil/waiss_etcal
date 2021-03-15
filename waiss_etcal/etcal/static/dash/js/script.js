@@ -16,6 +16,10 @@ var currentpercentMC, currentpercentMCdec, valMC, percentMAD, percentPWP;
 
 function dataHandler() {
     date_planted = $("#DAP-holder").val();
+    farm_loc = $("#farm-loc-holder").val();
+    farm_coor = $("#farm-coor-holder").val();
+    crop = $("#crop-holder").val();
+    soil = $("#soil-holder").val();
     crop_dtm = parseInt($("#dtm-holder").val());
     crop_drz = parseFloat($("#drz-holder").val());
     stage_init = parseInt($("#init-stage-holder").val());
@@ -318,6 +322,7 @@ function displayResults() {
     soilWaterGauge();
     dayToIrrigate();
     irrigateWater();
+    farmDetails();
 }
 
 function lastDataUpdate() {
@@ -591,6 +596,13 @@ function irrigateWater() {
         document.getElementById("textIrrigateNote").textContent = "The current soil moisture content is " + currentpercentMC + "% and is still above field capacity. No irrigation is needed.";
     }
 
+}
+
+function farmDetails(){
+    document.getElementById('textFarmLocation').textContent = farm_loc;
+    document.getElementById('textFarmCoordinates').textContent = farm_coor;
+    document.getElementById('textFarmCrop').textContent = crop;
+    document.getElementById('textFarmSoil').textContent = soil;
 }
 
 function resetArrayHolder() {
