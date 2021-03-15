@@ -340,7 +340,8 @@
                         <p id="textFarmCoordinates" class="mt-n3">14.00001 N 121.122111 E</p>
                         <p id="textFarmCrop">Corn (Sweet)</p>
                         <p id="textFarmSoil">Sandy Clay</p>
-                    </section><section data-pg-collapsed>
+                    </section>
+                    <section data-pg-collapsed>
                         <div class="alert alert-info alert-dismissible fade show" role="alert" id="lastDataAlert">
                             <strong>Hey there!</strong>
                             <span id="lastDataAlert_text"></span>
@@ -348,7 +349,8 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                    </section><section class="mb-3 mt-3" data-pg-collapsed>
+                    </section>
+                    <section class="mb-3 mt-3" data-pg-collapsed>
                         <h2 class="display h4 text-primary"><b>Data Options</b></h2>
                         <p id="lastDataUpdate">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                         <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
@@ -387,7 +389,344 @@
 {% endblock %}
 
 {% block addtl_modal_block %}
-
+<div class="modal pg-show-modal fade" id="modalAddData" data-pg-collapsed>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-primary"><i class="fa fa-plus-square-o"></i>&nbsp;Add Data</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Enter the following information to add data to your farm.</p>
+                <div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label for="formInput15">Farm</label>
+                                <input type="text" class="form-control" id="textAddDataFarmName"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label for="formInput15">Station</label>                                 
+                                <select id="selectAddDataStation" class="form-control"> 
+                                    <option>National Agromet Station</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label for="formInput15">Type of Data Input</label>                                 
+                                <select id="selectAddDataInputType" class="form-control"> 
+                                    <option>Reference evapotranspiration</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label for="formInput15">How do you want to add your data?</label>                                 
+                                <select id="selectAddDataInputMethod" class="form-control"> 
+                                    <option>Single data input</option>                                     
+                                    <option>Upload formatted excel file</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                    </div>
+                </div>
+                <section class="mt-3" id="single-data">
+                    <p class="text-muted"><i class="fa fa-pencil"></i>&nbsp;Add your data here:</p>
+                    <div class="table-responsive"> 
+                        <table class="table-borderless table table-sm data-table input-data">
+                            <thead>
+                                <tr>
+                                    <th><i class="fas fa-folder-minus"></i></th>
+                                    <th>
+                                        <label>Date</label>
+                                    </th>
+                                    <th>
+                                        <label>ETo(mm/day)</label>
+                                    </th>
+                                    <th>
+                                        <label>Rainfall(mm)</label>
+                                    </th>
+                                    <th>
+                                        <label>Irrigation(mm)</label>
+                                    </th>
+                                    <th><i class="fas fa-folder-plus"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <button name="data" type="button" class="btn btn-sm btn-template-outlined delete-row">
+                                            <i class="fa fa-minus-circle fa-sm"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <input class="form-control form-control-sm" name="date_measured[]" type="date">
+                                    </td>
+                                    <td>
+                                        <input class="form-control form-control-sm" name="eto_data[]" type="number" min="0" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control form-control-sm" name="rain_data[]" type="number" min="0" step="0.01">
+                                    </td>
+                                    <td>
+                                        <input class="form-control form-control-sm" name="irrig_data[]" type="number" min="0" step="0.01">
+                                    </td>
+                                    <td>
+                                        <button name="add" type="button" class="add-row btn btn-primary btn-sm btn-template-main">
+                                            <i class="fa fa-plus-circle fa-sm"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>                             
+                        </table>
+                        <script>
+                                                            $(document).on('click', '.add-row', function () {
+                                                                //adding rows to data table
+                                                                var counter = $('table.input-data tbody tr').length + 1;
+                                                                var newRow = $("<tr>");
+                                                                var cols = "";
+                                                                cols += "<td><button name='data' type='button' class='btn btn-sm btn-template-outlined delete-row'><i class='fa fa-minus-circle fa-sm'></i></button></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='date_measured[]' type='date'></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='eto_data[]' type='number' min='0' step='0.01'></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='rain_data[]' type='number' min='0' step='0.01'></td>";
+                                                                cols += "<td><input class='form-control form-control-sm' name='irrig_data[]' type='number' min='0' step='0.01'></td>";
+                                                                cols += "<td><button name='add' type='button' class='btn btn-sm btn-template-main add-row'><i class='fa fa-plus-circle fa-sm'></i></button></td>";
+                                                                newRow.append(cols);
+                                                                newRow.insertAfter($(this).closest("tr"));
+                                                            });
+                                                            $("table.input-data").on('click', '.delete-row', function (event) {
+                                                                //deleting selected row in data table
+                                                                $("table.input-data tbody").find('button[name="data"]').each(function () {
+                                                                    if ($(this).is(":focus")) {
+                                                                        $(this).parents("tr").remove();
+                                                                    }
+                                                                });
+                                                            });
+                                                        </script>
+                    </div>
+                </section>
+                <section class="mt-3" id="upload-data">
+                    <p class="text-center">To add data by uploading a formatted excel file, <a class="text-primary">click here</a>.</p>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div><div class="modal pg-show-modal fade" id="modalAddFarm" data-pg-collapsed>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-primary"><i class="fa fa-home"></i>&nbsp;Add Farm</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Provide the following information to add a farm.</p>
+                <div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="formInput15">Farm Name</label>
+                                <input type="text" class="form-control" id="textAddFarmName"> 
+                            </div>                             
+                        </div>
+                    </div>
+                    <label>Location</label>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" placeholder="Barangay" id="textAddFarmBrgy"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" placeholder="Municipality" id="textAddFarmMuni"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" placeholder="Province" id="textAddFarmProv"> 
+                            </div>                             
+                        </div>
+                    </div>
+                    <label>Coordinates (degree decimal)</label>
+                    <div class="form-row" data-pg-collapsed>
+                        <div data-pg-collapsed class="col-md-2">
+                            <div class="form-group"> 
+                                <input type="number" class="form-control" placeholder="Latitude" id="numAddFarmLat"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-2">
+                            <select id="selectAddFarmLatDir" class="form-control"> 
+                                <option value="N">N</option>
+                                <option value="S">S</option>                                 
+                            </select>                             
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group"> 
+                                <input type="number" class="form-control" placeholder="Longitude" id="numAddFarmLong"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-2">
+                            <select id="selectAddFarmLongDir" class="form-control"> 
+                                <option value="E">E</option>
+                                <option value="W">W</option>                                 
+                            </select>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="submit" class="btn-template-outlined form-control text-center" value="Get my location" id="btnAddFarmGetMyLoc"> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row" data-pg-collapsed>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <label for="formInput15">Crop</label>                                 
+                                <select id="selectAddFarmCrop" class="form-control"> 
+                                    <option>Corn (Sweet)</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <label for="formInput15">Soil Type</label>                                 
+                                <select id="selectAddFarmSoil" class="form-control"> 
+                                    <option>Sandy Clay</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <label for="formInput15">Station</label>                                 
+                                <select id="selectAddFarmStation" class="form-control"> 
+                                    <option>National Agromet Station</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div><div class="modal pg-show-modal fade" id="modalAddStation" data-pg-collapsed>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" data-pg-collapsed>
+                <h3 class="modal-title text-primary" data-pg-collapsed><i class="fa fa-sitemap"></i>&nbsp;Add Station</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Provide the following information to add a station.</p>
+                <div>
+                    <div class="form-row" data-pg-collapsed>
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="formInput15">Choose a station</label>
+                                <select id="selectAddStaChoose" class="form-control"> 
+                                    <option>National Agromet Station</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                    </div>
+                    <div class="form-row" data-pg-collapsed>
+                        <div class="col-md-12">
+                            <div class="form-group"> 
+                                <label for="formInput15">Type of Data Source</label>
+                                <select id="selectAddStaType" class="form-control"> 
+                                    <option>Atmometer</option>                                     
+                                </select>                                 
+                            </div>                             
+                        </div>
+                    </div>
+                    <div class="form-row" data-pg-collapsed>
+                        <div class="col-md-6">
+                            <div class="form-group"> 
+                                <label for="formInput15">Station Name</label>
+                                <input type="text" class="form-control" id="textAddStaName"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="formInput15">Station Elevation (m)</label>
+                                <input type="number" class="form-control" id="numAddStaElev">
+                            </div>                             
+                        </div>
+                    </div>
+                    <label>Coordinates (degree decimal)</label>
+                    <div class="form-row">
+                        <div data-pg-collapsed class="col-md-2">
+                            <div class="form-group"> 
+                                <input type="number" class="form-control" placeholder="Latitude" id="numAddStaLat"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-2">
+                            <select id="selectAddStaLatDir" class="form-control"> 
+                                <option value="N">N</option>
+                                <option value="S">S</option>                                 
+                            </select>                             
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group"> 
+                                <input type="number" class="form-control" placeholder="Longitude" id="numAddStaLong"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-2">
+                            <select id="selectAddStaLongDir" class="form-control"> 
+                                <option value="E">E</option>
+                                <option value="W">W</option>                                 
+                            </select>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="submit" class="btn-template-outlined form-control text-center" value="Get my location" id="btnAddStaGetMyLoc"> 
+                            </div>
+                        </div>
+                    </div>
+                    <label>Location</label>
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" placeholder="Barangay" id="textAddStaBrgy"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" placeholder="Municipality" id="textAddStaMuni"> 
+                            </div>                             
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" placeholder="Province" id="textAddStaProv"> 
+                            </div>                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block addtl_bottom_script_block %}
