@@ -447,9 +447,14 @@
                                                             });
                                                             $("table.input-data").on('click', '.delete-row', function (event) {
                                                                 //deleting selected row in data table
+                                                                var rows = $('table.input-data tbody tr').length;
                                                                 $("table.input-data tbody").find('button[name="data"]').each(function () {
                                                                     if ($(this).is(":focus")) {
-                                                                        $(this).parents("tr").remove();
+                                                                        if (rows == 1){
+                                                                        }
+                                                                        else {
+                                                                            $(this).parents("tr").remove();
+                                                                        }
                                                                     }
                                                                 });
                                                             });
