@@ -197,7 +197,7 @@ def get_started(request):
     return render(request, 'etcal/get-started.html', context)
 
 @login_required
-def get_started_upload_file(request):
+def upload_file(request):
     current_user = request.user
     farm_info = Farm.objects.filter(manager=current_user)
     crop_info = Crop.objects.all()
