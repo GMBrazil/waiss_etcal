@@ -393,6 +393,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form id="addData" action="{% url 'etcal:add_data' %}" method="post">
+                {% csrf_token %}
                 <div class="modal-header">
                     <h3 class="modal-title text-primary"><i class="fa fa-plus-square-o"></i>&nbsp;Add Data</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
