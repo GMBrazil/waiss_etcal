@@ -15,7 +15,7 @@
             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                 <div class="row">
                     <div class="col-md-12 mx-0">
-                        <form id="uploadform" action="{% url 'etcal:get_started_upload_file' %}" method="post" enctype="multipart/form-data">
+                        <form id="uploadform" action="{% url 'etcal:upload_file' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <fieldset>
                                 <div class="form-card text-black-50">
