@@ -498,7 +498,7 @@ $(document).ready(function () {
     a new window will open and pop up for uploading file*/
     var uploadWindow, uploadForm;
     $("#upload-link").click(function () {
-        uploadWindow = window.open("/getstarted/upload/file", "uploadWindow", "width=800,height=700");
+        uploadWindow = window.open("/upload/file", "uploadWindow", "width=800,height=700");
         if ($("#upload-message").is(':visible')){
             $("#upload-message").scrollIntoView();
         }
