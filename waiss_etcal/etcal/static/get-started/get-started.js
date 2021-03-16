@@ -18,9 +18,9 @@ var url, cropId, soilId, stationId, num; //for ajax dynamically filled out input
 var stage_init, stage_dev, stage_mid, stage_late, crop_dtm, cs_init, cs_dev, cs_mid, cs_late; //for function in computation of cumulative growth stage
 
 //get all farm names
-var farms = [{% if farm_info %}{% for farm in farm_info %}{% if forloop.last %}"{{ farm.farm_name }}"{% else %}"{{ farm.farm_name }},"{% endif %}{% endfor %}{% endif %}];
+var farms = [{%if farm_info %}{%for farm in farm_info %}{%if forloop.last %}"{{ farm.farm_name }}"{% else %}"{{ farm.farm_name }},"{% endif %}{% endfor %}{% endif %}];
 //get all station names
-var stations = [{% if station_info %}{% for sta in station_info %}{% if forloop.last %}"{{ sta.station_name }}"{% else %}"{{ sta.station_name }},"{% endif %}{% endfor %}{% endif %}];
+var stations = [{%if station_info %}{%for sta in station_info %}{%if forloop.last %}"{{ sta.station_name }}"{% else %}"{{ sta.station_name }},"{% endif %}{% endfor %}{% endif %}];
 
 
 
