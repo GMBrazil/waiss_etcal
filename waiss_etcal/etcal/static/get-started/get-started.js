@@ -17,14 +17,6 @@ var url, cropId, soilId, stationId, num; //for ajax dynamically filled out input
 
 var stage_init, stage_dev, stage_mid, stage_late, crop_dtm, cs_init, cs_dev, cs_mid, cs_late; //for function in computation of cumulative growth stage
 
-//get all farm names
-var farms = JSON.parse(document.getElementById('farm-data').textContent);
-//var farms = [{%if farm_info %}{%for farm in farm_info %}{%if forloop.last %}"{{ farm.farm_name }}"{% else %}"{{ farm.farm_name }},"{% endif %}{% endfor %}{% endif %}];
-//get all station names
-var stations = JSON.parse(document.getElementById('station-data').textContent);
-//var stations = [{%if station_info %}{%for sta in station_info %}{%if forloop.last %}"{{ sta.station_name }}"{% else %}"{{ sta.station_name }},"{% endif %}{% endfor %}{% endif %}];
-alert('farms='+farms+" stations="+stations);
-
 
 $(document).ready(function () {
 
@@ -32,6 +24,7 @@ $(document).ready(function () {
     /*check completeness and validate the input fields in each step
     in the multi-step form before proceeding to the next one*/
     $.validator.addMethod("unique", function(value, element){
+        alert('farms='+farms+" stations="+stations);
         var fieldset = $(element).parent().parent();
         var array = [];
         if (fieldset.data('step') == 1){
