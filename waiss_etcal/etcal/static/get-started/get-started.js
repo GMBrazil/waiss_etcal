@@ -41,7 +41,7 @@ $(document).ready(function () {
             }
         }
         return timeRepeated === 1 || timeRepeated === 0;
-    }, "*Duplicate");
+    }, "This name has been taken.");
 
 
     msformValidation = $("#msform").validate({
@@ -80,8 +80,6 @@ $(document).ready(function () {
             'excel_file': { required: '#upload-excel-data-form:visible'  },
         },
         messages: {
-            'farm-name':{ unique: "This name has been taken."},
-            'sta-name': { unique: "This name has been taken."},
             'date_measured[]': { required: "There are missing fields."},
             'eto_data[]': { required: "There are missing fields." },
             'excel_file': { required: "There are no file uploaded."}
