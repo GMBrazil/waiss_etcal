@@ -510,4 +510,8 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
 <script src={% static "get-started/get-started.js" %}></script>
 <script src={% static "all/js/validate.js" %}></script>
+
+{{ farm_info|json_script:"farm-data" }}
+{{ station_info|json_script:"station-data" }}
+
 {% endblock %}
