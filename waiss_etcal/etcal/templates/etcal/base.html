@@ -89,10 +89,10 @@
                                 <ul class="social-custom list-inline">                             
                                     {% if user.is_authenticated %}
                                     <li class="list-inline-item">
-                                        <p class="lead text-left ml-4">{{ user.username }}</p>
                                         <a href="javascript: void(0)" data-toggle="dropdown" class="dropdown-toggle"><img class="rounded-circle" width="25" height="25" avatar="{{ user.username }}"><b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li class="dropdown-item">
+                                                <p class="lead text-left ml-4">{{ user.username }}</p>
                                                 <a href={% url 'logout' %} class="signup-btn">&nbsp;<i class="fa fa-sign-out"></i>Log Out</a>
                                             </li>
                                         </ul>
