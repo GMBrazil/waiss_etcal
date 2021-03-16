@@ -233,9 +233,9 @@ function calcData() {
         valDBI[i] = Math.round(valActualRAW[i] / (valAveCWR[i]));
     }
     latest_index = date_data.length - 1;
-    alert("DAP="+valDAP + " Kc="+valKc+" ETc=" +valETc+" EFR="+valEFR+" RZWD="+valRZWD+" Surplus="+valSurplusWater+" DRZ="+valDRZ+" FC="+valFC+" PWP="+valPWP+" TAW="+valTAW+" RAW="+valRAW+" Actual RAW="+valActualRAW+ " Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
-    alert("valAveCWR="+valAveCWR);
-    alert(" Actual RAW="+valActualRAW+" depthActualRAW="+valdActualRAW+" Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
+    //alert("DAP="+valDAP + " Kc="+valKc+" ETc=" +valETc+" EFR="+valEFR+" RZWD="+valRZWD+" Surplus="+valSurplusWater+" DRZ="+valDRZ+" FC="+valFC+" PWP="+valPWP+" TAW="+valTAW+" RAW="+valRAW+" Actual RAW="+valActualRAW+ " Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
+    //alert("valAveCWR="+valAveCWR);
+    //alert(" Actual RAW="+valActualRAW+" depthActualRAW="+valdActualRAW+" Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
 }
 
 function iterateData() {
@@ -364,11 +364,11 @@ function dayToIrrigate() {
     var days_bef_irrigate;
     if ((valDBI_itr_2[latest_index] == "") || (isNaN(valDBI_itr_2[latest_index]))){
         days_bef_irrigate = valDBI[latest_index];
-        alert(1);
+        //alert(1);
     }
     else  {
         days_bef_irrigate = valDBI_itr_2[latest_index];
-        alert(2);
+        //alert(2);
     }
     var date_irrigate = new Date(date_data[latest_index]);
     date_irrigate.setDate(date_irrigate.getDate() + days_bef_irrigate);
@@ -411,7 +411,7 @@ function dayToIrrigate() {
         document.getElementById("valDBI").textContent = "Today";
         document.getElementById("textDBINote").textContent = "Needed since " + Math.abs(DBI_today) + " days ago";
     }
-    alert("days_bef_irrigate:"+days_bef_irrigate+" date_irrigate:"+date_irrigate+" DBI_today:"+DBI_today);
+    //alert("days_bef_irrigate:"+days_bef_irrigate+" date_irrigate:"+date_irrigate+" DBI_today:"+DBI_today);
 }
 
 function soilWaterStatus() {
