@@ -410,10 +410,10 @@ function soilWaterStatus() {
     var critical_level = 0.5; //50% below MAD and above PWP
     var diffActualRAW;
     var pathPercent;
-    valMC = parseFloat(valdActualRAW[latest_index]).toFixed(2)
-    currentpercentMCdec = (valMC / parseFloat(valFC[latest_index]));
-    percentMAD = (parseFloat(valdMAD[latest_index]) / parseFloat(valFC[latest_index]));
-    percentPWP = (parseFloat(valPWP[latest_index]) / parseFloat(valFC[latest_index]));
+    valMC = valdActualRAW[latest_index].toFixed(2)
+    currentpercentMCdec = (valMC / valFC[latest_index]);
+    percentMAD = (valdMAD[latest_index] / valFC[latest_index]);
+    percentPWP = (valPWP[latest_index] / valFC[latest_index]);
     pathPercent = (301.635 - (301.635 * currentpercentMCdec));
     document.getElementById("valCurrentMC").textContent = valMC + "mm";
     //document.getElementById("path-circle").style.strokeDashoffset = pathPercent;
@@ -580,7 +580,7 @@ function soilWaterGauge() {
 }
 
 function irrigateWater() {
-    valMC = parseFloat(valdActualRAW[latest_index]).toFixed(2)
+    valMC = valdActualRAW[latest_index].toFixed(2)
     currentpercentMC = ((valMC / valFC[latest_index]) * 100).toFixed(2);
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate) / valFC[latest_index] * 100;
