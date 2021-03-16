@@ -221,12 +221,20 @@ function calcData() {
             }
             valAveCWR[i] = totalCWR / sampleCWR;
         }
+        if (valAveCWR[i] == 0){  //check if average CWR is equal to zero (since division by zero is not plausible)            
+            if (valAveCWR[i-1]){  //if zero, check if there is an existing previous average CWR
+                valAveCWR[i] = valAveCWR[i-1];
+            }
+            else { //else use an arbitrary CWR of 0.1 (check for references/sources)
+                valAveCWR[i] = 0.1;
+            }
+        }
         valDBI[i] = Math.round(valActualRAW[i] / (valAveCWR[i]));
     }
     latest_index = date_data.length - 1;
     alert("DAP="+valDAP + " Kc="+valKc+" ETc=" +valETc+" EFR="+valEFR+" RZWD="+valRZWD+" Surplus="+valSurplusWater+" DRZ="+valDRZ+" FC="+valFC+" PWP="+valPWP+" TAW="+valTAW+" RAW="+valRAW+" Actual RAW="+valActualRAW+ " Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
-    alert("valAveCWR"+valAveCWR);
-    alert("depthActualRAW="+valdActualRAW+" Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
+    alert("valAveCWR="+valAveCWR);
+    alert(+" Actual RAW="+valActualRAW+" depthActualRAW="+valdActualRAW+" Perc="+valPerc+" Ks="+valKs+" ETcs="+valETcs+" CWR="+valCWR+" DBI=" +valDBI);
 }
 
 function iterateData() {
