@@ -508,10 +508,15 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>       
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
+<script type="text/javascript">
+    //get all farm names
+    //var farms = JSON.parse(document.getElementById('farm-data').textContent);
+    var farms = [{%if farm_info %}{%for farm in farm_info %}{%if forloop.last %}"{{ farm.farm_name }}"{% else %}"{{ farm.farm_name }},"{% endif %}{% endfor %}{% endif %}];
+    //get all station names
+    //var stations = JSON.parse(document.getElementById('station-data').textContent);
+    var stations = [{%if station_info %}{%for sta in station_info %}{%if forloop.last %}"{{ sta.station_name }}"{% else %}"{{ sta.station_name }},"{% endif %}{% endfor %}{% endif %}];
+    alert('farms='+farms+" stations="+stations);
+</script>
 <script src={% static "get-started/get-started.js" %}></script>
 <script src={% static "all/js/validate.js" %}></script>
-
-{{ farm_info.farm_name|json_script:"farm-data" }}
-{{ station_info.station_name|json_script:"station-data" }}
-
 {% endblock %}
