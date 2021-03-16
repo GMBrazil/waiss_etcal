@@ -152,7 +152,6 @@ function calcData() {
                 }
             }
         }
-        valSurplusWater[i] = valSurplusWater[i].toFixed(2);
         //Current Root Zone Depth, drz
         if (valDAP[i] <= stage_init) {
             valDRZ[i] = (crop_drz * (0.5 + (0.5 * (Math.sin((3.03 * stage_init / crop_dtm - 1.47))))));
