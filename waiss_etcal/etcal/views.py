@@ -185,6 +185,7 @@ def get_started(request):
 
 
     context = {
+        "farm_info": farm_info,
         "crop_info": crop_info,
         "soil_info": soil_info,
         "station_info": station_info,

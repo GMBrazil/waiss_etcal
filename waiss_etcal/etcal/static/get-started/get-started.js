@@ -17,6 +17,11 @@ var url, cropId, soilId, stationId, num; //for ajax dynamically filled out input
 
 var stage_init, stage_dev, stage_mid, stage_late, crop_dtm, cs_init, cs_dev, cs_mid, cs_late; //for function in computation of cumulative growth stage
 
+//get all farm names
+var farms = [{% if farm_info %}{% for farm in farm_info %}{% if forloop.last %}{{ farm.farm_name }}{% else %}{{ farm.farm_name }}, {% endif %}{% endfor %}{% endif %}];
+//get all station names
+var stations = [{% if station_info %}{% for sta in station_info %}{% if forloop.last %}{{ sta.station_name }}{% else %}{{ sta.station_name }}, {% endif %}{% endfor %}{% endif %}];
+
 
 
 $(document).ready(function () {
@@ -24,11 +29,31 @@ $(document).ready(function () {
     //---------JQUERY VALIDATION----------------//
     /*check completeness and validate the input fields in each step
     in the multi-step form before proceeding to the next one*/
+    $.validator.addMethod("unique", function(value, element){
+        var fieldset = $(element).parent().parent();
+        var array = [];
+        if (fieldset.data('step') == 1){
+            array = farms;
+        }
+        else if (fieldset.data('step') == 4){
+            array = stations;
+        }
+        var timeRepeated = 0;
+        if (value != ''){
+            for (i=0; i<array.length; i++){
+                if (array[i] === value){
+                    timeRepeated++;
+                }
+            }
+        }
+        return timeRepeated === 1 || timeRepeated === 0;
+    }, "*Duplicate");
+
 
     msformValidation = $("#msform").validate({
         submitHandler: function () { }, //prevent traditional form submission
         rules: {
-            'farm-name': { required: true },
+            'farm-name': { required: true, unique:true },
             'farm-brgy': { required: true },
             'farm-muni': { required: true },
             'farm-prov': { required: true },
@@ -50,7 +75,7 @@ $(document).ready(function () {
             'mad': { required: true },
             'stations': { required: true },
             'sta-type': { required: true },
-            'sta-name': { required: true },
+            'sta-name': { required: true, unique:true },
             'sta-lat': { required: true },
             'sta-long': { required: true },
             'dap': { required: '#data-form:visible' },
@@ -61,7 +86,9 @@ $(document).ready(function () {
             'excel_file': { required: '#upload-excel-data-form:visible'  },
         },
         messages: {
-            'date_measured[]': { required: "There are missing fields." },
+            'farm-name':{ unique: "This name has been taken."},
+            'sta-name': { unique: "This name has been taken."},
+            'date_measured[]': { required: "There are missing fields."},
             'eto_data[]': { required: "There are missing fields." },
             'excel_file': { required: "There are no file uploaded."}
         },
