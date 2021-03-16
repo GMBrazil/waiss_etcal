@@ -7,6 +7,9 @@ $(document).ready(function () {
         $("#selectAddDataFarmName").val(farm_id).change();
         $('#single-data').removeAttr('hidden');
         $('#upload-data').attr('hidden', '');
+        $("table.input-data tbody").find('input').each(function () {
+            $(this).prop('required', true);
+        });
     });
     $('#btnAddFarm').on('click', function () {
     });
@@ -19,11 +22,17 @@ $(document).ready(function () {
         if (value == "single-data"){
             $('#single-data').removeAttr('hidden');
             $('#upload-data').attr('hidden', '');
+            $("table.input-data tbody").find('input').each(function () {
+                $(this).prop('required', true);
+            });
         }
         else if (value == "excel-data"){
             $('#single-data').attr('hidden', '');
             $('#upload-data').removeAttr('hidden');
             $('#customFile').prop('required', true);
+            $("table.input-data tbody").find('input').each(function () {
+                $(this).prop('required', false);
+            });
         }
     });
     /*when user choose to upload formatted excel file,

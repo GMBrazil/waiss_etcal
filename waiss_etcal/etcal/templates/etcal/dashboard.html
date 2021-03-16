@@ -407,7 +407,7 @@
                             <div class="col-md-6">
                                 <div class="form-group"> 
                                     <label for="selectAddDataFarmName">Farm</label>
-                                    <select class="form-control" name="farm" id="selectAddDataFarmName"> 
+                                    <select class="form-control" name="farm" id="selectAddDataFarmName" required> 
                                         {% for item in farm_info %}
                                         {% if item == new_farm %}
                                         <option value="{{ item.id }}" selected="">{{ item.farm_name }}</option>
@@ -423,7 +423,7 @@
                             <div class="col-md-6">
                                 <div class="form-group"> 
                                     <label for="selectAddDataStation">Station</label>                                 
-                                    <select id="selectAddDataStation" name="station" class="form-control">
+                                    <select id="selectAddDataStation" name="station" class="form-control" required>
                                         <option value="" selected="">Choose</option>
                                         {% for item in station_info %}
                                         <option value="{{ item.id }}">{{ item.station_name }}</option>
@@ -436,7 +436,7 @@
                             <div class="col-md-6">
                                 <div class="form-group"> 
                                     <label for="selectAddDataInputType">Type of Data Input</label>                                 
-                                    <select id="selectAddDataInputType" class="form-control"> 
+                                    <select id="selectAddDataInputType" class="form-control" required> 
                                         <option selected>Reference evapotranspiration</option>                                     
                                     </select>                                 
                                 </div>                             
@@ -444,7 +444,7 @@
                             <div class="col-md-6">
                                 <div class="form-group"> 
                                     <label for="selectAddDataInputMethod">How do you want to add your data?</label>                                 
-                                    <select id="selectAddDataInputMethod" class="form-control"> 
+                                    <select id="selectAddDataInputMethod" class="form-control" required> 
                                         <option value="single-data" selected>Single data input</option>                                     
                                         <option value="excel-data">Upload formatted excel file</option>                                     
                                     </select>                                 
