@@ -152,7 +152,7 @@ function calcData() {
                 }
             }
         }
-        valSurplusWater[i] = valSurplusWater[i].toFixed(2);
+        valSurplusWater[i] = parseFloat(valSurplusWater[i]).toFixed(2);
         //Current Root Zone Depth, drz
         if (valDAP[i] <= stage_init) {
             valDRZ[i] = (crop_drz * (0.5 + (0.5 * (Math.sin((3.03 * stage_init / crop_dtm - 1.47))))));
@@ -411,7 +411,7 @@ function soilWaterStatus() {
     var critical_level = 0.5; //50% below MAD and above PWP
     var diffActualRAW;
     var pathPercent;
-    valMC = valdActualRAW[latest_index].toFixed(2)
+    valMC = parseFloat(valdActualRAW[latest_index]).toFixed(2)
     currentpercentMCdec = (valMC / valFC[latest_index]);
     percentMAD = (valdMAD[latest_index] / valFC[latest_index]);
     percentPWP = (valPWP[latest_index] / valFC[latest_index]);
@@ -581,7 +581,7 @@ function soilWaterGauge() {
 }
 
 function irrigateWater() {
-    valMC = valdActualRAW[latest_index].toFixed(2)
+    valMC = parseFloat(valdActualRAW[latest_index]).toFixed(2)
     currentpercentMC = ((valMC / valFC[latest_index]) * 100).toFixed(2);
     var valIrrigate = Math.round(valFC[latest_index] - valdActualRAW[latest_index]);
     var valpercentIrrigate = (valIrrigate) / valFC[latest_index] * 100;
