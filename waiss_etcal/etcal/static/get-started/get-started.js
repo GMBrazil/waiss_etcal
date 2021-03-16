@@ -24,7 +24,6 @@ $(document).ready(function () {
     /*check completeness and validate the input fields in each step
     in the multi-step form before proceeding to the next one*/
     $.validator.addMethod("unique", function(value, element){
-        alert('farms='+farms+" stations="+stations);
         var fieldset = $(element).parent().parent();
         var array = [];
         if (fieldset.data('step') == 1){
