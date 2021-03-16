@@ -35,7 +35,7 @@ $(document).ready(function () {
         var timeRepeated = 0;
         if (value != ''){
             for (i=0; i<array.length; i++){
-                if (array[i] === value){
+                if (array[i] == value){
                     timeRepeated++;
                 }
             }
