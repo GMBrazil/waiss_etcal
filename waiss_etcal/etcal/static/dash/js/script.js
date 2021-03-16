@@ -127,7 +127,6 @@ function calcData() {
                 valRZWD[i] = 0;
             }
         }
-        valRZWD[i] = parseFloat(valRZWD[i].toFixed(2));
         //Negative Root Zone Water Deficit, negRZWD
         valnegRZWD[i] = -valRZWD[i];
         //Surplus Water
@@ -148,12 +147,11 @@ function calcData() {
                 valSurplusWater[i] = 0;
             }
             else {
-                if (valSurplusWater < 0) {
+                if (valSurplusWater <= 0) {
                     valSurplusWater[i] = 0;
                 }
             }
         }
-        valSurplusWater[i] = parseFloat(valSurplusWater[i].toFixed(2));
         //Current Root Zone Depth, drz
         if (valDAP[i] <= stage_init) {
             valDRZ[i] = (crop_drz * (0.5 + (0.5 * (Math.sin((3.03 * stage_init / crop_dtm - 1.47))))));
@@ -186,7 +184,7 @@ function calcData() {
         //Actual RAW equivalent depth (from MAD), dActualRAW
         valdActualRAW[i] = valActualRAW[i] + valdMAD[i];
         //Percolation, P
-        if (valSurplusWater[i] > 0) {
+        if (valSurplusWater[i] > 0.01) { //compensate for values 0.0009 and lower but greater than zero
             if (valSurplusWater[i] < percolation) {
                 valPerc[i] = percolation;
             }
