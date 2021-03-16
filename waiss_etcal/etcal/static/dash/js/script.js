@@ -216,11 +216,12 @@ function calcData() {
             valAveCWR[i] = totalCWR / (i + 1);
         }
         else {
-            for (var j = i; j < (i + sampleCWR); j++) {
+            for (var j = i; j > (i - sampleCWR); j--) {
                 totalCWR += valCWR[j];
             }
             valAveCWR[i] = totalCWR / sampleCWR;
         }
+        //REMOVE IF NO SOURCES ARE FOUND OR NOT USED EVENTUALLY IN THE ITERATION
         if (valAveCWR[i] == 0){  //check if average CWR is equal to zero (since division by zero is not plausible)            
             if (valAveCWR[i-1]){  //if zero, check if there is an existing previous average CWR
                 valAveCWR[i] = valAveCWR[i-1];
